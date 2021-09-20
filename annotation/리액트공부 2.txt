@@ -1,0 +1,7 @@
+1. vscode에서 클론했던 경로 폴더로 가서 git폴더가 들어있는경로까지와서 열어주기
+2. 콘솔창 열고
+3. git pull origin master
+4. 혹시모르니 (업데이트) npm i 
+5. 완료후 npm run start
+
+------------

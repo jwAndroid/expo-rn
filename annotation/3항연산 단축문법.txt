@@ -1,0 +1,3 @@
+condition ? exprIfTrue : exprIfFalse 를
+
+exprIfTrue ?? exprIfFalse 로 축약가능하다

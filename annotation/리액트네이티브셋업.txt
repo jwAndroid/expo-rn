@@ -1,0 +1,64 @@
+setup 폴더생성 
+expo init / folder
+cd folder -> code .
+
+1.eslint install
+npm i -D eslint
+
+2.eslint start
+npx eslint --init
+
+3.no unserd var(How to use) 
+-eslint rules 에 추가
+
+4.react-hooks install
+- npm install eslint-plugin-react-hooks --save-dev 설치
+ //eslint 설치하면서 추가되었으니까 따로 해줄필요없다.
+ //혹시모르니까 패키지.json 에서 확인해볼것
+ // "eslint-plugin-react-hooks": "^4.2.0" 이부분
+
+- extends에 "plugin:react-hooks/recommended" 추가
+
+
+5.밑에서부터 하나씩 올라오면서 저장
+
+6. babel.config.js 화살표함수로 변경
+ -->  api.cache(true); 다음 엔터
+
+======================================================
+
+# Learn React Native with Expo
+
+- Node.js: https://nodejs.org/ko/
+- React Native: https://reactnative.dev/
+  - Environment Setup: https://reactnative.dev/docs/environment-setup
+- Expo: https://expo.io/
+  - Installation: https://docs.expo.io/get-started/installation/
+  - Guide: https://docs.expo.dev/guides/
+  - API Reference: https://docs.expo.dev/versions/latest/
+- ESLint: https://eslint.org/
+  - React Hooks: https://www.npmjs.com/package/eslint-plugin-react-hooks
+  - No Unused Vars: https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unused-vars.md
+- Flexbox Froggy: https://flexboxfroggy.com/#ko
+- Emotion: https://emotion.sh/docs/introduction
+  - Installation: https://emotion.sh/docs/@emotion/native
+  - Setup: https://emotion.sh/docs/typescript
+- Axios: https://www.npmjs.com/package/axios
+- Public API: https://github.com/public-apis/public-apis
+- Google Fonts Icons: https://fonts.google.com/icons
+- Navigation: https://reactnavigation.org/
+- Vector Icons: https://icons.expo.fyi/
+- Redux Toolkit: https://soyoung210.github.io/redux-toolkit/
+
+
+===============================
+npm run android (꺼진상태에서)
+npm run start
+npm run ios
+npm run web
+
+package.json 을 먼저보고 > scripts 쪽을 살펴봄
+그리고 value값말고 실행시켜려면 키만 살펴보고
+실행시키려면 npm run(고정) dev 
+
+cli -> 명령어로 뭔가를 설치하겠다.

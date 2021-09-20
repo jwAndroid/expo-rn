@@ -1,0 +1,14 @@
+  // const onPressPost = useCallback(async () => {
+  //   await axios.post(
+  //     'https://my-json-server.typicode.com/typicode/demo/profile',
+  //     { id: 'jwid' }
+  //   );
+  // }, []);
+
+  // const onPressGet = useCallback(async () => {
+  //   const { data } = await axios.get(
+  //     'https://my-json-server.typicode.com/typicode/demo/profile'
+  //   );
+
+  //   console.log(data);
+  // }, []);

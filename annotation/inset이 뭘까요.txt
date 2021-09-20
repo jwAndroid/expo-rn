@@ -1,0 +1,17 @@
+import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+인셋이 뭐냐면
+
+핸드폰기종마다 다르지? 카메라가 위에 있을수도있고 이상한곳에 위치할수도 있는데
+저 import 가 뷰를 그려줄때 기종에따라 '안전범위' 를 잡아주는것이다
+
+  paddingTop: insets.top,
+  paddingBottom: insets.bottom + 50,
+  paddingLeft: insets.left + 20,
+  paddingRight: insets.right + 20,
+
+이런식으로  + 50 을 준 의미는 제플린에서 그렇게 주라고 했으니까 준것
+insets.left 안전범위라고 생각하면됨
+
+이렇게 하면 어떤기종마다 뷰가 다른곳에 겹치지가 않겠지??
+

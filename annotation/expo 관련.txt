@@ -1,0 +1,9 @@
+라이브러리 다운로드시
+npm i name 한번띄어쓰고 name 또띄어쓰고 name 이런식으로하면
+한번에 다운로드가 가능.
+
+그리고 매일매일 npm i 하여 업데이트 확인
+$npm i {dependency name}
+TypeScript (or DT): "--save" --> "-D"
+
+

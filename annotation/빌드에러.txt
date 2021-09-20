@@ -1,0 +1,6 @@
+Cannot sign manifest under that username.
+--> https://stackoverflow.com/questions/65777920/apiv2error-cannot-sign-manifest-under-that-username
+
+빌드권한이 없는경우 발생할수 있다.
+If you try removing the "owner : yourname" in the app.json, it should run.
+app.json 에서  "owner : yourname" 을 삭제하고 다시 빌드한다.
