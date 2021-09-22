@@ -3,6 +3,8 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
+// npm i react-native-keyboard-aware-scroll-view --save
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
