@@ -1,0 +1,48 @@
+이제 프로젝트 셋업할때 이모션이랑 같이 들어가야함
+세팅 끝내고나서 이모션 하는거임
+
+스타일드 컴포넌트 바구니느낌
+이모션은? 조각인느낌
+
+이모션 네이티브 들어가서
+https://emotion.sh/docs/@emotion/native
+
+npm install @emotion/react @emotion/native
+
+스타일시트 이제 쓸 필요없음
+이름은 컨테이너 처럼 쓴다.(앞에는 대문자로 표기)
+Container 이렇게  
+
+문법
+
+1. 작성은 이렇게 한다.
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
+가 
+
+const Container = styled.View({
+  flex: 1,
+  backgroundColor: '#fff',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+로 이렇게 쓸수있고 container:  를 변수처럼 써서
+    <Container>
+      <StatusBar style="auto" />
+    </Container> 로 감쌀수 있다는것
+
+이제 style={styles.container} 를 안해줘도 된다.
+
+그리고 styled 뒤에 View 는  <Container> 얘 전에 View를 썻으니까 써준것 
+
+이런식으로 작성한다.
+
+
