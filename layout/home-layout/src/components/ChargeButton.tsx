@@ -1,58 +1,41 @@
 import React, { memo, useCallback } from 'react';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import styled from '@emotion/native';
 
-const styles = StyleSheet.create({
-  text: {
-    position: 'absolute',
-    top: 10,
-    left: '43%',
-    justifyContent: 'center',
-    fontSize: 16,
-    color: '#fff',
-  },
-  buttonText: {
-    position: 'absolute',
-    top: 10,
-    left: '82%',
-    justifyContent: 'center',
-    fontSize: 16,
-    color: '#fff',
-  },
-  button1: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
-    marginHorizontal: '15%',
-    marginBottom: 10,
-    borderRadius: 10,
-    backgroundColor: '#912afd',
-  },
-  button2: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
-    marginHorizontal: '15%',
-    marginBottom: 10,
-    borderRadius: 10,
-    backgroundColor: '#fed42e',
-  },
-  button3: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
-    marginHorizontal: '15%',
-    borderRadius: 10,
-    backgroundColor: '#ff46ec',
-  },
+import { Alert } from 'react-native';
+
+const Container = styled.View({
+  height: '100%',
+  marginTop: 20,
 });
 
+const StyledText = styled.Text({
+  fontSize: 18,
+  color: '#fff',
+});
+
+interface IStyledButton {
+  backgroundColor: string;
+}
+
+const StyledButton = styled.Pressable<IStyledButton>(({ backgroundColor }) => ({
+  height: '12%',
+  flexDirection: 'row',
+  marginHorizontal: '10%',
+  marginBottom: 10,
+  borderRadius: 10,
+  backgroundColor,
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
+
 const ChargeButton = () => {
+  const consoleStart = useCallback(
+    (text: string) => () => {
+      console.log(text);
+    },
+    []
+  );
+
   const onPress = useCallback(() => {
     Alert.alert(
       'Alert Title',
@@ -60,32 +43,29 @@ const ChargeButton = () => {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: consoleStart('Cancel'),
           style: 'cancel',
         },
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
+        { text: 'OK', onPress: consoleStart('Ok') },
       ],
       { cancelable: false }
     );
   }, []);
 
   return (
-    <View>
-      <Pressable style={styles.button1} onPress={onPress}>
-        <Text style={styles.text}>React</Text>
-        <Text style={styles.buttonText}>10%</Text>
-      </Pressable>
+    <Container>
+      <StyledButton backgroundColor="#404040" onPress={onPress}>
+        <StyledText>React</StyledText>
+      </StyledButton>
 
-      <Pressable style={styles.button2} onPress={onPress}>
-        <Text style={styles.text}>Axios</Text>
-        <Text style={styles.buttonText}>60%</Text>
-      </Pressable>
+      <StyledButton backgroundColor="#202020" onPress={onPress}>
+        <StyledText>Axios</StyledText>
+      </StyledButton>
 
-      <Pressable style={styles.button3} onPress={onPress}>
-        <Text style={styles.text}>Hook</Text>
-        <Text style={styles.buttonText}>30%</Text>
-      </Pressable>
-    </View>
+      <StyledButton backgroundColor="#101010" onPress={onPress}>
+        <StyledText>Hook</StyledText>
+      </StyledButton>
+    </Container>
   );
 };
 

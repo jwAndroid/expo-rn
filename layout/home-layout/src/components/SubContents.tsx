@@ -1,13 +1,11 @@
 import React, { FC, memo } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import styled from '@emotion/native';
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 16,
-    color: '#0099ff',
-    marginLeft: 30,
-    marginRight: 30,
-  },
+const StyledText = styled.Text({
+  fontSize: 16,
+  color: '#0099ff',
+  marginLeft: 30,
+  marginRight: 30,
 });
 
 interface ISubContents {
@@ -15,7 +13,7 @@ interface ISubContents {
 }
 
 const SubContents: FC<ISubContents> = ({ content }) => {
-  return <Text style={styles.text}>{content}</Text>;
+  return <StyledText>{content}</StyledText>;
 };
 
 export default memo(SubContents);

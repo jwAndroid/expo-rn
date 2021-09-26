@@ -1,14 +1,11 @@
 import React, { FC, memo } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import styled from '@emotion/native';
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 24,
-    color: '#fff',
-    marginLeft: 30,
-    marginTop: 30,
-    marginRight: 30,
-  },
+const StyledText = styled.Text({
+  fontSize: 24,
+  paddingHorizontal: 30,
+  paddingTop: 30,
+  color: '#fff',
 });
 
 interface IContents {
@@ -16,7 +13,7 @@ interface IContents {
 }
 
 const Contents: FC<IContents> = ({ content }) => {
-  return <Text style={styles.text}>{content}</Text>;
+  return <StyledText>{content}</StyledText>;
 };
 
 export default memo(Contents);
