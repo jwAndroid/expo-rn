@@ -25,6 +25,7 @@
     "react/jsx-filename-extension": "off",
     "arrow-body-style": "off",
     "object-curly-newline": "off",
-    "react/jsx-boolean-value": "off"
+    "react/jsx-boolean-value": "off",
+    "no-console": "off"
   }
 }

@@ -1,4 +1,44 @@
 import React, { memo, useCallback, useState } from 'react';
+
+const VerifyEmail = () => {
+
+  const [code, setCode] = useState('');
+ // EditText 에 들어가는 useState 값.
+
+  const onChangeCode = useCallback((code: string) => {
+    setCode(code.trim());
+  }, []);
+
+  return (
+          <TextInput
+            marginTop={20}
+            paddingHorizontal={20}
+            fontFamily={theme.font.PoppinsMedium}
+            placeholder="000000"
+            keyboardType="number-pad"
+            maxLength={6}
+            value={code}
+            onChangeText={onChangeCode}
+            onClear={onClearCode}
+          />
+  );
+};
+
+// onChangeText={onChangeCode} 이부분보면
+// {onChangeCode} 이 함수를 실행하는데 , 분명  
+// onChangeCode (code: string) code 라는 입력값이 있다
+// 근데  onChangeText={onChangeCode} 이렇게 입력값을 넣지않고있다
+// 이유는  value={code} 에서 입력값을 받고있기 때문이다. 
+// input에서 입력값은 value={code} 로 제어한다.
+// useState는 상태값을 받아서 계속 저장한다. setCode(code.trim());
+
+export default memo(VerifyEmail);
+
+
+===============================예제================================
+
+
+import React, { memo, useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 

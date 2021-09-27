@@ -1,0 +1,145 @@
+https://kyounghwan01.github.io/blog/React/image-upload/#formdata-%E1%84%92%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC
+
+블랍데이타에 대한 이해
+
+
+
+
+import React, { memo, useCallback, useEffect } from 'react';
+import {
+  Alert,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import * as ImagePicker from 'expo-image-picker';
+import axios from 'axios';
+import * as FileSystem from 'expo-file-system';
+
+import { API_SERVER_URL } from './src/apiKey';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  text: {
+    fontSize: 24,
+    backgroundColor: 'cornflowerblue',
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 8,
+    color: '#fff',
+  },
+});
+
+const App = () => {
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          Alert.alert(
+            'Photo Permission',
+            'Please turn on the camera permission.'
+          );
+        }
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        if (status !== 'granted') {
+          Alert.alert(
+            'Photo Permission',
+            'Please turn on the camera permission.'
+          );
+        }
+      }
+    })();
+  }, []);
+
+  const getImageSize = useCallback((base64: string) => {
+    const len = base64.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+      bytes[i] = base64.charCodeAt(i);
+    }
+    return bytes.length;
+  }, []);
+
+  const uploadImage = useCallback(async (imageUri: string) => {
+    try {
+      // const blob: Blob = await new Promise((resolve, reject) => {
+      //   const xhr = new XMLHttpRequest();
+
+      //   xhr.onload = () => {
+      //     resolve(xhr.response);
+      //   };
+
+      //   xhr.onerror = () => {
+      //     reject(new TypeError('Network request failed'));
+      //   };
+
+      //   xhr.responseType = 'blob';
+
+      //   xhr.open('GET', imageUri, true);
+      //   xhr.send(null);
+      // });
+
+      // console.log('Blob RESPONSE: ' + JSON.stringify(blob));
+
+      const base64 = await FileSystem.readAsStringAsync(imageUri, {
+        encoding: 'base64',
+      });
+
+      console.log(base64);
+      console.log(getImageSize(base64));
+
+      // const formData = new FormData();
+      // formData.append('file', base64);
+      const { data } = await axios.post(API_SERVER_URL, {
+        file: 'data:image/jpeg;' + base64,
+      });
+
+      // console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  const onPress = useCallback(async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.5,
+      base64: true,
+    });
+
+    if (!result.cancelled && uploadImage) {
+      uploadImage(result.uri);
+      // console.log(result);
+    }
+  }, [uploadImage]);
+
+  return (
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+
+      <Pressable onPress={onPress}>
+        <Text style={styles.text}>GO ALBUM</Text>
+      </Pressable>
+    </View>
+  );
+};
+
+export default memo(App);
