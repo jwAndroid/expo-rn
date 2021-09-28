@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import WebView from 'react-native-webview';
-import { uri } from './src/uri';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,30 +14,17 @@ const styles = StyleSheet.create({
   },
 });
 
-Linking.getInitialURL()
-  .then((url) => {
-    if (url) {
-      // Linking.openURL(url);
-      console.log(url);
-    }
-  })
-  .catch((err) => console.error('An error occurred', err));
-
 const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
       <WebView
-        // onMessage={(e) => {
-        //   const getData = JSON.parse(e.nativeEvent.data);
-        //   console.log({ getData });
-        // }}
         startInLoadingState
         javaScriptEnabled
-        source={{ uri }}
+        source={{
+          uri: 'https://docs.expo.dev/guides/linking/?redirected#in-a-standalone-app',
+        }}
       />
-
-      <Text style={styles.font}>url</Text>
     </View>
   );
 };

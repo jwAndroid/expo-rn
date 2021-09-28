@@ -1,9 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
+import { StatusBar } from 'expo-status-bar';
 
-// https://github.com/FiberJW/react-native-app-link
 // https://docs.expo.dev/guides/linking/#linking--module
 
 const styles = StyleSheet.create({
@@ -14,8 +13,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-// const url = 'exp://ts-psz.jwandroid.11-react-native-app-link.exp.direct';
 
 // const getUrl = async () => {
 //   const initialUrl = await Linking.getInitialURL();
@@ -37,20 +34,16 @@ const styles = StyleSheet.create({
 
 // openUrl(url);
 
-// Linking.getInitialURL()
-//   .then((url) => {
-//     if (url) {
-//       console.log(`Initial Url: ${url}`);
-//     }
-//   })
-//   .catch((err) => console.error('An error occurred', err));
-
 const App = () => {
+  const go = useCallback(() => {
+    Linking.openURL('exp://exp.host/@tripmate-dev/wetrip/--/');
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text onPress={go}>GO</Text>
     </View>
   );
 };

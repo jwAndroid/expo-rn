@@ -32,6 +32,7 @@
     "quotes": "off",
     "operator-linebreak": "off",
     "no-alert": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "comma-dangle": "off"
   }
 }
