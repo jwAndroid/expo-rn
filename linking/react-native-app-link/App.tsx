@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
 const App = () => {
   const go = useCallback(() => {
-    Linking.openURL('exp://exp.host/@tripmate-dev/wetrip/--/');
+    Linking.openURL('wetrip://');
   }, []);
 
   return (

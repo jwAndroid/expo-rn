@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
@@ -15,17 +15,15 @@ const styles = StyleSheet.create({
 
 // console.log(Constants.manifest?.version);
 
-const {
-  manifest: { version },
-} = Constants;
-
 const App = () => {
+  const { manifest } = Constants;
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
 
       <Text>Version : </Text>
-      <Text>{version}</Text>
+      <Text>{manifest?.version}</Text>
     </View>
   );
 };
