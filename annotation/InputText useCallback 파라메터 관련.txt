@@ -24,13 +24,12 @@ const VerifyEmail = () => {
   );
 };
 
-// onChangeText={onChangeCode} 이부분보면
-// {onChangeCode} 이 함수를 실행하는데 , 분명  
-// onChangeCode (code: string) code 라는 입력값이 있다
-// 근데  onChangeText={onChangeCode} 이렇게 입력값을 넣지않고있다
-// 이유는  value={code} 에서 입력값을 받고있기 때문이다. 
-// input에서 입력값은 value={code} 로 제어한다.
-// useState는 상태값을 받아서 계속 저장한다. setCode(code.trim());
+TextInput ( callback ( ) ) ;
+
+onChangeCode 의 code 는 변경된 값을 받아서 setCode(code.trim()); 를 해주는거고
+value={code} 에서 code 는 useState 의 code를 가져오는거니까 위에가 먼저 이루어져야함.
+
+
 
 export default memo(VerifyEmail);
 

@@ -1,0 +1,148 @@
+import React, { memo, useCallback, useEffect } from 'react';
+import {
+  Alert,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import axios from 'axios';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import * as ImageManipulator from 'expo-image-manipulator';
+import { StatusBar } from 'expo-status-bar';
+import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
+
+import { API_SERVER_URL } from './src/apiKey';
+
+// 가로 : 1920 세로 1080 으로 막아놓기
+// 넘어가면 resize >
+
+// https://kusti8s-notes.readthedocs.io/en/latest/react-image-resizer.html
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  text: {
+    fontSize: 24,
+    backgroundColor: 'cornflowerblue',
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 8,
+    color: '#fff',
+  },
+});
+
+const App = () => {
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          Alert.alert(
+            'Photo Permission',
+            'Please turn on the camera permission.'
+          );
+        }
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        if (status !== 'granted') {
+          Alert.alert(
+            'Photo Permission',
+            'Please turn on the camera permission.'
+          );
+        }
+      }
+    })();
+  }, []);
+
+  const imageResizer = useCallback(async (image: ImageInfo) => {
+    const { width, height } = await ImageManipulator.manipulateAsync(
+      image.uri,
+      [
+        {
+          resize: {
+            width: 200,
+          },
+        },
+      ],
+      { compress: 0.5, format: ImageManipulator.SaveFormat.PNG }
+    );
+    console.log(`리사이즈후 가로 ${width}`);
+    console.log(`리사이즈후 세로 ${height}`);
+  }, []);
+
+  const uploadImage = useCallback(async (imageUri: string) => {
+    try {
+      const blob: Blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = () => {
+          resolve(xhr.response);
+        };
+
+        xhr.onerror = () => {
+          reject(new TypeError('Network request failed'));
+        };
+
+        xhr.responseType = 'blob';
+
+        xhr.open('GET', imageUri, true);
+        xhr.send(null);
+      });
+
+      console.log('Blob RESPONSE: ' + JSON.stringify(blob));
+      // console.log('size: ' + blob.size);
+
+      const base64 = await FileSystem.readAsStringAsync(imageUri, {
+        encoding: 'base64',
+      });
+
+      // await axios.post(API_SERVER_URL, {
+      //   file: 'data:image/jpeg;' + base64,
+      // });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  const onPress = useCallback(async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.5,
+      base64: true,
+    });
+
+    if (!result.cancelled && uploadImage) {
+      imageResizer(result);
+      // uploadImage(result.uri);
+
+      console.log(`원래 가로크기 : ${result.width}`);
+      console.log(`원래 세로크기 : ${result.height}`);
+    }
+  }, [imageResizer, uploadImage]);
+
+  return (
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+
+      <Pressable onPress={onPress}>
+        <Text style={styles.text}>GO ALBUM</Text>
+      </Pressable>
+    </View>
+  );
+};
+
+export default memo(App);
