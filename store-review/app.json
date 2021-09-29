@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "notification-setting",
-    "slug": "notification-setting",
+    "name": "store-review",
+    "slug": "store-review",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
