@@ -1,0 +1,9 @@
+const [ open , isOpen ] = useState(false)
+
+return ( 
+
+  { isOpen && <Component />  } 
+   
+)
+
+이렇게 함.
