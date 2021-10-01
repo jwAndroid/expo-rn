@@ -18,15 +18,11 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
     "no-use-before-define": "off",
+    "arrow-body-style": "off",
     "react/jsx-filename-extension": "off",
     "react/style-prop-object": "off",
-    "operator-linebreak": "off",
-    "no-console": "off",
-    "prefer-template": "off",
-    "comma-dangle": "off",
-    "no-shadow": "off"
+    "linebreak-style": "off",
+    "no-console": "off"
   }
 }

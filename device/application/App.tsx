@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import React, { memo, useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const styles = StyleSheet.create({
   container: {
