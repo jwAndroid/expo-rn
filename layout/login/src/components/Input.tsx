@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useCallback, useEffect, useState } from 'react';
 import { KeyboardTypeOptions, Platform } from 'react-native';
 
 const Container = styled.View({
@@ -18,11 +18,11 @@ const SectionStyle = styled.View({
     ios: {
       shadowColor: '#000',
       shadowOffset: {
-        width: 10,
-        height: 10,
+        width: 5,
+        height: 5,
       },
-      shadowOpacity: 0.2,
-      shadowRadius: 10,
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
     },
     android: {
       elevation: 20,
@@ -31,10 +31,8 @@ const SectionStyle = styled.View({
 });
 
 const ImageStyle = styled.Image({
-  padding: 5,
-  margin: 5,
   height: 20,
-  width: 25,
+  width: 22,
   resizeMode: 'stretch',
   alignItems: 'center',
   marginLeft: 10,
@@ -42,7 +40,7 @@ const ImageStyle = styled.Image({
 
 const StyledInput = styled.TextInput({
   flex: 1,
-  marginLeft: 5,
+  marginLeft: 10,
   color: '#fff',
 });
 
@@ -68,6 +66,21 @@ const Input: FC<IInput> = ({
   maxLength,
   keyboardType = 'default',
 }) => {
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    console.log('`Start component`');
+
+    return () => {
+      console.log('`Remove component`');
+    };
+  }, []);
+
+  const onChangeEmail = useCallback((email: string) => {
+    setEmail(email);
+    console.log(email);
+  }, []);
+
   return (
     <Container>
       <StyledText>{title}</StyledText>
@@ -83,6 +96,8 @@ const Input: FC<IInput> = ({
           autoCorrect={false}
           maxLength={maxLength}
           keyboardType={keyboardType}
+          value={email}
+          onChangeText={onChangeEmail}
         />
       </SectionStyle>
     </Container>
