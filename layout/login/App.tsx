@@ -1,6 +1,12 @@
 import React, { memo, useCallback } from 'react';
 import styled from '@emotion/native';
-import { FlexAlignType, StyleSheet, TextStyle } from 'react-native';
+import {
+  FlexAlignType,
+  Keyboard,
+  StyleSheet,
+  TextStyle,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 
@@ -91,89 +97,109 @@ const App = () => {
   const onPressFindPassword = useCallback(() => {
     console.log('findpassword!');
   }, []);
+
+  const onPress = useCallback(() => {
+    Keyboard.dismiss();
+  }, []);
+
   return (
-    <Container>
-      <StatusBar style="auto" />
-      <LinearGradient
-        colors={['#69a9f3', 'transparent']}
-        style={styles.background}
-      />
-      <TitleContainer>
-        <StyledText marginBottom={20} color="#fff" fontSize={30}>
-          Sign In
-        </StyledText>
-      </TitleContainer>
-
-      <MainContainer>
-        <Input
-          title="Email"
-          placeholder="Enter your Email"
-          inputIcon={icon.email}
-          secureTextEntry={false}
-          maxLength={30}
-          keyboardType="email-address"
+    <TouchableWithoutFeedback onPress={onPress}>
+      <Container>
+        <StatusBar style="auto" />
+        <LinearGradient
+          colors={['#69a9f3', 'transparent']}
+          style={styles.background}
         />
+        <TitleContainer>
+          <StyledText
+            marginBottom={20}
+            color="#fff"
+            fontSize={30}
+            fontWeight="bold"
+          >
+            Sign In
+          </StyledText>
+        </TitleContainer>
 
-        <Input
-          title="Password"
-          placeholder="Enter your Password"
-          inputIcon={icon.password}
-          secureTextEntry
-          maxLength={16}
-          keyboardType="default"
-        />
+        <MainContainer>
+          <Input
+            title="Email"
+            placeholder="Enter your Email"
+            inputIcon={icon.email}
+            secureTextEntry={false}
+            maxLength={30}
+            keyboardType="email-address"
+          />
 
-        <MiddleContainer>
-          <StyledText onPress={onPressFindPassword} color="#fff" fontSize={13}>
-            Auto Login
+          <Input
+            title="Password"
+            placeholder="Enter your Password"
+            inputIcon={icon.password}
+            secureTextEntry
+            maxLength={16}
+            keyboardType="default"
+          />
+
+          <MiddleContainer>
+            <StyledText
+              onPress={onPressFindPassword}
+              color="#fff"
+              fontSize={13}
+            >
+              Auto Login
+            </StyledText>
+
+            <StyledText
+              onPress={onPressFindPassword}
+              color="#fff"
+              fontSize={13}
+            >
+              Forgot Password?
+            </StyledText>
+          </MiddleContainer>
+
+          <SignupButton>로그인</SignupButton>
+
+          <StyledText
+            color="#fff"
+            fontSize={13}
+            alignSelf="center"
+            marginTop={20}
+          >
+            - OR -
           </StyledText>
 
-          <StyledText onPress={onPressFindPassword} color="#fff" fontSize={13}>
-            Forgot Password?
+          <StyledText
+            color="#fff"
+            fontSize={13}
+            alignSelf="center"
+            marginTop={20}
+          >
+            Sign in with
           </StyledText>
-        </MiddleContainer>
 
-        <SignupButton>로그인</SignupButton>
+          <SocialLoginContainer>
+            <Circle size={45} source={icon.facebook} />
+            <Circle size={45} source={icon.google} />
+          </SocialLoginContainer>
+        </MainContainer>
 
-        <StyledText
-          color="#fff"
-          fontSize={13}
-          alignSelf="center"
-          marginTop={20}
-        >
-          - OR -
-        </StyledText>
-
-        <StyledText
-          color="#fff"
-          fontSize={13}
-          alignSelf="center"
-          marginTop={20}
-        >
-          Sign in with
-        </StyledText>
-
-        <SocialLoginContainer>
-          <Circle size={45} source={icon.facebook} />
-          <Circle size={45} source={icon.google} />
-        </SocialLoginContainer>
-      </MainContainer>
-
-      <SignupContainer>
-        <StyledText color="#fff" fontSize={16} marginBottom={35}>
-          Dont have an Account?
-        </StyledText>
-        <StyledText
-          color="#fff"
-          fontSize={16}
-          marginBottom={35}
-          fontWeight="bold"
-        >
-          {' '}
-          Sign up
-        </StyledText>
-      </SignupContainer>
-    </Container>
+        <SignupContainer>
+          <StyledText color="#fff" fontSize={16} marginBottom={35}>
+            Dont have an Account?
+          </StyledText>
+          <StyledText
+            color="#fff"
+            fontSize={16}
+            marginBottom={35}
+            fontWeight="bold"
+          >
+            {' '}
+            Sign up
+          </StyledText>
+        </SignupContainer>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 
