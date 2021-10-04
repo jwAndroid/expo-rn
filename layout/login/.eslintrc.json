@@ -30,9 +30,9 @@
     "no-console": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "import/prefer-default-export": "off",
+    "prefer-default-export": "off",
     "global-require": "off",
-    "react/require-default-props": "off",
+    "import/prefer-default-export": "off",
     "comma-dangle": "off"
   }
 }
