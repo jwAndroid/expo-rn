@@ -3,7 +3,6 @@ import React, { FC, memo } from 'react';
 import { KeyboardTypeOptions, Platform } from 'react-native';
 
 const Container = styled.View({
-  paddingHorizontal: 40,
   marginTop: 10,
 });
 
