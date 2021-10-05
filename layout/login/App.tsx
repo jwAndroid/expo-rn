@@ -83,6 +83,14 @@ const Circle = styled.Image<ICircle>(({ marginTop, size }) => ({
   margin: 10,
 }));
 
+const StyledGradient = styled(LinearGradient)({
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  height: 400,
+});
+
 const styles = StyleSheet.create({
   background: {
     position: 'absolute',

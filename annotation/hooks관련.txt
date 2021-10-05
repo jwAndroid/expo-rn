@@ -63,6 +63,17 @@ dispatch : redux에 저장하여 saga에게 알린다.
 const dispatch = useDispatch();
 dispatch(getUriRequest());
 
+-----------------------------------------------------------------
+useState 
+
+ex)
+
+const [isValid , setIsValid] = useState({isValid : true , message : " "})
+
+isValid.message 
+// " "  
+
+이렇게 초기값을 객체로 사용가능함.
 
 
 
