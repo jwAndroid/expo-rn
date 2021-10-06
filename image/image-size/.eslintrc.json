@@ -26,6 +26,7 @@
     "react/style-prop-object": "off",
     "import/no-unresolved": "off",
     "no-console": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "operator-linebreak": "off"
   }
 }
