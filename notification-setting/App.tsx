@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
-import styled from '@emotion/native';
+import React, { memo, useCallback, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import * as Linking from 'expo-linking';
 import * as Notifications from 'expo-notifications';
+import * as Linking from 'expo-linking';
+import styled from '@emotion/native';
 
 const Container = styled.View({
   flex: 1,
@@ -17,41 +17,26 @@ const AccecsSetting = styled.Text({
   marginTop: 30,
 });
 
-const RequsetPermission = styled.Text({
-  fontSize: 16,
-  color: '#303030',
-  marginTop: 30,
-});
+const App = () => {
+  useEffect(() => {
+    (async () => {
+      const result = await Notifications.getPermissionsAsync();
 
-const GetPermission = styled.Text({
-  fontSize: 16,
-  color: '#303030',
-  marginTop: 30,
-});
+      console.log(result);
+    })();
+  }, []);
 
-export default function App() {
   const accecsSetting = useCallback(() => {
     Linking.openSettings();
-  }, []);
-
-  const getPermission = useCallback(async () => {
-    const getPermission = await Notifications.getPermissionsAsync();
-    console.log(getPermission);
-  }, []);
-
-  const requesPermission = useCallback(async () => {
-    const requesPermission = await Notifications.requestPermissionsAsync();
-    console.log(requesPermission);
   }, []);
 
   return (
     <Container>
       <StatusBar style="auto" />
+
       <AccecsSetting onPress={accecsSetting}>Accecs Setting</AccecsSetting>
-      <RequsetPermission onPress={requesPermission}>
-        Requset Permission
-      </RequsetPermission>
-      <GetPermission onPress={getPermission}>Get Permission</GetPermission>
     </Container>
   );
-}
+};
+
+export default memo(App);
