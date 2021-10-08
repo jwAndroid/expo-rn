@@ -1,4 +1,4 @@
-# React Native Expo Project
+# React Native Expo Project kit
 
 - React Native: https://reactnative.dev/
 
