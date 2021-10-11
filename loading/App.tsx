@@ -1,6 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import styled from '@emotion/native';
 import { StatusBar } from 'expo-status-bar';
+
+import { Loading } from './src/components';
 
 const Container = styled.View({
   flex: 1,
@@ -9,10 +11,35 @@ const Container = styled.View({
   justifyContent: 'center',
 });
 
+const PressContainer = styled.Pressable({
+  paddingHorizontal: 50,
+  paddingVertical: 20,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#303030',
+});
+
+const StyledText = styled.Text({
+  fontSize: 18,
+  color: '#fff',
+});
+
 const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onPress = useCallback(() => {
+    setIsLoading(true);
+  }, []);
+
   return (
     <Container>
       <StatusBar style="auto" />
+
+      {isLoading && <Loading />}
+
+      <PressContainer onPress={onPress}>
+        <StyledText>press</StyledText>
+      </PressContainer>
     </Container>
   );
 };

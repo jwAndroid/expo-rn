@@ -24,10 +24,13 @@
     "react/jsx-filename-extension": "off",
     "react/style-prop-object": "off",
     "arrow-body-style": "off",
+    "linebreak-style": "off",
     "operator-linebreak": "off",
     "no-console": "off",
-    "prefer-template": "off",
     "comma-dangle": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
     "no-shadow": "off"
   }
 }
