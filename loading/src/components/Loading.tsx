@@ -7,6 +7,7 @@ const Container = styled.View({
   width: '100%',
   alignItems: 'center',
   justifyContent: 'center',
+  backgroundColor: '#303030',
 });
 
 const Loading = () => {

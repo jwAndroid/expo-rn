@@ -12,8 +12,8 @@ const Container = styled.View({
 });
 
 const PressContainer = styled.Pressable({
-  paddingHorizontal: 50,
-  paddingVertical: 20,
+  paddingHorizontal: 30,
+  paddingVertical: 10,
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '#303030',
