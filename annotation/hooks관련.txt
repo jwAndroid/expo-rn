@@ -13,6 +13,8 @@ redux 로부터 isAppleSuccess(boolen)값을 가져왔을때(업데이트) 되�
     }
   }, [isAppleSuccess, dispatch]);
 
+useLayoutEffect 는 view를 그리기전에 실행 그냥 이펙트는 그리고나서 실행
+
 위 코드는 isAppleSuccess 가 null 이 아니고, isAppleSuccess 가 false 일때에만
 dispatch 하여 nice인증창 url을 호출함.이렇게되면 isAppleSuccess 값이 변경될때에만 저렇게 호출한다는것
 그리고 디펜던시 [isAppleSuccess, dispatch]에 반드시 작성해주어야한다. 값이 바뀔때마다 실행하라는 구문
