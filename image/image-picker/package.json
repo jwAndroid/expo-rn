@@ -15,7 +15,8 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-permissions": "^3.0.5",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "expo-media-library": "~12.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

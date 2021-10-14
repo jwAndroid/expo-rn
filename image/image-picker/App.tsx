@@ -1,6 +1,7 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as MediaLibrary from 'expo-media-library';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +39,22 @@ const styles = StyleSheet.create({
 const App = () => {
   const [selectedImage, setSelectedImage] = useState({ uri: '' });
 
+  useEffect(() => {
+    (async () => {
+      await MediaLibrary.requestPermissionsAsync();
+    })();
+  }, []);
+
+  // get image array from own device
+  // https://docs.expo.dev/versions/latest/sdk/media-library/#medialibrarydeleteassetsasyncassets
+
+  const getAlbum = useCallback(async () => {
+    const assetList = await MediaLibrary.getAssetsAsync();
+
+    setSelectedImage({ uri: assetList.assets[0].uri });
+    console.log(assetList.assets[0].uri);
+  }, []);
+
   const onOpenImagePicker = async () => {
     const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -65,7 +82,9 @@ const App = () => {
         <Image style={styles.thumbnail} source={selectedImage} />
       )}
 
-      <Text style={styles.instruction}>사진을 골라보세요!</Text>
+      <Pressable style={styles.button} onPress={getAlbum}>
+        <Text style={styles.buttonText}>기기에서 사진가져오기</Text>
+      </Pressable>
 
       <Pressable style={styles.button} onPress={onOpenImagePicker}>
         <Text style={styles.buttonText}>앨범가기</Text>
