@@ -47,6 +47,7 @@ const App = () => {
 
   // get image array from own device
   // https://docs.expo.dev/versions/latest/sdk/media-library/#medialibrarydeleteassetsasyncassets
+  // https://forums.expo.dev/t/what-should-i-use-to-list-the-photos-cameraroll-getphotos-function-deleted/32506/2
 
   const getAlbum = useCallback(async () => {
     const assetList = await MediaLibrary.getAssetsAsync();
