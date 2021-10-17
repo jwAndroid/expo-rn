@@ -21,7 +21,7 @@ const { width, height } = Dimensions.get('screen');
 
 const Container = styled.View({
   flex: 1,
-  backgroundColor: '#303030',
+  backgroundColor: '#fff',
 });
 
 const Loading = styled.Text({
@@ -34,27 +34,38 @@ const App = () => {
   const fetchImagesFromPexels = useCallback(async () => {
     const data = await fetch(API_URL, { headers: { Authorization: API_KEY } });
     const { photos } = await data.json();
-
     return photos;
   }, []);
 
   useEffect(() => {
     const fetchImages = async () => {
       const images = await fetchImagesFromPexels();
-      console.log(images);
+      setImages(images);
     };
 
     fetchImages();
-  });
-
-  if (!images) {
-    return null;
-  }
+  }, [fetchImagesFromPexels]);
 
   return (
     <Container>
       <StatusBar hidden />
-      <Loading>Loading...</Loading>
+
+      {!images && <Loading>Loading...</Loading>}
+
+      <FlatList
+        data={images}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => {
+          return (
+            <View style={{ width, height }}>
+              <Image
+                source={{ uri: item.src.landscape }}
+                style={[StyleSheet.absoluteFillObject]}
+              />
+            </View>
+          );
+        }}
+      />
     </Container>
   );
 };
