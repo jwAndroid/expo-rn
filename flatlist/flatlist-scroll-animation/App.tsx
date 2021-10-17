@@ -4,15 +4,10 @@ import {
   StatusBar,
   FlatList,
   Image,
-  Animated,
-  Text,
   View,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  Easing,
-  SafeAreaViewBase,
-  SafeAreaView,
 } from 'react-native';
 
 import { API_KEY, API_URL } from './src/apiKey';
@@ -28,6 +23,9 @@ const Loading = styled.Text({
   fontSize: 18,
 });
 
+const IMAGE_SIZE = 80;
+const SPACING = 10;
+
 const App = () => {
   const [images, setImages] = useState(null);
 
@@ -40,7 +38,9 @@ const App = () => {
   useEffect(() => {
     const fetchImages = async () => {
       const images = await fetchImagesFromPexels();
+
       setImages(images);
+      // console.log(images);
     };
 
     fetchImages();
@@ -55,6 +55,9 @@ const App = () => {
       <FlatList
         data={images}
         keyExtractor={(item) => item.id.toString()}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
             <View style={{ width, height }}>
@@ -63,6 +66,32 @@ const App = () => {
                 style={[StyleSheet.absoluteFillObject]}
               />
             </View>
+          );
+        }}
+      />
+
+      <FlatList
+        data={images}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        style={{ position: 'absolute', bottom: IMAGE_SIZE }}
+        contentContainerStyle={{ padding: SPACING }}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity>
+              <Image
+                source={{ uri: item.src.landscape }}
+                style={{
+                  width: IMAGE_SIZE,
+                  height: IMAGE_SIZE,
+                  borderRadius: 12,
+                  marginRight: SPACING,
+                  borderWidth: 2,
+                }}
+              />
+            </TouchableOpacity>
           );
         }}
       />
