@@ -90,6 +90,7 @@ const StyledGradient = styled(LinearGradient)({
   top: 0,
   height: 400,
 });
+// 잘못쓴것
 
 const styles = StyleSheet.create({
   background: {
