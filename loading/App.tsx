@@ -24,6 +24,8 @@ const StyledText = styled.Text({
   color: '#fff',
 });
 
+// test
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
