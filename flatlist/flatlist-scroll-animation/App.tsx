@@ -40,7 +40,7 @@ const App = () => {
       const images = await fetchImagesFromPexels();
 
       setImages(images);
-      // console.log(images);
+      console.log(images);
     };
 
     fetchImages();
