@@ -5,14 +5,13 @@ import { StatusBar } from 'expo-status-bar';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 20,
   },
   input: {
     width: '94%',
-    height: 40,
+    height: 100,
     color: '#000000',
     textAlignVertical: 'top',
     borderColor: 'gray',
@@ -32,8 +31,8 @@ const App = () => {
   }, []);
 
   const onPressGetText = useCallback(() => {
-    console.log(`getText: ${textValue}`);
-  }, [textValue]);
+    console.log('?????');
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -44,6 +43,7 @@ const App = () => {
         value={textValue}
         placeholder="입력창"
         onChangeText={onChangeText}
+        multiline
       />
 
       <Pressable onPress={onPressGetText}>

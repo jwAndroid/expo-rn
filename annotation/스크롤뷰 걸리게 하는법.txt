@@ -1,0 +1,3 @@
+stickyHeaderIndices={[1]}
+
+https://csc0705.tistory.com/66
