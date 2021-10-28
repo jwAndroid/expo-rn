@@ -1,0 +1,18 @@
+git
+$ git add
+   git commit -m "note"
+   git push
+$ git pull origin master
+
+
+npm
+$ npm i
+$ npm run start
+$ npm run android
+
+expo
+$ expo init {project-name}
+
+eslint
+$ npm i -D eslint 
+$ npx eslint --init
