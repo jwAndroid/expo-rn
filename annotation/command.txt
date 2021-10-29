@@ -16,3 +16,9 @@ $ expo init {project-name}
 eslint
 $ npm i -D eslint 
 $ npx eslint --init
+
+@emotion/native
+npm install @emotion/react @emotion/native
+
+hook
+npm install eslint-plugin-react-hooks --save-dev
