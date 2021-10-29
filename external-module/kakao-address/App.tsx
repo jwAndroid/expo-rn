@@ -1,7 +1,8 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
 import Postcode from '@actbase/react-daum-postcode';
+import { OnCompleteParams } from '@actbase/react-daum-postcode/lib/types';
 // postcode github : https://github.com/actbase/react-daum-postcode
 
 const Container = styled.View({
@@ -40,8 +41,14 @@ const App = () => {
   const [isStart, setIsStart] = useState(false);
   const [selectedData, setSelectedData] = useState('');
 
+  const animation = useMemo(() => ({ animation: true }), []);
+
   const onPress = useCallback(() => {
     setIsStart((prev) => !prev);
+  }, []);
+
+  const onSelected = useCallback((data: OnCompleteParams) => {
+    setSelectedData(data.address);
   }, []);
 
   return (
@@ -54,12 +61,9 @@ const App = () => {
 
       {isStart && (
         <KakaoAddress
-          jsOptions={{ animation: true }}
-          onSelected={(data) => setSelectedData(data.address)}
-          // JSON.stringify(data)
-          onError={() => {
-            console.error('error!');
-          }}
+          jsOptions={animation}
+          onSelected={onSelected}
+          onError={console.warn}
         />
       )}
 
