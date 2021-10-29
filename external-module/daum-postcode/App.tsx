@@ -2,6 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
 import Postcode from '@actbase/react-daum-postcode';
+// postcode github : https://github.com/actbase/react-daum-postcode
 
 const Container = styled.View({
   flex: 1,
