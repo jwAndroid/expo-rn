@@ -27,6 +27,13 @@
     "no-console": "off",
     "no-alert": "off",
     "react/jsx-one-expression-per-line": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "operator-linebreak": "off",
+    "comma-dangle": "off",
+    "import/prefer-default-export": "off",
+    "eol-last": "off",
+    "linebreak-style": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off"
   }
 }
