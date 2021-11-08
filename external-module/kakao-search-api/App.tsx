@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import { Header } from './src/env';
 
+// doc : https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword
+
 const Container = styled.View({
   flex: 1,
   alignItems: 'center',
@@ -13,39 +15,38 @@ const Container = styled.View({
 
 const StyledInput = styled.TextInput({
   width: '94%',
-  color: '#fff',
+  color: '#303030',
   textAlignVertical: 'center',
-  backgroundColor: '#fff',
   borderWidth: 1,
+  padding: 7,
 });
 
-const URL = `https://dapi.kakao.com/v2/local/search/keyword.json?query=${encodeURI(
-  '수원'
-)}&size=15&page=1`;
-
 const App = () => {
-  const [url, setUrl] = useState(URL);
-  const [textValue, setTextValue] = useState('');
+  const [value, setValue] = useState('');
 
   const onChangeText = useCallback((text: string) => {
-    setTextValue(text.trim());
+    setValue(text.trim());
   }, []);
 
   const onSubmitEditing = useCallback(async () => {
-    // const result = await axios.get(URL, {
-    //   headers: { Authorization: Header },
-    // });
+    const URL = `https://dapi.kakao.com/v2/local/search/keyword.json?query=${encodeURI(
+      value
+    )}&size=15&page=1`;
 
-    console.log(url);
-  }, []);
+    const result = await axios.get(URL, {
+      headers: { Authorization: Header },
+    });
+
+    console.log(result);
+  }, [value]);
 
   return (
     <Container>
       <StatusBar style="auto" />
 
       <StyledInput
-        value={textValue}
-        placeholder="입력창"
+        value={value}
+        placeholder="지역 입력"
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
       />
