@@ -102,6 +102,8 @@ const Today = styled.Text({
   marginTop: 2,
 });
 
+const now = new Date();
+
 const App = () => {
   const theme = useMemo<Theme>(() => {
     return {
@@ -122,9 +124,7 @@ const App = () => {
       textDayHeaderFontSize: 12,
       textSectionTitleColor: '#999',
       textDayHeaderFontWeight: 'bold',
-      textDayFontSize: 12,
-      dayTextColor: '#303030',
-      textDayFontWeight: '400',
+      dayTextColor: '#fff',
     };
   }, []);
 
@@ -157,13 +157,11 @@ const App = () => {
 
   const dayComponent = useCallback(({ date, state }) => {
     const originDate = new Date(date.dateString);
-    const currentDate = new Date().setHours(0, 0, 0, 0);
-    const isPast = originDate.setHours(0, 0, 0, 0) < currentDate;
+    const isToday = state === 'today';
     const isSunday = originDate.getDay() === 0;
     const isSaturday = originDate.getDay() === 6;
-    const isToday = state === 'today';
 
-    if (isPast) {
+    if (state === 'disabled') {
       return (
         <DayContainer isToday={isToday}>
           <Past>{date.day}</Past>
@@ -206,6 +204,7 @@ const App = () => {
         theme={theme}
         style={style}
         calendarStyle={calendarStyle}
+        minDate={now}
         pastScrollRange={0}
         futureScrollRange={11}
         renderHeader={renderHeader}
