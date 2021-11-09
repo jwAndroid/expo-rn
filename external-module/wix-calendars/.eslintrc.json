@@ -24,10 +24,10 @@
     "arrow-body-style": "off",
     "react/jsx-filename-extension": "off",
     "react/style-prop-object": "off",
-    "operator-linebreak": "off",
-    "no-console": "off",
-    "prefer-template": "off",
-    "comma-dangle": "off",
-    "no-shadow": "off"
+    "import/prefer-default-export": "off",
+    "linebreak-style": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "comma-dangle": "off"
   }
 }
