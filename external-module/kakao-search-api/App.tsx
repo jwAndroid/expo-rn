@@ -5,7 +5,6 @@ import styled from '@emotion/native';
 import axios from 'axios';
 
 import { key } from './src/key';
-
 // doc : https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword
 
 const Container = styled.View({
@@ -13,38 +12,56 @@ const Container = styled.View({
 });
 
 const InputContainer = styled.View({
-  alignItems: 'center',
   flexDirection: 'row',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   marginTop: 60,
 });
 
 const StyledTextInput = styled.TextInput({
-  width: '80%',
-  color: '#303030',
+  flex: 1,
+  paddingHorizontal: 20,
   textAlignVertical: 'center',
+  fontSize: 16,
+  color: '#303030',
 });
 
 const ResultContainer = styled.View({
   flex: 1,
-  margin: 30,
+  paddingHorizontal: 20,
+  paddingVertical: 10,
 });
 
-const StyledText = styled.Text({
-  color: '#000000',
+interface IStyledText {
+  isTitle?: boolean;
+  isSearch?: boolean;
+}
+
+const StyledText = styled.Text<IStyledText>(({ isTitle, isSearch }) => ({
+  color: isSearch ? 'blue' : '#303030',
+  marginRight: 20,
+  fontWeight: isTitle ? 'bold' : undefined,
+  fontSize: isTitle ? 18 : 14,
+}));
+
+const SearchButton = styled.Text({
+  color: '#3399ff',
+  marginRight: 20,
+  fontWeight: 'bold',
+  fontSize: 16,
 });
 
 const TextContainer = styled.View({
   width: '100%',
   backgroundColor: '#fff',
-  marginTop: 8,
+  marginVertical: 10,
 });
 
 const Divider = styled.View({
   width: '100%',
   height: 1,
   marginTop: 10,
-  backgroundColor: '#303030',
+  backgroundColor: '#e0e0e0',
 });
 
 interface IItem {
@@ -93,18 +110,22 @@ const App = () => {
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
         />
-        <StyledText onPress={onSubmitEditing}>검색</StyledText>
+
+        <SearchButton onPress={onSubmitEditing}>검색</SearchButton>
       </InputContainer>
 
       <Divider />
 
       <ScrollView>
         <ResultContainer>
-          {listData.map(({ address_name, place_name }) => {
+          {listData.map(({ address_name, place_name }, index) => {
             return (
-              <TextContainer>
-                <StyledText>{address_name}</StyledText>
-                <StyledText>{place_name}</StyledText>
+              <TextContainer key={index}>
+                <StyledText numberOfLines={1} isTitle>
+                  {place_name}
+                </StyledText>
+
+                <StyledText numberOfLines={1}>{address_name}</StyledText>
               </TextContainer>
             );
           })}
