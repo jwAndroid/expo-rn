@@ -34,6 +34,8 @@
     "eol-last": "off",
     "linebreak-style": "off",
     "import/extensions": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "camelcase": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }
