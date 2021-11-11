@@ -32,8 +32,8 @@ const StyledText = styled.Text<IStyledText>(({ isSelected, marginTop }) => ({
 }));
 
 const KakaoAddress = styled(Postcode)({
-  width: 320,
-  height: 320,
+  width: '100%',
+  height: 600,
   marginTop: 10,
 });
 
