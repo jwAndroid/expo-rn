@@ -40,6 +40,10 @@
         }
       ]
     ],
-    "description": ""
+    "description": "",
+    "notification": {
+      "icon": "./assets/adaptive-icon.png",
+      "androidCollapsedTitle": "#{unread_notifications} new interactions'"
+    }
   }
 }
