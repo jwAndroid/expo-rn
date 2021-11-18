@@ -1,8 +1,7 @@
 {
   "expo": {
-    "owner": "jwandroid",
-    "name": "push-notification",
-    "slug": "push-notification",
+    "name": "lottie",
+    "slug": "lottie",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,30 +15,16 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.jwandroid.notification"
+      "supportsTablet": true
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.jwandroid.notification",
-      "permissions": [],
-      "versionCode": 1
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-notifications",
-        {
-          "mode": "production"
-        }
-      ]
-    ],
-    "description": ""
+    }
   }
 }

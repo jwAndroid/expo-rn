@@ -21,3 +21,6 @@ npm install @emotion/react @emotion/native
 
 hook
 npm install eslint-plugin-react-hooks --save-dev
+
+build
+expo build:android or ios

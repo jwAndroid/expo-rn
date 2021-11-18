@@ -1,0 +1,3 @@
+expo push:android:upload --api-key AAAAJKgIqpU:APA91bGLAcM8SefY0a2eZED7dSRatD-kv_HaihOBH-lzbK-Oahtr17RUIWKKS3Z1iZ4IjyjgF2cn_xO_xu_MohyUR_kZIGFk6ORxCCvYLuCntzs8Kp3uItGT5FbOzkXxq0zyyFKi_-d-
+
+expo 크리덴셜에서도 세팅가능
