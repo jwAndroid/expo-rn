@@ -50,10 +50,12 @@ const App = () => {
   // https://forums.expo.dev/t/what-should-i-use-to-list-the-photos-cameraroll-getphotos-function-deleted/32506/2
 
   const getAlbum = useCallback(async () => {
-    const assetList = await MediaLibrary.getAssetsAsync();
+    const assetLists = await MediaLibrary.getAssetsAsync();
 
-    setSelectedImage({ uri: assetList.assets[0].uri });
-    console.log(assetList.assets[0].uri);
+    assetLists.assets.map((item) => console.log(item));
+
+    setSelectedImage({ uri: assetLists.assets[1].uri });
+    console.log(assetLists.assets[0].uri);
   }, []);
 
   const onOpenImagePicker = async () => {
