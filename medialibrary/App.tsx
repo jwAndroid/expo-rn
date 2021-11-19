@@ -10,6 +10,11 @@ const Container = styled.View({
   justifyContent: 'center',
 });
 
+const StyledText = styled.Text({
+  fontSize: 17,
+  color: '#303030',
+});
+
 const App = () => {
   const [selectedImage, setSelectedImage] = useState({ uri: '' });
 
@@ -19,18 +24,19 @@ const App = () => {
     })();
   }, []);
 
-  const getAlbum = useCallback(async () => {
+  const onPress = useCallback(async () => {
     const assetLists = await MediaLibrary.getAssetsAsync();
-
     assetLists.assets.map((item) => console.log(item));
-
     setSelectedImage({ uri: assetLists.assets[1].uri });
+
     console.log(assetLists.assets[0].uri);
-  }, []);
+    console.log(selectedImage);
+  }, [selectedImage]);
 
   return (
     <Container>
       <StatusBar style="auto" />
+      <StyledText onPress={onPress}>press</StyledText>
     </Container>
   );
 };
