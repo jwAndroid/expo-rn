@@ -1,5 +1,6 @@
 node_modules/
 .expo/
+dist/
 npm-debug.*
 *.jks
 *.p8
@@ -11,9 +12,3 @@ web-build/
 
 # macOS
 .DS_Store
-
-# apiKey
-apiKey.ts
-
-# link
-link.ts

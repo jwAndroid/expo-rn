@@ -23,4 +23,5 @@ hook
 npm install eslint-plugin-react-hooks --save-dev
 
 build
-expo build:android or ios
+$ expo build:android
+$ expo build:ios
