@@ -23,6 +23,7 @@ const Container = styled.View<IContainer>(({ safeAreaInsets }) => ({
 const StyledText = styled.Text({
   fontSize: 30,
   margin: 10,
+  color: '#303030',
 });
 
 const Home = () => {
