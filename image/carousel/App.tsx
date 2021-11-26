@@ -33,8 +33,15 @@ const App = () => {
       <ImageZoom
         cropWidth={Dimensions.get('window').width}
         cropHeight={Dimensions.get('window').height}
-        imageWidth={600}
+        imageWidth={200}
         imageHeight={200}
+        enableSwipeDown
+        onStartShouldSetPanResponder={() => {
+          return false;
+        }}
+        onSwipeDown={() => {
+          console.log('down');
+        }}
       >
         <ImageContainer>
           <StyledImage source={{ uri: item }} resizeMode="center" />
