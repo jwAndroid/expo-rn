@@ -36,9 +36,6 @@ const App = () => {
         imageWidth={200}
         imageHeight={200}
         enableSwipeDown
-        onStartShouldSetPanResponder={() => {
-          return false;
-        }}
         onSwipeDown={() => {
           console.log('down');
         }}
