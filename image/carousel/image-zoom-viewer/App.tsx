@@ -32,12 +32,12 @@ const App = () => {
 
   const onPress = useCallback(() => setVisible(true), []);
 
-  const renderIndicator = useCallback((currentIndex) => {
-    return <StyledText>{currentIndex}</StyledText>;
-  }, []);
+  // const renderIndicator = useCallback((currentIndex) => {
+  //   return <StyledText>{currentIndex}</StyledText>;
+  // }, []);
 
-  const renderFooter = useCallback(() => {
-    return <StyledText>123</StyledText>;
+  const renderFooter = useCallback((currentIndex) => {
+    return <StyledText>{currentIndex + 1}</StyledText>;
   }, []);
 
   return (
@@ -52,9 +52,9 @@ const App = () => {
             setVisible(false);
           }}
           enablePreload
-          renderIndicator={renderIndicator}
           renderFooter={renderFooter}
-          swipeDownThreshold={3}
+          swipeDownThreshold={10}
+          maxOverflow={800}
         />
       </Modal>
 
