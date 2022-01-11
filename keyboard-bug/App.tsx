@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/native';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import * as SystemUI from 'expo-system-ui';
 
 const Container = styled.View({
   flex: 1,
@@ -20,22 +21,37 @@ const StyledInput = styled.TextInput({
   marginBottom: 10,
 });
 
+const StyledText = styled.Text({
+  fontSize: 18,
+  color: '#fff',
+  marginBottom: 30,
+});
+
 const App = () => {
   const [textValue, setTextValue] = useState('');
+  // const [rootColor, setRootColor] = useState('');
+
+  // useEffect(() => {
+  //   const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+  //     console.log('Keyboard Shown');
+  //   });
+  //   const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+  //     console.log('Keyboard Hidden');
+  //   });
+
+  //   return () => {
+  //     showSubscription.remove();
+  //     hideSubscription.remove();
+  //   };
+  // });
 
   useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-      console.log('Keyboard Shown');
-    });
-    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-      console.log('Keyboard Hidden');
-    });
+    (async () => {
+      const result = await SystemUI.getBackgroundColorAsync();
 
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  });
+      console.log(result);
+    })();
+  }, []);
 
   const onChangeText = useCallback((text: string) => {
     setTextValue(text.trim());
@@ -49,10 +65,18 @@ const App = () => {
     Keyboard.dismiss();
   }, []);
 
+  const onPress = useCallback(async () => {
+    await SystemUI.setBackgroundColorAsync('#303030');
+
+    console.log('설정완료');
+  }, []);
+
   return (
     <TouchableWithoutFeedback onPress={onPressOutside}>
       <Container>
         <StatusBar style="auto" />
+
+        <StyledText onPress={onPress}>SetRootViewColor</StyledText>
 
         <StyledInput
           value={textValue}
