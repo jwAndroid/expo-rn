@@ -6,7 +6,6 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:react/jsx-runtime",
     "airbnb"
   ],
   "parser": "@typescript-eslint/parser",
@@ -14,19 +13,23 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 13,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "react/function-component-definition": "off",
+    "no-use-before-define": "off",
     "arrow-body-style": "off",
     "react/jsx-filename-extension": "off",
     "react/style-prop-object": "off",
-    "react/react-in-jsx-scope": "off",
+    "linebreak-style": "off",
+    "object-curly-newline": "off",
     "no-console": "off",
-    "object-curly-newline": "off"
+    "operator-linebreak": "off",
+    "prefer-template": "off",
+    "no-undef": "off",
+    "global-require": "off"
   }
 }

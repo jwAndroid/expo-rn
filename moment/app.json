@@ -1,11 +1,10 @@
 {
   "expo": {
-    "name": "keyboard-bug",
-    "slug": "keyboard-bug",
+    "name": "moment",
+    "slug": "moment",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "backgroundColor": "#303030",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#fff"
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
