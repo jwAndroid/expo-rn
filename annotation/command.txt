@@ -11,6 +11,7 @@ $ npm run android
 
 expo
 $ expo init {project-name}
+$ expo upgrade
 
 eslint
 $ npm i -D eslint 
@@ -25,3 +26,8 @@ npm install eslint-plugin-react-hooks --save-dev
 build
 $ expo build:android
 $ expo build:ios
+
+update npm check
+$ npm i -g npm-check-updates
+$ ncu -u
+$ npm install -> ncu -u
