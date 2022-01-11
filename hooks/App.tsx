@@ -14,7 +14,7 @@ const StyledButton = styled.Pressable({
   paddingVertical: 10,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#303030',
+  backgroundColor: '#fff',
   borderRadius: 8,
   marginTop: 20,
 });
