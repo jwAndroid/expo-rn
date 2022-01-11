@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "keyboard-bug",
-    "slug": "keyboard-bug",
+    "name": "expo-system-ui",
+    "slug": "expo-system-ui",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
