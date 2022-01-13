@@ -1,0 +1,2 @@
+KeyboardAwareScrollView
+의 extraScrollHeight={Platform.OS === 'ios' ? 110 : 100} 이런식으로 주면된다
