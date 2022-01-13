@@ -58,9 +58,9 @@ const App = () => {
         inactiveSlideScale={1}
         autoplay
         lockScrollWhileSnapping
-        autoplayInterval={5000}
+        autoplayInterval={2000}
         loop
-        loopClonesPerSide={3}
+        loopClonesPerSide={4}
         data={images}
         renderItem={renderItem}
       />
