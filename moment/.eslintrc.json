@@ -6,7 +6,6 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:react/jsx-runtime",
     "airbnb"
   ],
   "parser": "@typescript-eslint/parser",
@@ -14,19 +13,37 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 13,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "react/function-component-definition": "off",
+    "no-use-before-define": "off",
     "arrow-body-style": "off",
     "react/jsx-filename-extension": "off",
     "react/style-prop-object": "off",
-    "react/react-in-jsx-scope": "off",
+    "linebreak-style": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
     "no-console": "off",
-    "object-curly-newline": "off"
+    "import/prefer-default-export": "off",
+    "no-shadow": "off",
+    "comma-dangle": "off",
+    "object-curly-newline": "off",
+    "global-require": "off",
+    "react/prop-types": "off",
+    "no-param-reassign": "off",
+    "operator-linebreak": "off",
+    "no-nested-ternary": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-wrap-multilines": "off",
+    "indent": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/function-component-definition": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off"
   }
 }
