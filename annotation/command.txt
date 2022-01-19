@@ -12,6 +12,8 @@ $ npm run android
 expo
 $ expo init {project-name}
 $ expo upgrade
+$ expo login
+$ expo logout
 
 eslint
 $ npm i -D eslint 
@@ -31,3 +33,5 @@ update npm check
 $ npm i -g npm-check-updates
 $ ncu -u
 $ npm install -> ncu -u
+
+npm i 랑 install 이랑 다름 
