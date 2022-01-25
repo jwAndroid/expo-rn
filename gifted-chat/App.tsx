@@ -82,7 +82,7 @@ const App = () => {
     <Container>
       <GiftedChat
         renderAvatarOnTop
-        maxComposerHeight={75}
+        maxComposerHeight={44}
         messages={messages}
         onSend={(messages) => onSend(messages)}
         user={{
