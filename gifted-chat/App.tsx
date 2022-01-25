@@ -4,6 +4,13 @@ import { GiftedChat } from 'react-native-gifted-chat';
 
 const Container = styled.View({
   flex: 1,
+  marginTop: 50,
+});
+
+const Header = styled.View({
+  width: '100%',
+  height: 50,
+  backgroundColor: '#303030',
 });
 
 interface IUser {
@@ -80,9 +87,11 @@ const App = () => {
 
   return (
     <Container>
+      <Header />
       <GiftedChat
         renderAvatarOnTop
-        maxComposerHeight={44}
+        placeholder="send messages"
+        alignTop
         messages={messages}
         onSend={(messages) => onSend(messages)}
         user={{
