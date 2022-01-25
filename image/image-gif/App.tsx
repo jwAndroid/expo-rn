@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styled from '@emotion/native';
+import { TouchableHighlight } from 'react-native';
 
 const Container = styled.View({
   flex: 1,
@@ -16,7 +17,9 @@ const GifImage = styled.Image({
 const App = () => {
   return (
     <Container>
-      <GifImage source={require('./assets/test.gif')} />
+      <TouchableHighlight onPress={() => console.log('click!')}>
+        <GifImage source={require('./assets/test.gif')} />
+      </TouchableHighlight>
     </Container>
   );
 };
