@@ -1,21 +1,22 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import styled from '@emotion/native';
 
 const Container = styled.View({
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center',
+  backgroundColor: '#303030',
 });
 
-const SplashLogo = styled.Image({
-  width: 160,
-  height: 160,
+const GifImage = styled.Image({
+  width: 360,
+  height: 360,
 });
 
 const App = () => {
   return (
     <Container>
-      <SplashLogo source={require('./assets/test.gif')} />
+      <GifImage source={require('./assets/test.gif')} />
     </Container>
   );
 };
