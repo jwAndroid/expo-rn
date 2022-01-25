@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
   },
 });
 
+// './assets/85819-kadokado-heart.json'
+
 const App = () => {
   const animation = useRef<LottieView>(null);
   const [pressed, setPressed] = useState(false);
