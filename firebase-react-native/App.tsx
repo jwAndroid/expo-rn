@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import styled from '@emotion/native';
 
+// install firebase sdk , database , GA
+
 const Container = styled.View({
   flex: 1,
 });
