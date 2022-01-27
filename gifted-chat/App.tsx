@@ -88,9 +88,10 @@ const App = () => {
   return (
     <Container>
       <Header />
+
       <GiftedChat
         renderAvatarOnTop
-        placeholder="send messages"
+        placeholder="입력해주세요..."
         alignTop
         messages={messages}
         onSend={(messages) => onSend(messages)}
