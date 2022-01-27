@@ -23,6 +23,7 @@
     "arrow-body-style": "off",
     "react/function-component-definition": "off",
     "react/jsx-filename-extension": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-console": "off"
   }
 }

@@ -1,10 +1,12 @@
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/native';
 
 // install firebase sdk , database , GA
 
 const Container = styled.View({
   flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 const StyledText = styled.Text({
@@ -13,9 +15,21 @@ const StyledText = styled.Text({
 });
 
 const App = () => {
+  const [value, setValue] = useState('TEST');
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+
+  const onPress = useCallback(() => {
+    setValue('set!');
+
+    console.log(value);
+  }, [value]);
+
   return (
     <Container>
-      <StyledText>hello world</StyledText>
+      <StyledText onPress={onPress}>hello world</StyledText>
     </Container>
   );
 };
