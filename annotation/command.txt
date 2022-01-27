@@ -33,5 +33,3 @@ update npm check
 $ npm i -g npm-check-updates
 $ ncu -u
 $ npm install -> ncu -u
-
-npm i 랑 install 이랑 다름 
