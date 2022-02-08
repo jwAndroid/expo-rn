@@ -27,7 +27,7 @@ const App = () => {
         ref={animation}
         autoPlay
         loop
-        source={require('./assets/85819-kadokado-heart.json')}
+        source={require('./assets/mytest.json')}
       />
     </View>
   );
