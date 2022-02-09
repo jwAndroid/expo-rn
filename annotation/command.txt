@@ -29,7 +29,11 @@ build
 $ expo build:android
 $ expo build:ios
 
-update npm check
+update check npm
 $ npm i -g npm-check-updates
 $ ncu -u
 $ npm install -> ncu -u
+
+npm update 
+$ npm install -g npm
+
