@@ -22,3 +22,7 @@
 
 - openbase: https://openbase.com/
 - npm trands: https://www.npmtrends.com/
+
+## npm
+
+- nvm install : https://github.com/nvm-sh/nvm#installing-and-updating
