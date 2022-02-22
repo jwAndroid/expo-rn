@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import styled from '@emotion/native';
 
 import StyledText from './src/components/StyledText';
@@ -10,9 +10,13 @@ const Container = styled.View({
 });
 
 const App = () => {
+  const onPress = useCallback(() => {
+    console.log('asd');
+  }, []);
+
   return (
     <Container>
-      <StyledText fontSize={16} color="#303030">
+      <StyledText onPress={onPress} fontSize={16} color="#303030">
         hello react native
       </StyledText>
     </Container>

@@ -28,6 +28,7 @@
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "import/no-unresolved": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "no-console": "off"
   }
 }
