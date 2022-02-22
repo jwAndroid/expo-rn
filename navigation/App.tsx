@@ -1,15 +1,19 @@
-import React, { memo } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { memo } from 'react';
+import styled from '@emotion/native';
 
-import { Stack } from './src/navigation';
+const Container = styled.View({
+  flex: 1,
+});
+
+const StyledText = styled.Text({
+  fontSize: 16,
+});
 
 const App = () => {
   return (
-    <>
-      <StatusBar style="auto" />
-
-      <Stack />
-    </>
+    <Container>
+      <StyledText>hello world</StyledText>
+    </Container>
   );
 };
 
