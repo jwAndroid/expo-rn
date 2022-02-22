@@ -1,18 +1,20 @@
 import { memo } from 'react';
 import styled from '@emotion/native';
 
+import StyledText from './src/components/StyledText';
+
 const Container = styled.View({
   flex: 1,
-});
-
-const StyledText = styled.Text({
-  fontSize: 16,
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 const App = () => {
   return (
     <Container>
-      <StyledText>hello world</StyledText>
+      <StyledText fontSize={16} color="#303030">
+        hello react native
+      </StyledText>
     </Container>
   );
 };
