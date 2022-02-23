@@ -17,3 +17,8 @@ react native navigation 는 fragment 처럼 여러 fragment 를 쌓아놓고 nav
 
 navigation 패키지와 screen 패키지는 대응해야한다
 네비게이션에서 Auth 폴더와 Screen 에서 Auth폴더가 대응
+
+3. 컴포넌트 이름변경
+Navigation -> index
+Stack -> 화면이름.tsx
+

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   input: {
-    width: '94%',
+    width: '100%',
     height: 100,
     color: '#000000',
     textAlignVertical: 'top',
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
 
 const App = () => {
   const [textValue, setTextValue] = useState('');
+  const [sm, setSm] = useState('');
 
   const onChangeText = useCallback((text: string) => {
-    setTextValue(text.trim());
-    console.log(`text: ${text}`);
+    setTextValue(text);
   }, []);
 
   const onPressGetText = useCallback(() => {
@@ -39,6 +39,7 @@ const App = () => {
       <StatusBar style="auto" />
 
       <TextInput
+        keyboardType="numbers-and-punctuation"
         style={styles.input}
         value={textValue}
         placeholder="입력창"
