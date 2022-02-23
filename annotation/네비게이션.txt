@@ -1,0 +1,19 @@
+1. 화면이동
+
+home이 먼저 보이는 이유가 
+navigation 도 하나의 컴포넌트인데
+<Screen name="Home" component={Home} /> 을 먼저 깔았기 때문에 그렇다
+ <Navigator screenOptions={screenOptions}>
+      <Screen name="Home" component={Home} />
+      <Screen name="List" component={List} />
+      <Screen name="Chat" component={Chat} />
+ </Navigator>
+
+react native navigation 는 fragment 처럼 여러 fragment 를 쌓아놓고 navigate 해서 그 화면을 보여주는것일뿐
+그리고 name="Home" 컴포넌트가 가장 최상단에 있으니까 가장먼저 보이는것
+하나의 네비게이션에서 어디로 navigate 미리정의를 해놓고서 관리하는것
+
+2. 패키지 
+
+navigation 패키지와 screen 패키지는 대응해야한다
+네비게이션에서 Auth 폴더와 Screen 에서 Auth폴더가 대응

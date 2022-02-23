@@ -29,6 +29,8 @@
     "react/require-default-props": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "comma-dangle": "off",
+    "react/jsx-no-useless-fragment": "off"
   }
 }
