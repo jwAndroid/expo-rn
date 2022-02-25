@@ -1,7 +1,7 @@
 ### Setup
 
 ```bash
-$ expo init project name
+$ expo init "project name"
 ```
 
 ### ESLint
