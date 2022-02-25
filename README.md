@@ -46,7 +46,7 @@ add rules
 - [React Native](https://reactnative.dev)
 - [Expo](https://docs.expo.io/get-started/installation) Installation
 - [ESLint](https://eslint.org)
-- [No Unused Vars](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unused-vars.md)
+  - [No Unused Vars](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unused-vars.md)
 - [Hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
 - [Emotion](https://emotion.sh/docs/introduction) introduction , [install](https://emotion.sh/docs/@emotion/native) and [setup](https://emotion.sh/docs/typescript)
 - [Axios](https://www.npmjs.com/package/axios)
