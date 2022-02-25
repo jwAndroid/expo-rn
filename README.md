@@ -57,8 +57,6 @@ add rules
 - [openbase](https://openbase.com)
 - [Public-API](https://github.com/public-apis/public-apis)
 
----
-
 ## Design
 
 - [MUI](https://mui.com/getting-started/usage)
@@ -68,8 +66,6 @@ add rules
 - [react-native-elements](https://reactnativeelements.com/docs)
 - [Vector-Icons](https://icons.expo.fyi)
 - [Google Fonts Icons](https://fonts.google.com/icons)
-
----
 
 ## Flexbox Froggy
 
