@@ -11,12 +11,6 @@ $ npm i -D eslint
 $ npx eslint --init
 ```
 
-### Emotion
-
-```bash
-$ npm install @emotion/react @emotion/native
-```
-
 ### eslint-plugin-hook
 
 ```bash
@@ -36,6 +30,12 @@ add rules
     "@typescript-eslint/no-unused-vars": ["error"],
     ...
   }
+```
+
+### Emotion
+
+```bash
+$ npm install @emotion/react @emotion/native
 ```
 
 ---
