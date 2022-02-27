@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import * as Location from 'expo-location';
 
-import { API_KEY, BASE_URL } from './src/apiKey';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { callApi } from './src/apiKey';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -65,12 +64,13 @@ export default function App() {
           { latitude, longitude },
           { useGoogleMaps: false }
         );
+
         setCity(location[0].city);
-        const reponse = await fetch(
-          `${BASE_URL}/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${API_KEY}&units=metric`
-        );
+
+        const reponse = await fetch(callApi(latitude, longitude));
 
         const json = await reponse.json();
+
         setDay(json.daily);
       }
     })();
