@@ -3,7 +3,7 @@ import styled from '@emotion/native';
 
 import { FloatingButton, TabButton } from '../components/button';
 import { BaseContainer } from '../components/layout';
-import { StyledText } from '../components/text';
+import { RecycleBin, Todo } from './components';
 
 const TabContainer = styled.View({
   width: '100%',
@@ -20,13 +20,18 @@ const ContentContainer = styled.View(({ theme }) => ({
 
 const Main = () => {
   const [isActive, setIsActive] = useState(true);
+  const [isTodoScreen, setIsTodoScreen] = useState(true);
 
-  const work = useCallback(() => {
+  const toDoOnPress = useCallback(() => {
     setIsActive((prev) => !prev);
+
+    setIsTodoScreen(true);
   }, []);
 
-  const travel = useCallback(() => {
+  const recycleBinOnPress = useCallback(() => {
     setIsActive(false);
+
+    setIsTodoScreen((prev) => !prev);
   }, []);
 
   const onPress = useCallback(() => {
@@ -40,25 +45,23 @@ const Main = () => {
           isActive={isActive}
           buttonTextSize={18}
           buttonTextColor="#fff"
-          onPress={work}
+          onPress={toDoOnPress}
         >
-          work
+          ToDo
         </TabButton>
 
         <TabButton
           isActive={!isActive}
           buttonTextSize={18}
           buttonTextColor="#fff"
-          onPress={travel}
+          onPress={recycleBinOnPress}
         >
-          travel
+          RecycleBin
         </TabButton>
       </TabContainer>
 
       <ContentContainer>
-        <StyledText fontSize={24} color="#fff">
-          Contents
-        </StyledText>
+        {isTodoScreen ? <Todo /> : <RecycleBin />}
       </ContentContainer>
 
       <FloatingButton onPress={onPress} />
