@@ -1,8 +1,7 @@
-import styled from '@emotion/native';
 import { memo, useCallback, useState } from 'react';
-import { Text } from 'react-native';
+import styled from '@emotion/native';
 
-import { TabButton } from '../components/button';
+import { FloatingButton, TabButton } from '../components/button';
 import { BaseContainer } from '../components/layout';
 import { StyledText } from '../components/text';
 
@@ -12,12 +11,12 @@ const TabContainer = styled.View({
   justifyContent: 'space-between',
 });
 
-const ContentContainer = styled.View({
+const ContentContainer = styled.View(({ theme }) => ({
   flex: 1,
-  backgroundColor: '#303030',
   justifyContent: 'center',
   alignItems: 'center',
-});
+  backgroundColor: theme.background,
+}));
 
 const Main = () => {
   const [isActive, setIsActive] = useState(true);
@@ -30,6 +29,10 @@ const Main = () => {
     setIsActive(false);
   }, []);
 
+  const onPress = useCallback(() => {
+    console.log('FloatingOnPress');
+  }, []);
+
   return (
     <BaseContainer>
       <TabContainer>
@@ -37,7 +40,6 @@ const Main = () => {
           isActive={isActive}
           buttonTextSize={18}
           buttonTextColor="#fff"
-          marginTop={10}
           onPress={work}
         >
           work
@@ -47,7 +49,6 @@ const Main = () => {
           isActive={!isActive}
           buttonTextSize={18}
           buttonTextColor="#fff"
-          marginTop={10}
           onPress={travel}
         >
           travel
@@ -59,6 +60,8 @@ const Main = () => {
           Contents
         </StyledText>
       </ContentContainer>
+
+      <FloatingButton onPress={onPress} />
     </BaseContainer>
   );
 };

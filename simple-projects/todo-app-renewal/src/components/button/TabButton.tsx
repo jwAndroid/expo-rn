@@ -1,6 +1,7 @@
 import styled from '@emotion/native';
 import { FC, memo, ReactNode } from 'react';
 import { GestureResponderEvent } from 'react-native';
+
 import { StyledText } from '../text';
 
 interface IContainer {
