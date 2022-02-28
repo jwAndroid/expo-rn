@@ -1,13 +1,22 @@
 import styled from '@emotion/native';
 import { memo, useCallback, useState } from 'react';
+import { Text } from 'react-native';
 
 import { TabButton } from '../components/button';
 import { BaseContainer } from '../components/layout';
+import { StyledText } from '../components/text';
 
-const Container = styled.View({
+const TabContainer = styled.View({
   width: '100%',
   flexDirection: 'row',
   justifyContent: 'space-between',
+});
+
+const ContentContainer = styled.View({
+  flex: 1,
+  backgroundColor: '#303030',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
 
 const Main = () => {
@@ -23,7 +32,7 @@ const Main = () => {
 
   return (
     <BaseContainer>
-      <Container>
+      <TabContainer>
         <TabButton
           isActive={isActive}
           buttonTextSize={18}
@@ -43,7 +52,13 @@ const Main = () => {
         >
           travel
         </TabButton>
-      </Container>
+      </TabContainer>
+
+      <ContentContainer>
+        <StyledText fontSize={24} color="#fff">
+          Contents
+        </StyledText>
+      </ContentContainer>
     </BaseContainer>
   );
 };
