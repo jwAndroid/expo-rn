@@ -1,23 +1,25 @@
-import { memo, useMemo } from 'react';
-import { StatusBar } from 'react-native';
+import { memo, useCallback, useMemo, useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from '@emotion/react';
 
-import { BaseContainer, SafeAreaContainer } from './src/components/layout';
-import { StyledText } from './src/components/text';
 import { lightTheme } from './src/theme';
+import { Splash } from './src/screen';
+import Navigation from './src/navigation/Navigation';
 
 const App = () => {
+  const [isComplete, setIsComplete] = useState(false);
+
   const theme = useMemo(() => lightTheme, []);
+
+  const onComplete = useCallback(() => {
+    setIsComplete(true);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <SafeAreaContainer>
-        <BaseContainer>
-          <StatusBar />
+      <StatusBar />
 
-          <StyledText>memo app</StyledText>
-        </BaseContainer>
-      </SafeAreaContainer>
+      {isComplete ? <Navigation /> : <Splash onComplete={onComplete} />}
     </ThemeProvider>
   );
 };
