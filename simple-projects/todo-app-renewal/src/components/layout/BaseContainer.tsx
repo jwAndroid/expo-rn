@@ -1,14 +1,14 @@
 import { FC, memo, ReactNode } from 'react';
 import styled from '@emotion/native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface IContainer {
-  paddingHorizontal: number;
+  paddingHorizontal?: number;
   marginTop: number;
 }
 
 const Container = styled.View<IContainer>(
   ({ paddingHorizontal, marginTop, theme }) => ({
-    width: '100%',
     flex: 1,
     paddingHorizontal,
     marginTop,
@@ -24,8 +24,8 @@ interface IBaseContainer {
 
 const BaseContainer: FC<IBaseContainer> = ({
   children,
-  paddingHorizontal = 20,
-  marginTop = 10,
+  paddingHorizontal = 0,
+  marginTop = getStatusBarHeight(),
 }) => {
   return (
     <Container paddingHorizontal={paddingHorizontal} marginTop={marginTop}>

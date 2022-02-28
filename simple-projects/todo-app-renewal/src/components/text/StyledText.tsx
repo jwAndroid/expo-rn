@@ -2,26 +2,22 @@ import { FC, memo, ReactNode } from 'react';
 import styled from '@emotion/native';
 
 interface IText {
-  color: string | undefined;
-  fontSize: number | undefined;
+  color?: string;
+  fontSize?: number;
 }
 
-const Text = styled.Text<IText>(({ theme, fontSize }) => ({
-  color: theme.text,
+const Text = styled.Text<IText>(({ color, fontSize }) => ({
+  color,
   fontSize,
 }));
 
 interface IStyledText {
   children: ReactNode;
-  color?: string | undefined;
-  fontSize?: number | undefined;
+  color?: string;
+  fontSize?: number;
 }
 
-const StyledText: FC<IStyledText> = ({
-  children,
-  color = '#303030',
-  fontSize = 16,
-}) => {
+const StyledText: FC<IStyledText> = ({ children, color, fontSize }) => {
   return (
     <Text color={color} fontSize={fontSize}>
       {children}

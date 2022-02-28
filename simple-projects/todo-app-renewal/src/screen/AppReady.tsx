@@ -7,7 +7,7 @@ interface ISplash {
   onComplete: (isComplete: boolean) => void;
 }
 
-const Splash: FC<ISplash> = ({ onComplete }) => {
+const AppReady: FC<ISplash> = ({ onComplete }) => {
   const [isPreloading, setIsPreloading] = useState(false);
 
   const startAsync = useCallback(async () => {
@@ -35,4 +35,4 @@ const Splash: FC<ISplash> = ({ onComplete }) => {
   );
 };
 
-export default memo(Splash);
+export default memo(AppReady);

@@ -21,8 +21,12 @@ const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 const Stack = () => {
   return (
-    <Navigator>
-      <Screen name="Main" component={Main} />
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Screen name="Main" component={Main} options={{ title: 'main' }} />
     </Navigator>
   );
 };
