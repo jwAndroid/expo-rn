@@ -15,7 +15,7 @@ const App = () => {
         <BaseContainer>
           <StatusBar />
 
-          <StyledText>ㅅㅂ</StyledText>
+          <StyledText>memo app</StyledText>
         </BaseContainer>
       </SafeAreaContainer>
     </ThemeProvider>
