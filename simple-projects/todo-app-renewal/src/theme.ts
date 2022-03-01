@@ -5,7 +5,8 @@ export const lightTheme: Theme = {
   background: '#E2E2E2',
   color: {
     white: '#ffffff',
-    black: 'black',
+    black: '#000000',
+    gray: '#808080',
   },
 };
 

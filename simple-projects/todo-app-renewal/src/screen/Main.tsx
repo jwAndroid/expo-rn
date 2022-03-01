@@ -4,6 +4,7 @@ import styled from '@emotion/native';
 import { FloatingButton, TabButton } from '../components/button';
 import { BaseContainer } from '../components/layout';
 import { RecycleBin, Todo } from './components';
+import { InputModal } from '../components/modal';
 
 const TabContainer = styled.View({
   width: '100%',
@@ -21,6 +22,7 @@ const ContentContainer = styled.View(({ theme }) => ({
 const Main = () => {
   const [isActive, setIsActive] = useState(true);
   const [isTodoScreen, setIsTodoScreen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toDoOnPress = useCallback(() => {
     setIsActive((prev) => !prev);
@@ -34,8 +36,12 @@ const Main = () => {
     setIsTodoScreen((prev) => !prev);
   }, []);
 
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   const onPress = useCallback(() => {
-    console.log('FloatingOnPress');
+    setIsOpen(true);
   }, []);
 
   return (
@@ -65,6 +71,8 @@ const Main = () => {
       </ContentContainer>
 
       <FloatingButton onPress={onPress} />
+
+      <InputModal isOpen={isOpen} onClose={onClose} />
     </BaseContainer>
   );
 };
