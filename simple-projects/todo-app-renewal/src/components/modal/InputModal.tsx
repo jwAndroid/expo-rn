@@ -1,20 +1,19 @@
-import { FC, memo, useCallback } from 'react';
-import styled from '@emotion/native';
-import { Keyboard, Modal } from 'react-native';
+import { FC, memo } from 'react';
+import { Modal } from 'react-native';
+import { StyledText } from '../text';
 
-const Container = styled.Pressable(() => ({
-  flex: 1,
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  padding: 10,
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-}));
+// 디자인 수정
 
-const StyledInput = styled.TextInput(({ theme }) => ({
-  width: '100%',
-  borderWidth: 1,
-  borderColor: theme.color.black,
-}));
+// const Container = styled.Pressable(() => ({
+//   padding: 10,
+//   backgroundColor: '',
+// }));
+
+// const StyledInput = styled.TextInput(({ theme }) => ({
+//   width: '100%',
+//   borderWidth: 1,
+//   borderColor: theme.color.black,
+// }));
 
 interface IInputModal {
   isOpen: boolean;
@@ -22,23 +21,30 @@ interface IInputModal {
 }
 
 const InputModal: FC<IInputModal> = ({ isOpen, onClose }) => {
-  const onPress = useCallback(() => {
-    Keyboard.dismiss();
+  // const [value, setValue] = useState('');
 
-    onClose();
-  }, [onClose]);
+  // const onPress = useCallback(() => {
+  //   Keyboard.dismiss();
+
+  //   onClose();
+  // }, [onClose]);
+
+  // const onSubmitEditing = useCallback(() => {
+  //   onClose();
+  // }, [onClose]);
+
+  // const onChangeText = useCallback((text: string) => {
+  //   setValue(text);
+  // }, []);
 
   return (
     <Modal
       transparent
       visible={isOpen}
       onDismiss={onClose}
-      hardwareAccelerated
-      animationType="fade"
+      animationType="none"
     >
-      <Container onPress={onPress}>
-        <StyledInput onSubmitEditing={onPress} />
-      </Container>
+      <StyledText>Modal</StyledText>
     </Modal>
   );
 };
