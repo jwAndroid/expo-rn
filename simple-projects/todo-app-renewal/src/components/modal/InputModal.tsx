@@ -1,19 +1,19 @@
-import { FC, memo } from 'react';
-import { Modal } from 'react-native';
-import { StyledText } from '../text';
+import styled from '@emotion/native';
+import { FC, memo, useCallback } from 'react';
+import { Keyboard, KeyboardAvoidingView, Modal, Platform } from 'react-native';
 
-// 디자인 수정
+const Container = styled.Pressable(() => ({
+  flex: 1,
+  justifyContent: 'flex-end',
+  padding: 10,
+  backgroundColor: 'rgba(0,0,0,0.3)',
+}));
 
-// const Container = styled.Pressable(() => ({
-//   padding: 10,
-//   backgroundColor: '',
-// }));
-
-// const StyledInput = styled.TextInput(({ theme }) => ({
-//   width: '100%',
-//   borderWidth: 1,
-//   borderColor: theme.color.black,
-// }));
+const StyledInput = styled.TextInput(({ theme }) => ({
+  width: '100%',
+  borderWidth: 1,
+  borderColor: theme.color.black,
+}));
 
 interface IInputModal {
   isOpen: boolean;
@@ -21,13 +21,11 @@ interface IInputModal {
 }
 
 const InputModal: FC<IInputModal> = ({ isOpen, onClose }) => {
-  // const [value, setValue] = useState('');
+  const onPress = useCallback(() => {
+    Keyboard.dismiss();
 
-  // const onPress = useCallback(() => {
-  //   Keyboard.dismiss();
-
-  //   onClose();
-  // }, [onClose]);
+    onClose();
+  }, [onClose]);
 
   // const onSubmitEditing = useCallback(() => {
   //   onClose();
@@ -44,7 +42,13 @@ const InputModal: FC<IInputModal> = ({ isOpen, onClose }) => {
       onDismiss={onClose}
       animationType="none"
     >
-      <StyledText>Modal</StyledText>
+      <Container onPress={onPress}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
+          <StyledInput />
+        </KeyboardAvoidingView>
+      </Container>
     </Modal>
   );
 };
