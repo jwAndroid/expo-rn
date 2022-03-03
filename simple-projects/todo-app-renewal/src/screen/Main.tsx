@@ -1,10 +1,9 @@
 import { memo, useCallback, useState } from 'react';
 import styled from '@emotion/native';
 
-import { FloatingButton, TabButton } from '../components/button';
 import { BaseContainer } from '../components/layout';
 import { RecycleBin, Todo } from './components';
-import { InputModal } from '../components/modal';
+import { TabButton } from '../components/button';
 
 const TabContainer = styled.View({
   width: '100%',
@@ -22,7 +21,6 @@ const ContentContainer = styled.View(({ theme }) => ({
 const Main = () => {
   const [isActive, setIsActive] = useState(true);
   const [isTodoScreen, setIsTodoScreen] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
 
   const toDoOnPress = useCallback(() => {
     setIsActive((prev) => !prev);
@@ -34,14 +32,6 @@ const Main = () => {
     setIsActive(false);
 
     setIsTodoScreen((prev) => !prev);
-  }, []);
-
-  const onClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
-  const onPress = useCallback(() => {
-    setIsOpen(true);
   }, []);
 
   return (
@@ -69,10 +59,6 @@ const Main = () => {
       <ContentContainer>
         {isTodoScreen ? <Todo /> : <RecycleBin />}
       </ContentContainer>
-
-      <FloatingButton onPress={onPress} />
-
-      <InputModal isOpen={isOpen} onClose={onClose} />
     </BaseContainer>
   );
 };
