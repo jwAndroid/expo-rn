@@ -3,10 +3,8 @@ import { FC, memo, useCallback } from 'react';
 import { Keyboard, KeyboardAvoidingView, Modal, Platform } from 'react-native';
 
 const Container = styled.Pressable(() => ({
-  flex: 1,
-  justifyContent: 'flex-end',
   padding: 10,
-  backgroundColor: 'rgba(0,0,0,0.3)',
+  backgroundColor: 'red',
 }));
 
 const StyledInput = styled.TextInput(({ theme }) => ({
@@ -20,7 +18,7 @@ interface IInputModal {
   onClose: () => void;
 }
 
-const InputModal: FC<IInputModal> = ({ isOpen, onClose }) => {
+const InputModal: FC<IInputModal> = ({ isOpen = true, onClose }) => {
   const onPress = useCallback(() => {
     Keyboard.dismiss();
 
@@ -41,6 +39,7 @@ const InputModal: FC<IInputModal> = ({ isOpen, onClose }) => {
       visible={isOpen}
       onDismiss={onClose}
       animationType="none"
+      style={{ width: '100%' }}
     >
       <Container onPress={onPress}>
         <KeyboardAvoidingView

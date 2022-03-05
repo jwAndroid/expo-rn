@@ -9,5 +9,7 @@ declare module '@emotion/react' {
       black: string;
       gray: string;
     };
+    inActive: string;
+    active: string;
   }
 }

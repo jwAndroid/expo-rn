@@ -1,9 +1,11 @@
 import { memo, useCallback, useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
 
 import { BaseContainer } from '../components/layout';
 import { RecycleBin, Todo } from './components';
 import { TabButton } from '../components/button';
+import { View } from 'react-native';
 
 const TabContainer = styled.View({
   width: '100%',
@@ -11,54 +13,30 @@ const TabContainer = styled.View({
   justifyContent: 'space-between',
 });
 
-const ContentContainer = styled.View(({ theme }) => ({
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: theme.background,
-}));
+const image1 = {
+  uri: 'https://cdn-icons-png.flaticon.com/512/1891/1891667.png',
+};
+
+const image2 = {
+  uri: 'https://imgc.1300k.com/aaaaaib/goods/215025/99/215025995432.jpg?3',
+};
 
 const Main = () => {
-  const [isActive, setIsActive] = useState(true);
   const [isTodoScreen, setIsTodoScreen] = useState(true);
 
   const toDoOnPress = useCallback(() => {
-    setIsActive((prev) => !prev);
-
     setIsTodoScreen(true);
   }, []);
 
   const recycleBinOnPress = useCallback(() => {
-    setIsActive(false);
-
-    setIsTodoScreen((prev) => !prev);
+    setIsTodoScreen(false);
   }, []);
 
   return (
     <BaseContainer>
-      <TabContainer>
-        <TabButton
-          isActive={isActive}
-          buttonTextSize={18}
-          buttonTextColor="#fff"
-          onPress={toDoOnPress}
-        >
-          ToDo
-        </TabButton>
+      <StatusBar style="dark" />
 
-        <TabButton
-          isActive={!isActive}
-          buttonTextSize={18}
-          buttonTextColor="#fff"
-          onPress={recycleBinOnPress}
-        >
-          RecycleBin
-        </TabButton>
-      </TabContainer>
-
-      <ContentContainer>
-        {isTodoScreen ? <Todo /> : <RecycleBin />}
-      </ContentContainer>
+      {isTodoScreen ? <Todo /> : <RecycleBin />}
     </BaseContainer>
   );
 };

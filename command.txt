@@ -37,3 +37,6 @@ $ npm install -> ncu -u
 npm update 
 $ npm install -g npm
 
+npm cache clean --force
+npm cache verify
+

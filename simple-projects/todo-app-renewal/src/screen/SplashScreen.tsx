@@ -1,6 +1,7 @@
 import { memo, useMemo } from 'react';
 import { Dimensions } from 'react-native';
 import styled from '@emotion/native';
+
 import { BaseContainer } from '../components/layout';
 
 const SplashImage = styled.Image({

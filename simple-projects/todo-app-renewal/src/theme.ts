@@ -8,6 +8,8 @@ export const lightTheme: Theme = {
     black: '#000000',
     gray: '#808080',
   },
+  inActive: '#ffffff',
+  active: '#fafafa',
 };
 
 // export const darkTheme: Theme = {

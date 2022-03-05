@@ -25,7 +25,7 @@ interface IBaseContainer {
 const BaseContainer: FC<IBaseContainer> = ({
   children,
   paddingHorizontal = 0,
-  marginTop = getStatusBarHeight(),
+  marginTop = 0,
 }) => {
   return (
     <Container paddingHorizontal={paddingHorizontal} marginTop={marginTop}>

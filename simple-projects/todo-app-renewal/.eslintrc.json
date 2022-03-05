@@ -35,6 +35,7 @@
     "react/prop-types": "off",
     "comma-dangle": "off",
     "object-curly-newline": "off",
-    "global-require": "off"
+    "global-require": "off",
+    "indent": "off"
   }
 }
