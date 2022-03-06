@@ -1,13 +1,17 @@
+import styled from '@emotion/native';
 import { memo } from 'react';
-import { View } from 'react-native';
 
 import { StyledText } from '../../components/text';
 
+const Container = styled.View({
+  flex: 1,
+});
+
 const RecycleBin = () => {
   return (
-    <View>
+    <Container>
       <StyledText>RecycleBin screen</StyledText>
-    </View>
+    </Container>
   );
 };
 

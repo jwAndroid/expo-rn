@@ -36,6 +36,9 @@
     "comma-dangle": "off",
     "object-curly-newline": "off",
     "global-require": "off",
-    "indent": "off"
+    "indent": "off",
+    "no-undef": "off", // 삭제예정
+    "no-shadow": "off",
+    "react/jsx-no-useless-fragment": "off" // 삭제예정
   }
 }

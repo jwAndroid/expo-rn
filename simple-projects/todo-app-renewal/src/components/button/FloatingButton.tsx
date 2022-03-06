@@ -14,11 +14,7 @@ interface IFloatingButton {
 }
 
 const FloatingButton: FC<IFloatingButton> = ({ onPress }) => {
-  return (
-    <FloatingButtonContainer>
-      <Ionicons name="add-circle" size={60} color="blue" onPress={onPress} />
-    </FloatingButtonContainer>
-  );
+  return <></>;
 };
 
 export default memo(FloatingButton);
