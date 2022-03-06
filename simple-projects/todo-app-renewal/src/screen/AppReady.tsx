@@ -18,7 +18,7 @@ const AppReady: FC<ISplash> = ({ onComplete }) => {
     setIsPreloading(true);
 
     await new Promise((resolve) => {
-      setTimeout(resolve, 0);
+      setTimeout(resolve, 2000);
     });
 
     onComplete(true);

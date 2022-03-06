@@ -1,7 +1,7 @@
-import styled from '@emotion/native';
 import { FC, memo, ReactNode } from 'react';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import styled from '@emotion/native';
 
 interface ISafeAreaContainer {
   children: ReactNode;

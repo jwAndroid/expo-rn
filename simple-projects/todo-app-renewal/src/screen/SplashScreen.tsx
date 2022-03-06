@@ -12,7 +12,7 @@ const SplashImage = styled.Image({
 const SplashScreen = () => {
   const uri = useMemo(
     () => ({
-      uri: 'https://i.pinimg.com/474x/f5/6c/13/f56c13a6edcb1171eb0b6dbc5276b71a--ios-ui-ui-ux.jpg',
+      uri: 'https://imgc.1300k.com/aaaaaib/goods/215025/99/215025995432.jpg?3',
     }),
     []
   );

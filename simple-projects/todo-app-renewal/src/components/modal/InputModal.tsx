@@ -1,16 +1,12 @@
-import styled from '@emotion/native';
 import { FC, memo, useCallback } from 'react';
-import { Keyboard, KeyboardAvoidingView, Modal, Platform } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Modal } from 'react-native';
+import styled from '@emotion/native';
+
+import { StyledInput } from '../input';
 
 const Container = styled.Pressable(() => ({
   padding: 10,
   backgroundColor: 'red',
-}));
-
-const StyledInput = styled.TextInput(({ theme }) => ({
-  width: '100%',
-  borderWidth: 1,
-  borderColor: theme.color.black,
 }));
 
 interface IInputModal {
@@ -18,20 +14,12 @@ interface IInputModal {
   onClose: () => void;
 }
 
-const InputModal: FC<IInputModal> = ({ isOpen = true, onClose }) => {
+const InputModal: FC<IInputModal> = ({ isOpen, onClose }) => {
   const onPress = useCallback(() => {
     Keyboard.dismiss();
 
     onClose();
   }, [onClose]);
-
-  // const onSubmitEditing = useCallback(() => {
-  //   onClose();
-  // }, [onClose]);
-
-  // const onChangeText = useCallback((text: string) => {
-  //   setValue(text);
-  // }, []);
 
   return (
     <Modal
@@ -39,12 +27,9 @@ const InputModal: FC<IInputModal> = ({ isOpen = true, onClose }) => {
       visible={isOpen}
       onDismiss={onClose}
       animationType="none"
-      style={{ width: '100%' }}
     >
       <Container onPress={onPress}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        >
+        <KeyboardAvoidingView behavior="padding">
           <StyledInput />
         </KeyboardAvoidingView>
       </Container>

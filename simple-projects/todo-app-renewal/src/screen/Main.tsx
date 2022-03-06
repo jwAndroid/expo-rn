@@ -1,7 +1,7 @@
 import { memo, useCallback, useState } from 'react';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
-import { KeyboardAvoidingView, Platform } from 'react-native';
 
 import { RecycleBin, Todo } from './components';
 import { TabButton } from '../components/button';

@@ -1,9 +1,9 @@
+import { memo, useMemo } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { memo, useMemo } from 'react';
 
 import { Main } from '../screen';
 

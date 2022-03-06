@@ -1,5 +1,5 @@
-import styled from '@emotion/native';
 import { FC, memo } from 'react';
+import styled from '@emotion/native';
 
 const Input = styled.TextInput(({ theme }) => ({
   width: '100%',
