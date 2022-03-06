@@ -1,6 +1,5 @@
 import { FC, memo, ReactNode } from 'react';
 import styled from '@emotion/native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 interface IContainer {
   paddingHorizontal?: number;

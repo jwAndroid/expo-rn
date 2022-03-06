@@ -4,7 +4,7 @@ import { FC, memo } from 'react';
 const Input = styled.TextInput(({ theme }) => ({
   width: '100%',
   height: 50,
-  backgroundColor: '#303030',
+  backgroundColor: theme.color.gray,
 }));
 
 interface IStyledInput {}

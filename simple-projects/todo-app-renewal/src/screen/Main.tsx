@@ -1,13 +1,19 @@
 import { memo, useCallback, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
-import { BaseContainer } from '../components/layout';
 import { RecycleBin, Todo } from './components';
 import { TabButton } from '../components/button';
-import { View } from 'react-native';
+import { StyledInput } from '../components/input';
+import { SafeAreaContainer } from '../components/layout';
 
-const TabContainer = styled.View({
+const ScreenContainer = styled.View(({ theme }) => ({
+  flex: 1,
+  backgroundColor: theme.background,
+}));
+
+const TabBarContainer = styled.View({
   width: '100%',
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -22,22 +28,35 @@ const image2 = {
 };
 
 const Main = () => {
-  const [isTodoScreen, setIsTodoScreen] = useState(true);
+  const [isTodo, setIsTodo] = useState(true);
 
-  const toDoOnPress = useCallback(() => {
-    setIsTodoScreen(true);
+  const onPressTodo = useCallback(() => {
+    setIsTodo(true);
   }, []);
 
-  const recycleBinOnPress = useCallback(() => {
-    setIsTodoScreen(false);
+  const onPressRecycleBin = useCallback(() => {
+    setIsTodo(false);
   }, []);
 
   return (
-    <BaseContainer>
+    <SafeAreaContainer>
       <StatusBar style="dark" />
 
-      {isTodoScreen ? <Todo /> : <RecycleBin />}
-    </BaseContainer>
+      <TabBarContainer>
+        <TabButton source={image1} onPress={onPressTodo} />
+        <TabButton source={image2} onPress={onPressRecycleBin} />
+      </TabBarContainer>
+
+      <ScreenContainer>{isTodo ? <Todo /> : <RecycleBin />}</ScreenContainer>
+
+      {isTodo ? (
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        >
+          <StyledInput />
+        </KeyboardAvoidingView>
+      ) : undefined}
+    </SafeAreaContainer>
   );
 };
 

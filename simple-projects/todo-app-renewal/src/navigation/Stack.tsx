@@ -3,7 +3,7 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 import { Main } from '../screen';
 
@@ -20,13 +20,11 @@ export type HomeScreenNavigationProp = StackNavigationProp<
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 const Stack = () => {
+  const screenOptions = useMemo(() => ({ headerShown: false }), []);
+
   return (
-    <Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Screen name="Main" component={Main} options={{ title: 'main' }} />
+    <Navigator screenOptions={screenOptions}>
+      <Screen name="Main" component={Main} />
     </Navigator>
   );
 };

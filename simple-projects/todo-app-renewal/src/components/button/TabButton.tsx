@@ -1,17 +1,11 @@
 import styled from '@emotion/native';
 import { FC, memo } from 'react';
-import {
-  GestureResponderEvent,
-  Dimensions,
-  ImageSourcePropType,
-} from 'react-native';
-
-const { height } = Dimensions.get('screen');
+import { GestureResponderEvent, ImageSourcePropType } from 'react-native';
 
 interface IContainer {
   paddingVertical?: number;
   marginTop?: number;
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 const Container = styled.Pressable<IContainer>(
@@ -19,25 +13,26 @@ const Container = styled.Pressable<IContainer>(
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: height / 10,
+    height: 50,
     paddingVertical,
+    zIndex: 1,
     marginTop,
     backgroundColor: isActive ? '#303030' : '#101010',
   })
 );
 
 const SubjectIcon = styled.Image({
-  width: 48,
-  height: 48,
+  width: 50,
+  height: 50,
   backgroundColor: 'red',
 });
 
 interface ITabButton {
-  isActive: boolean;
+  isActive?: boolean;
   paddingVertical?: number;
   marginTop?: number;
   source: ImageSourcePropType;
-  onPress: (event: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 const TabButton: FC<ITabButton> = ({

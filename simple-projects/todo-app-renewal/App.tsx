@@ -1,6 +1,5 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { StatusBar } from 'expo-status-bar';
 
 import { lightTheme } from './src/theme';
 import { AppReady } from './src/screen';
@@ -17,8 +16,6 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar style="light" backgroundColor={theme.color.black} />
-
       {isComplete ? <Navigation /> : <AppReady onComplete={onComplete} />}
     </ThemeProvider>
   );

@@ -25,6 +25,8 @@ const Tab = () => {
       tabBarShowLabel: true,
       tabBarLabelPosition: 'below-icon',
       tabBarStyle: {
+        height: 56,
+        justifyContent: 'flex-start',
         backgroundColor: '#303030',
         borderTopWidth: 5,
       },
