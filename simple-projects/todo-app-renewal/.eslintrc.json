@@ -39,6 +39,7 @@
     "indent": "off",
     "no-undef": "off", // 삭제예정
     "no-shadow": "off",
-    "react/jsx-no-useless-fragment": "off" // 삭제예정
+    "react/jsx-no-useless-fragment": "off", // 삭제예정,
+    "no-array-constructor": "off" // 삭제예정
   }
 }

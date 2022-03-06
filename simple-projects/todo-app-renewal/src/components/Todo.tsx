@@ -109,7 +109,7 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
 
           <StyledText isCompleted={todo.isCompleted}>{todo.text}</StyledText>
 
-          {!todo.isCompleted && (
+          {todo.isCompleted || (
             <CheckButton icon={theme.icon.edit} onPress={onPress} />
           )}
 

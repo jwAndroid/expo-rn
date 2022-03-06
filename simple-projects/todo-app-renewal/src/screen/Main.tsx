@@ -4,16 +4,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
 
-// import { RecycleBin } from './components';
+import { RecycleBin, TodoScreen } from './components';
 import { TabButton } from '../components/button';
 import { StyledInput } from '../components/input';
 import { SafeAreaContainer } from '../components/layout';
-import { Todo, Todos } from '../components';
 
-// const ScreenContainer = styled.View(({ theme }) => ({
-//   flex: 1,
-//   backgroundColor: theme.background,
-// }));
+const ScreenContainer = styled.View(({ theme }) => ({
+  flex: 1,
+  backgroundColor: theme.background,
+}));
 
 const TabBarContainer = styled.View({
   width: '100%',
@@ -28,6 +27,8 @@ const image1 = {
 const image2 = {
   uri: 'https://imgc.1300k.com/aaaaaib/goods/215025/99/215025995432.jpg?3',
 };
+
+const arr: Array<TodoObject> = new Array<TodoObject>();
 
 const Main = () => {
   const [isTodo, setIsTodo] = useState(true);
@@ -52,6 +53,10 @@ const Main = () => {
       setStorage([todo]);
     }
   }, [setStorage]);
+
+  const setBinStorage = useCallback(async (bins: TodoObject[]) => {
+    await AsyncStorage.setItem('binTodos', JSON.stringify(bins));
+  }, []);
 
   useEffect(() => {
     getStorage();
@@ -81,14 +86,27 @@ const Main = () => {
     [setStorage, todos]
   );
 
-  const onDelete = useCallback(
-    (id: number) => () => {
-      const updatedTodos = todos.filter((todo) => todo.id !== id);
+  // const onDelete = useCallback(
+  //   (id: number) => () => {
+  //     const updatedTodos = todos.filter((todo) => todo.id !== id);
 
-      // if , todo.id === id >> 삭제된 애들이니까 이 객체배열을 휴지통 스토리지에 넣어주면 됨.
+  //     setStorage(updatedTodos);
+  //   },
+  //   [setStorage, todos]
+  // );
+
+  const onDelete2 = useCallback(
+    (id: number) => () => {
+      const binListdata = todos.filter((todo) => todo.id === id);
+
+      arr.push(binListdata[0]);
+      console.log(arr);
+
+      setBinStorage(arr);
+      const updatedTodos = todos.filter((todo) => todo.id !== id);
       setStorage(updatedTodos);
     },
-    [setStorage, todos]
+    [setStorage, setBinStorage, todos]
   );
 
   const onPressTodo = useCallback(() => {
@@ -123,22 +141,18 @@ const Main = () => {
         <TabButton source={image2} onPress={onPressRecycleBin} />
       </TabBarContainer>
 
-      {/* <ScreenContainer>{isTodo ? <Todo /> : <RecycleBin />}</ScreenContainer> */}
-
-      <Todos>
-        {todos.map(
-          (todo) => (
-            <Todo
-              key={todo.id}
-              todo={todo}
-              onCheck={onCheck}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          ),
-          []
+      <ScreenContainer>
+        {isTodo ? (
+          <TodoScreen
+            todos={todos}
+            onCheck={onCheck}
+            onDelete={onDelete2}
+            onEdit={onEdit}
+          />
+        ) : (
+          <RecycleBin />
         )}
-      </Todos>
+      </ScreenContainer>
 
       {isTodo ? (
         <KeyboardAvoidingView
