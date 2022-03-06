@@ -10,8 +10,10 @@ const Container = styled.View<IContainer>(
   ({ paddingHorizontal, marginTop, theme }) => ({
     flex: 1,
     paddingHorizontal,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop,
-    backgroundColor: theme.color.white,
+    backgroundColor: theme.color.gray,
   })
 );
 
