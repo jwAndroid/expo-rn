@@ -28,12 +28,14 @@ const image2 = {
   uri: 'https://imgc.1300k.com/aaaaaib/goods/215025/99/215025995432.jpg?3',
 };
 
-const arr: Array<TodoObject> = new Array<TodoObject>();
+// const arr: Array<TodoObject> = new Array<TodoObject>();
 
 const Main = () => {
   const [isTodo, setIsTodo] = useState(true);
   const [value, setValue] = useState('');
   const [todos, setTodos] = useState<TodoObject[]>([]);
+
+  const [deletedTodos, setDeletedTodos] = useState<TodoObject[]>([]);
 
   const setStorage = useCallback(async (todos: TodoObject[]) => {
     await AsyncStorage.setItem('todos', JSON.stringify(todos));
@@ -99,15 +101,21 @@ const Main = () => {
     (id: number) => () => {
       const binListdata = todos.filter((todo) => todo.id === id);
 
-      arr.push(binListdata[0]);
-      console.log(arr);
+      console.log(binListdata[0]);
 
-      setBinStorage(arr);
+      setDeletedTodos((deletedTodos) => [binListdata[0], ...deletedTodos]);
+
+      // arr.push(binListdata[0]);
+      // console.log(arr);
+
+      // setBinStorage(arr);
       const updatedTodos = todos.filter((todo) => todo.id !== id);
       setStorage(updatedTodos);
     },
     [setStorage, setBinStorage, todos]
   );
+
+  console.log(deletedTodos);
 
   const onPressTodo = useCallback(() => {
     setIsTodo(true);
