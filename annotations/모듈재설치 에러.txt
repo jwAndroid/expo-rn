@@ -1,0 +1,8 @@
+expo 5.2.0
+firebase 9.6.7 -> o
+
+expo , firebase 둘다 최신버전 -> x
+
+--> ide not not find  --> npm 캐시 삭제후 모듈 재설치
+
+
