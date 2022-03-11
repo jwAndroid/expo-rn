@@ -1,8 +1,8 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ScrollView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
 
 import { RecycleBin, TodoScreen } from './components';
@@ -21,28 +21,22 @@ const TabBarContainer = styled.View({
   justifyContent: 'space-between',
 });
 
-const image1 = {
-  uri: 'https://cdn-icons-png.flaticon.com/512/1891/1891667.png',
-};
-
-const image2 = {
-  uri: 'https://imgc.1300k.com/aaaaaib/goods/215025/99/215025995432.jpg?3',
-};
-
 const Main = () => {
+  const theme = useTheme();
+
   const [isTodo, setIsTodo] = useState(true);
   const [value, setValue] = useState('');
+
   const [todos, setTodos] = useState<TodoObject[]>([]);
+  const [binTodos, setbinTodos] = useState<TodoObject[]>([]);
 
-  const [deletedTodos, setDeletedTodos] = useState<TodoObject[]>([]);
-
-  const setStorage = useCallback(async (todos: TodoObject[]) => {
+  const setTodoStorage = useCallback(async (todos: TodoObject[]) => {
     await AsyncStorage.setItem('todos', JSON.stringify(todos));
 
     setTodos(todos);
   }, []);
 
-  const getStorage = useCallback(async () => {
+  const getTodoStorage = useCallback(async () => {
     const todos = JSON.parse((await AsyncStorage.getItem('todos')) || '[]');
 
     if (todos.length > 0) {
@@ -51,13 +45,40 @@ const Main = () => {
       const id = Date.now();
       const todo = { id, text: '새롭게 작성해 주세요.', isCompleted: false };
 
-      setStorage([todo]);
+      setTodoStorage([todo]);
     }
-  }, [setStorage]);
+  }, [setTodoStorage]);
+
+  const setBinStorage = useCallback(async (todos: TodoObject[]) => {
+    await AsyncStorage.setItem('bins', JSON.stringify(todos));
+
+    setbinTodos(todos);
+  }, []);
+
+  const getBinStorage = useCallback(async () => {
+    const todos = JSON.parse((await AsyncStorage.getItem('bins')) || '[]');
+
+    if (todos.length > 0) {
+      setbinTodos(todos);
+    } else {
+      const id = Date.now();
+      const todo = {
+        id,
+        text: '삭제된 게시글이 없습니다.',
+        isCompleted: false,
+      };
+
+      setbinTodos([todo]);
+    }
+  }, [setbinTodos]);
 
   useEffect(() => {
-    getStorage();
-  }, [getStorage]);
+    getTodoStorage();
+  }, [getTodoStorage]);
+
+  useEffect(() => {
+    getBinStorage();
+  }, [getBinStorage]);
 
   const onCheck = useCallback(
     (id: number) => () => {
@@ -67,9 +88,9 @@ const Main = () => {
           : todo;
       }, []);
 
-      setStorage(updatedTodos);
+      setTodoStorage(updatedTodos);
     },
-    [setStorage, todos]
+    [setTodoStorage, todos]
   );
 
   const onEdit = useCallback(
@@ -78,29 +99,22 @@ const Main = () => {
         return todo.id === id ? { ...todo, text } : todo;
       }, []);
 
-      setStorage(updatedTodos);
+      setTodoStorage(updatedTodos);
     },
-    [setStorage, todos]
+    [setTodoStorage, todos]
   );
-
-  // const onDelete = useCallback(
-  //   (id: number) => () => {
-  //     const updatedTodos = todos.filter((todo) => todo.id !== id);
-
-  //     setStorage(updatedTodos);
-  //   },
-  //   [setStorage, todos]
-  // );
 
   const onDelete = useCallback(
     (id: number) => () => {
-      const updatedTodos = todos.filter((todo) => todo.id === id);
-      setDeletedTodos([updatedTodos[0], ...deletedTodos]);
+      const bin = todos.filter((todo) => todo.id === id);
+      setbinTodos([bin[0], ...binTodos]);
 
-      const updatedTodos2 = todos.filter((todo) => todo.id !== id);
-      setStorage(updatedTodos2);
+      setBinStorage([bin[0], ...binTodos]);
+
+      const del = todos.filter((todo) => todo.id !== id);
+      setTodoStorage(del);
     },
-    [todos, deletedTodos, setStorage]
+    [todos, binTodos, setTodoStorage, setBinStorage]
   );
 
   const onCheck2 = useCallback(
@@ -138,40 +152,38 @@ const Main = () => {
       const id = Date.now();
       const todo = { id, text: value, isCompleted: false };
 
-      setStorage([todo, ...todos]);
+      setTodoStorage([todo, ...todos]);
 
       setValue('');
     }
-  }, [setStorage, todos, value]);
+  }, [setTodoStorage, todos, value]);
 
   return (
     <SafeAreaContainer>
       <StatusBar style="dark" />
 
-      <ScrollView>
-        <TabBarContainer>
-          <TabButton source={image1} onPress={onPressTodo} />
-          <TabButton source={image2} onPress={onPressRecycleBin} />
-        </TabBarContainer>
+      <TabBarContainer>
+        <TabButton source={theme.icon.check} onPress={onPressTodo} />
+        <TabButton source={theme.icon.delete} onPress={onPressRecycleBin} />
+      </TabBarContainer>
 
-        <ScreenContainer>
-          {isTodo ? (
-            <TodoScreen
-              todos={todos}
-              onCheck={onCheck}
-              onDelete={onDelete}
-              onEdit={onEdit}
-            />
-          ) : (
-            <RecycleBin
-              todos={deletedTodos}
-              onCheck={onCheck2}
-              onDelete={onDelete2}
-              onEdit={onEdit2}
-            />
-          )}
-        </ScreenContainer>
-      </ScrollView>
+      <ScreenContainer>
+        {isTodo ? (
+          <TodoScreen
+            todos={todos}
+            onCheck={onCheck}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ) : (
+          <RecycleBin
+            todos={binTodos}
+            onCheck={onCheck2}
+            onDelete={onDelete2}
+            onEdit={onEdit2}
+          />
+        )}
+      </ScreenContainer>
 
       {isTodo ? (
         <KeyboardAvoidingView

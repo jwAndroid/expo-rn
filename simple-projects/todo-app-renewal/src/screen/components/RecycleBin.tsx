@@ -4,9 +4,10 @@ import { GestureResponderEvent } from 'react-native';
 import styled from '@emotion/native';
 import { Todo, Todos } from '../../components';
 
-const Container = styled.View({
+const Container = styled.View(({ theme }) => ({
   flex: 1,
-});
+  backgroundColor: theme.background,
+}));
 
 interface IRecycleBin {
   todos: TodoObject[];
@@ -20,7 +21,7 @@ const RecycleBin: FC<IRecycleBin> = ({ todos, onCheck, onEdit, onDelete }) => {
 
   useEffect(() => {
     setDataList(todos);
-  }, [todos]);
+  }, [todos, dataList]);
 
   return (
     <Container>

@@ -3,9 +3,10 @@ import styled from '@emotion/native';
 import { GestureResponderEvent } from 'react-native';
 import { Todo, Todos } from '../../components';
 
-const Container = styled.View({
+const Container = styled.View(({ theme }) => ({
   flex: 1,
-});
+  backgroundColor: theme.background,
+}));
 
 interface ITodoScreen {
   todos: TodoObject[];
