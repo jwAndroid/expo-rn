@@ -1,7 +1,5 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import styled from '@emotion/native';
-import { StatusBar } from 'expo-status-bar';
-import { Counter } from './src';
 
 const Container = styled.View({
   flex: 1,
@@ -10,12 +8,25 @@ const Container = styled.View({
   justifyContent: 'center',
 });
 
+const TextView = styled.Text({
+  fontSize: 48,
+  color: '#000000',
+});
+
 const App = () => {
+  const [data, setData] = useState<Number[]>([]);
+
+  const onPress = useCallback(() => {
+    const item = 10;
+
+    setData([item, ...data]);
+
+    console.log(data);
+  }, []);
+
   return (
     <Container>
-      <StatusBar style="auto" />
-
-      <Counter />
+      <TextView onPress={onPress}>+</TextView>
     </Container>
   );
 };

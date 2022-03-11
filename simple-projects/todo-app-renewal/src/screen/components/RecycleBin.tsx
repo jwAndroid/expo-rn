@@ -1,34 +1,43 @@
-import { memo, useCallback, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import styled from '@emotion/native';
+import { FC, memo, useEffect, useState } from 'react';
+import { GestureResponderEvent } from 'react-native';
 
-import { StyledText } from '../../components/text';
+import styled from '@emotion/native';
+import { Todo, Todos } from '../../components';
 
 const Container = styled.View({
   flex: 1,
 });
 
-const RecycleBin = () => {
-  // const [bin, setBin] = useState<TodoObject[]>([]);
+interface IRecycleBin {
+  todos: TodoObject[];
+  onCheck: (id: number) => (event: GestureResponderEvent) => void | undefined;
+  onEdit: (id: number, text: string) => void;
+  onDelete: (id: number) => (event: GestureResponderEvent) => void | undefined;
+}
 
-  // state 떄문에 디도스 생기는거
-
-  const getBinStorage = useCallback(async () => {
-    const deleteDataList = JSON.parse(
-      (await AsyncStorage.getItem('binTodos')) || '[]'
-    );
-
-    console.log('----------bin------------');
-    console.log(deleteDataList);
-  }, []);
+const RecycleBin: FC<IRecycleBin> = ({ todos, onCheck, onEdit, onDelete }) => {
+  const [dataList, setDataList] = useState<TodoObject[]>([]);
 
   useEffect(() => {
-    getBinStorage();
-  }, [getBinStorage]);
+    setDataList(todos);
+  }, [todos]);
 
   return (
     <Container>
-      <StyledText>RecycleBin screen</StyledText>
+      <Todos>
+        {dataList.map(
+          (todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              onCheck={onCheck}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          ),
+          []
+        )}
+      </Todos>
     </Container>
   );
 };

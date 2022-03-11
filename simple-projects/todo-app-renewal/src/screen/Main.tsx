@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ScrollView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import styled from '@emotion/native';
 
@@ -28,8 +29,6 @@ const image2 = {
   uri: 'https://imgc.1300k.com/aaaaaib/goods/215025/99/215025995432.jpg?3',
 };
 
-// const arr: Array<TodoObject> = new Array<TodoObject>();
-
 const Main = () => {
   const [isTodo, setIsTodo] = useState(true);
   const [value, setValue] = useState('');
@@ -55,10 +54,6 @@ const Main = () => {
       setStorage([todo]);
     }
   }, [setStorage]);
-
-  const setBinStorage = useCallback(async (bins: TodoObject[]) => {
-    await AsyncStorage.setItem('binTodos', JSON.stringify(bins));
-  }, []);
 
   useEffect(() => {
     getStorage();
@@ -97,25 +92,34 @@ const Main = () => {
   //   [setStorage, todos]
   // );
 
-  const onDelete2 = useCallback(
+  const onDelete = useCallback(
     (id: number) => () => {
-      const binListdata = todos.filter((todo) => todo.id === id);
+      const updatedTodos = todos.filter((todo) => todo.id === id);
+      setDeletedTodos([updatedTodos[0], ...deletedTodos]);
 
-      console.log(binListdata[0]);
-
-      setDeletedTodos((deletedTodos) => [binListdata[0], ...deletedTodos]);
-
-      // arr.push(binListdata[0]);
-      // console.log(arr);
-
-      // setBinStorage(arr);
-      const updatedTodos = todos.filter((todo) => todo.id !== id);
-      setStorage(updatedTodos);
+      const updatedTodos2 = todos.filter((todo) => todo.id !== id);
+      setStorage(updatedTodos2);
     },
-    [setStorage, setBinStorage, todos]
+    [todos, deletedTodos, setStorage]
   );
 
-  console.log(deletedTodos);
+  const onCheck2 = useCallback(
+    (id: number) => () => {
+      console.log(id);
+    },
+    []
+  );
+
+  const onEdit2 = useCallback((id: number, text: string) => {
+    console.log(id, text);
+  }, []);
+
+  const onDelete2 = useCallback(
+    (id: number) => () => {
+      console.log(id);
+    },
+    []
+  );
 
   const onPressTodo = useCallback(() => {
     setIsTodo(true);
@@ -144,23 +148,30 @@ const Main = () => {
     <SafeAreaContainer>
       <StatusBar style="dark" />
 
-      <TabBarContainer>
-        <TabButton source={image1} onPress={onPressTodo} />
-        <TabButton source={image2} onPress={onPressRecycleBin} />
-      </TabBarContainer>
+      <ScrollView>
+        <TabBarContainer>
+          <TabButton source={image1} onPress={onPressTodo} />
+          <TabButton source={image2} onPress={onPressRecycleBin} />
+        </TabBarContainer>
 
-      <ScreenContainer>
-        {isTodo ? (
-          <TodoScreen
-            todos={todos}
-            onCheck={onCheck}
-            onDelete={onDelete2}
-            onEdit={onEdit}
-          />
-        ) : (
-          <RecycleBin />
-        )}
-      </ScreenContainer>
+        <ScreenContainer>
+          {isTodo ? (
+            <TodoScreen
+              todos={todos}
+              onCheck={onCheck}
+              onDelete={onDelete}
+              onEdit={onEdit}
+            />
+          ) : (
+            <RecycleBin
+              todos={deletedTodos}
+              onCheck={onCheck2}
+              onDelete={onDelete2}
+              onEdit={onEdit2}
+            />
+          )}
+        </ScreenContainer>
+      </ScrollView>
 
       {isTodo ? (
         <KeyboardAvoidingView

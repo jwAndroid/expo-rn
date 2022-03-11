@@ -43,9 +43,9 @@ const StyledText = styled.Text<IStyledText>(({ theme, isCompleted }) => ({
 
 interface ITodo {
   todo: TodoObject;
-  onCheck: (id: number) => (event: GestureResponderEvent) => void | undefined;
+  onCheck: (id: number) => (event: GestureResponderEvent) => void;
   onEdit: (id: number, text: string) => void;
-  onDelete: (id: number) => (event: GestureResponderEvent) => void | undefined;
+  onDelete: (id: number) => (event: GestureResponderEvent) => void;
 }
 
 const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
