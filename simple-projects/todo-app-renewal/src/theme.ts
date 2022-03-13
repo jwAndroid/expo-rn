@@ -9,6 +9,8 @@ export const icon = {
   listChecked: require('../assets/icons/list-check-inactive.png'),
   binActive: require('../assets/icons/bin-active.png'),
   binInActive: require('../assets/icons/bin-inactive.png'),
+  box: require('../assets/icons/box.png'),
+  checked: require('../assets/icons/checked.png'),
 };
 
 export const lightTheme: Theme = {
