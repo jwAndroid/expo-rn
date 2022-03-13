@@ -12,7 +12,6 @@ const StyledSafeAreaView = styled.SafeAreaView({
   ...(Platform.OS === 'android'
     ? { marginTop: getStatusBarHeight() }
     : undefined),
-  paddingVertical: 20,
 });
 
 const SafeAreaContainer: FC<ISafeAreaContainer> = ({ children }) => {

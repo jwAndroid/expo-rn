@@ -24,8 +24,8 @@ const Container = styled.Pressable<IContainer>(
 );
 
 const Icon = styled.Image({
-  width: 36,
-  height: 36,
+  width: 30,
+  height: 30,
 });
 
 interface ITabButton {

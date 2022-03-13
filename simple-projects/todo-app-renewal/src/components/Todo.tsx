@@ -14,7 +14,7 @@ const Container = styled.View<IContainer>(({ theme, isCompleted }) => ({
   width: '100%',
   flexDirection: 'row',
   alignItems: 'center',
-  backgroundColor: theme.color.gray,
+  backgroundColor: theme.itemBackground,
   borderRadius: 10,
   padding: 5,
   marginVertical: 5,

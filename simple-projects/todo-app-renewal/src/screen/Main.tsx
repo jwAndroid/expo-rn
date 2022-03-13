@@ -17,6 +17,7 @@ const ScreenContainer = styled.View(({ theme }) => ({
 
 const TabBarContainer = styled.View({
   width: '100%',
+  paddingTop: 10,
   flexDirection: 'row',
   justifyContent: 'space-between',
 });
@@ -198,7 +199,9 @@ const Main = () => {
 
       {isTodo ? (
         <KeyboardAvoidingView
+          style={{ marginBottom: 20 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          keyboardVerticalOffset={10}
         >
           <StyledInput
             value={value}

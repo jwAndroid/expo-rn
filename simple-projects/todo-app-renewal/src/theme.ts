@@ -14,6 +14,7 @@ export const icon = {
 export const lightTheme: Theme = {
   text: '#303030',
   background: '#ffffff',
+  itemBackground: '#f0f0f0',
   color: {
     white: '#ffffff',
     black: '#000000',
