@@ -5,11 +5,15 @@ export const icon = {
   delete: require('../assets/icons/delete.png'),
   edit: require('../assets/icons/edit.png'),
   uncheck: require('../assets/icons/uncheck.png'),
+  listCheck: require('../assets/icons/list-check-active.png'),
+  listChecked: require('../assets/icons/list-check-inactive.png'),
+  binActive: require('../assets/icons/bin-active.png'),
+  binInActive: require('../assets/icons/bin-inactive.png'),
 };
 
 export const lightTheme: Theme = {
   text: '#303030',
-  background: '#E2E2E2',
+  background: '#ffffff',
   color: {
     white: '#ffffff',
     black: '#000000',
@@ -17,8 +21,8 @@ export const lightTheme: Theme = {
     red: '#FF0000',
     blue: '#0000FF',
     dynamic: {
-      inActive: '#ffffff',
-      active: '#fafafa',
+      inActive: '#f0f0f0',
+      active: '#ffffff',
     },
   },
   icon,

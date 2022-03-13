@@ -23,7 +23,7 @@ const TabBarContainer = styled.View({
 
 const Main = () => {
   const theme = useTheme();
-
+  const [isActive, setIsActive] = useState(true);
   const [isTodo, setIsTodo] = useState(true);
   const [value, setValue] = useState('');
 
@@ -72,15 +72,21 @@ const Main = () => {
     }
   }, [setbinTodos]);
 
+  useEffect(() => {
+    getTodoStorage();
+  }, [getTodoStorage]);
+
+  useEffect(() => {
+    getBinStorage();
+  }, [getBinStorage]);
+
   const onRecovery = useCallback(
     (id: number) => () => {
       const del = binTodos.filter((todo) => todo.id !== id);
       setBinStorage(del);
 
       const recovery = binTodos.filter((todo) => todo.id === id);
-
       setTodos([recovery[0], ...todos]);
-
       setTodoStorage([recovery[0], ...todos]);
     },
     [binTodos, todos, setTodoStorage, setBinStorage]
@@ -92,15 +98,7 @@ const Main = () => {
     getBinStorage();
   }, [getBinStorage]);
 
-  useEffect(() => {
-    getTodoStorage();
-  }, [getTodoStorage]);
-
-  useEffect(() => {
-    getBinStorage();
-  }, [getBinStorage]);
-
-  const onCheck = useCallback(
+  const onComplete = useCallback(
     (id: number) => () => {
       const updatedTodos = todos.map((todo) => {
         return todo.id === id
@@ -139,10 +137,14 @@ const Main = () => {
 
   const onPressTodo = useCallback(() => {
     setIsTodo(true);
+
+    setIsActive(true);
   }, []);
 
   const onPressRecycleBin = useCallback(() => {
     setIsTodo(false);
+
+    setIsActive(false);
   }, []);
 
   const onChangeText = useCallback((value) => {
@@ -165,15 +167,23 @@ const Main = () => {
       <StatusBar style="dark" />
 
       <TabBarContainer>
-        <TabButton source={theme.icon.check} onPress={onPressTodo} />
-        <TabButton source={theme.icon.delete} onPress={onPressRecycleBin} />
+        <TabButton
+          source={isActive ? theme.icon.listCheck : theme.icon.listChecked}
+          onPress={onPressTodo}
+          isActive={isActive}
+        />
+        <TabButton
+          source={isActive ? theme.icon.binInActive : theme.icon.binActive}
+          onPress={onPressRecycleBin}
+          isActive={!isActive}
+        />
       </TabBarContainer>
 
       <ScreenContainer>
         {isTodo ? (
           <TodoScreen
             todos={todos}
-            onCheck={onCheck}
+            onCheck={onComplete}
             onDelete={onDelete}
             onEdit={onEdit}
           />

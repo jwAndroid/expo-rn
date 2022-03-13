@@ -5,11 +5,11 @@ import { GestureResponderEvent, ImageSourcePropType } from 'react-native';
 interface IContainer {
   paddingVertical?: number;
   marginTop?: number;
-  isActive?: boolean;
+  isActive: boolean;
 }
 
 const Container = styled.Pressable<IContainer>(
-  ({ isActive, paddingVertical, marginTop }) => ({
+  ({ theme, isActive, paddingVertical, marginTop }) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -17,39 +17,40 @@ const Container = styled.Pressable<IContainer>(
     paddingVertical,
     zIndex: 1,
     marginTop,
-    backgroundColor: isActive ? '#303030' : '#101010',
+    backgroundColor: isActive
+      ? theme.color.dynamic.active
+      : theme.color.dynamic.inActive,
   })
 );
 
-const SubjectIcon = styled.Image({
-  width: 50,
-  height: 50,
-  backgroundColor: 'red',
+const Icon = styled.Image({
+  width: 36,
+  height: 36,
 });
 
 interface ITabButton {
-  isActive?: boolean;
-  paddingVertical?: number;
-  marginTop?: number;
   source: ImageSourcePropType;
+  isActive: boolean;
+  marginTop?: number;
   onPress?: (event: GestureResponderEvent) => void;
+  paddingVertical?: number;
 }
 
 const TabButton: FC<ITabButton> = ({
-  isActive,
-  paddingVertical,
-  marginTop,
   source,
+  isActive,
+  marginTop,
   onPress,
+  paddingVertical,
 }) => {
   return (
     <Container
       isActive={isActive}
-      paddingVertical={paddingVertical}
       marginTop={marginTop}
       onPress={onPress}
+      paddingVertical={paddingVertical}
     >
-      <SubjectIcon source={source} />
+      <Icon source={source} />
     </Container>
   );
 };
