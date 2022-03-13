@@ -86,7 +86,6 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
           autoCapitalize="none"
           autoCorrect={false}
           returnKeyType="done"
-          placeholder="Edit contents."
           placeholderTextColor={theme.text}
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}
