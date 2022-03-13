@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
 import styled from '@emotion/native';
+import { GestureResponderEvent, Text } from 'react-native';
 
 import { StyledText } from './text';
 
@@ -16,13 +17,20 @@ const Container = styled.View(({ theme }) => ({
 
 interface IBin {
   todo: TodoObject;
-  // onRecovery: (id: number) => (event: GestureResponderEvent) => void;
+  onPress: (id: number) => (event: GestureResponderEvent) => void;
 }
 
-const Bin: FC<IBin> = ({ todo }) => {
+const Bin: FC<IBin> = ({ todo, onPress }) => {
   return (
     <Container>
       <StyledText>{todo.text}</StyledText>
+
+      <Text
+        style={{ fontSize: 20, marginRight: 20 }}
+        onPress={onPress(todo.id)}
+      >
+        R
+      </Text>
     </Container>
   );
 };

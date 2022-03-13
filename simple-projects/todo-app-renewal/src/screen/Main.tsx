@@ -72,6 +72,26 @@ const Main = () => {
     }
   }, [setbinTodos]);
 
+  const onRecovery = useCallback(
+    (id: number) => () => {
+      const del = binTodos.filter((todo) => todo.id !== id);
+      setBinStorage(del);
+
+      const recovery = binTodos.filter((todo) => todo.id === id);
+
+      setTodos([recovery[0], ...todos]);
+
+      setTodoStorage([recovery[0], ...todos]);
+    },
+    [binTodos, todos, setTodoStorage, setBinStorage]
+  );
+
+  const onClear = useCallback(async () => {
+    await AsyncStorage.removeItem('bins');
+
+    getBinStorage();
+  }, [getBinStorage]);
+
   useEffect(() => {
     getTodoStorage();
   }, [getTodoStorage]);
@@ -158,7 +178,11 @@ const Main = () => {
             onEdit={onEdit}
           />
         ) : (
-          <RecycleBin todos={binTodos} />
+          <RecycleBin
+            todos={binTodos}
+            onClear={onClear}
+            onRecovery={onRecovery}
+          />
         )}
       </ScreenContainer>
 

@@ -1,4 +1,5 @@
 import { FC, memo, useEffect, useState } from 'react';
+import { GestureResponderEvent } from 'react-native';
 import styled from '@emotion/native';
 
 import { Bin } from '../../components';
@@ -10,22 +11,46 @@ const Container = styled.View(({ theme }) => ({
   backgroundColor: theme.background,
 }));
 
+const ClearContainer = styled.View(({ theme }) => ({
+  width: '100%',
+  alignItems: 'flex-end',
+  justifyContent: 'center',
+  marginVertical: 12,
+  paddingVertical: 10,
+  paddingHorizontal: 20,
+  backgroundColor: theme.background,
+}));
+
+const ClearText = styled.Text(({ theme }) => ({
+  fontSize: 16,
+  color: theme.color.black,
+  fontWeight: 'bold',
+}));
+
 interface IRecycleBin {
   todos: TodoObject[];
+  onClear: ((event: GestureResponderEvent) => void) | undefined;
+  onRecovery: (
+    id: number
+  ) => (event: GestureResponderEvent) => void | undefined;
 }
 
-const RecycleBin: FC<IRecycleBin> = ({ todos }) => {
-  const [dataList, setDataList] = useState<TodoObject[]>([]);
+const RecycleBin: FC<IRecycleBin> = ({ todos, onClear, onRecovery }) => {
+  const [data, setdata] = useState<TodoObject[]>([]);
 
   useEffect(() => {
-    setDataList(todos);
-  }, [todos, dataList]);
+    setdata(todos);
+  }, [todos]);
 
   return (
     <Container>
-      {dataList.map(
+      <ClearContainer>
+        <ClearText onPress={onClear}>전체삭제</ClearText>
+      </ClearContainer>
+
+      {data.map(
         (todo) => (
-          <Bin key={todo.id} todo={todo} />
+          <Bin key={todo.id} todo={todo} onPress={onRecovery} />
         ),
         []
       )}
