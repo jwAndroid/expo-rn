@@ -117,24 +117,6 @@ const Main = () => {
     [todos, binTodos, setTodoStorage, setBinStorage]
   );
 
-  const onCheck2 = useCallback(
-    (id: number) => () => {
-      console.log(id);
-    },
-    []
-  );
-
-  const onEdit2 = useCallback((id: number, text: string) => {
-    console.log(id, text);
-  }, []);
-
-  const onDelete2 = useCallback(
-    (id: number) => () => {
-      console.log(id);
-    },
-    []
-  );
-
   const onPressTodo = useCallback(() => {
     setIsTodo(true);
   }, []);
@@ -148,7 +130,7 @@ const Main = () => {
   }, []);
 
   const onSubmitEditing = useCallback(() => {
-    if (todos.length > 0) {
+    if (value.length > 0) {
       const id = Date.now();
       const todo = { id, text: value, isCompleted: false };
 
@@ -176,12 +158,7 @@ const Main = () => {
             onEdit={onEdit}
           />
         ) : (
-          <RecycleBin
-            todos={binTodos}
-            onCheck={onCheck2}
-            onDelete={onDelete2}
-            onEdit={onEdit2}
-          />
+          <RecycleBin todos={binTodos} />
         )}
       </ScreenContainer>
 

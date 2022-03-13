@@ -1,10 +1,12 @@
 import { FC, memo, useEffect, useState } from 'react';
 import styled from '@emotion/native';
 import { GestureResponderEvent } from 'react-native';
-import { Todo, Todos } from '../../components';
+import { Todo } from '../../components';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
+  paddingHorizontal: 10,
+  marginVertical: 10,
   backgroundColor: theme.background,
 }));
 
@@ -24,20 +26,18 @@ const TodoScreen: FC<ITodoScreen> = ({ todos, onCheck, onEdit, onDelete }) => {
 
   return (
     <Container>
-      <Todos>
-        {dataList.map(
-          (todo) => (
-            <Todo
-              key={todo.id}
-              todo={todo}
-              onCheck={onCheck}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          ),
-          []
-        )}
-      </Todos>
+      {dataList.map(
+        (todo) => (
+          <Todo
+            key={todo.id}
+            todo={todo}
+            onCheck={onCheck}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
+        ),
+        []
+      )}
     </Container>
   );
 };

@@ -4,6 +4,7 @@ import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 import { CheckButton } from './button';
+import { StyledText } from './text';
 
 interface IContainer {
   isCompleted: boolean;
@@ -20,25 +21,12 @@ const Container = styled.View<IContainer>(({ theme, isCompleted }) => ({
   opacity: isCompleted ? 0.3 : 1,
 }));
 
-const StyledTextInput = styled.TextInput(({ theme }) => ({
+const EditInput = styled.TextInput(({ theme }) => ({
   flex: 1,
   fontSize: 20,
   textAlignVertical: 'center',
   margin: 10,
   color: theme.text,
-}));
-
-interface IStyledText {
-  isCompleted: boolean;
-}
-
-const StyledText = styled.Text<IStyledText>(({ theme, isCompleted }) => ({
-  flex: 1,
-  fontSize: 20,
-  textAlignVertical: 'center',
-  margin: 10,
-  color: theme.text,
-  textDecorationLine: isCompleted ? 'line-through' : 'none',
 }));
 
 interface ITodo {
@@ -88,7 +76,7 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
   return (
     <Container isCompleted={todo.isCompleted}>
       {isEdit ? (
-        <StyledTextInput
+        <EditInput
           ref={inputRef}
           value={update}
           autoCapitalize="none"
