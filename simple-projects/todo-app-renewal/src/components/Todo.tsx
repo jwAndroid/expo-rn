@@ -50,10 +50,6 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
     }
   }, [isEdit]);
 
-  const onPress = useCallback(() => {
-    setIsEdit(true);
-  }, []);
-
   const onChangeText = useCallback((text: string) => {
     setUpdate(text);
   }, []);
@@ -73,6 +69,14 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
     setIsEdit(false);
   }, [todo.text]);
 
+  const onEditPress = useCallback(() => {
+    if (!todo.isCompleted) {
+      setIsEdit(true);
+
+      inputRef.current?.focus();
+    }
+  }, [todo.isCompleted]);
+
   return (
     <Container isCompleted={todo.isCompleted}>
       {isEdit ? (
@@ -91,15 +95,13 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
       ) : (
         <>
           <CheckButton
-            icon={todo.isCompleted ? theme.icon.check : theme.icon.uncheck}
+            icon={todo.isCompleted ? theme.icon.checked : theme.icon.box}
             onPress={onCheck(todo.id)}
           />
 
-          <StyledText isCompleted={todo.isCompleted}>{todo.text}</StyledText>
-
-          {todo.isCompleted || (
-            <CheckButton icon={theme.icon.edit} onPress={onPress} />
-          )}
+          <StyledText isCompleted={todo.isCompleted} onPress={onEditPress}>
+            {todo.text}
+          </StyledText>
 
           <CheckButton icon={theme.icon.delete} onPress={onDelete(todo.id)} />
         </>

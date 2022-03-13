@@ -1,5 +1,6 @@
 import { FC, memo, ReactNode } from 'react';
 import styled from '@emotion/native';
+import { GestureResponderEvent } from 'react-native';
 
 interface IText {
   color?: string;
@@ -21,16 +22,23 @@ interface IStyledText {
   color?: string;
   fontSize?: number;
   isCompleted?: boolean;
+  onPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
 const StyledText: FC<IStyledText> = ({
   children,
+  onPress,
   color,
   fontSize = 18,
   isCompleted,
 }) => {
   return (
-    <Text isCompleted={isCompleted} color={color} fontSize={fontSize}>
+    <Text
+      isCompleted={isCompleted}
+      onPress={onPress}
+      color={color}
+      fontSize={fontSize}
+    >
       {children}
     </Text>
   );
