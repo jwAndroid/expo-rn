@@ -16,6 +16,7 @@ export const icon = {
   box: require('../assets/icons/box.png'),
   checked: require('../assets/icons/checked.png'),
   cancel: require('../assets/icons/cancel.png'),
+  recovery: require('../assets/icons/recovery.png'),
 };
 
 export const lightTheme: Theme = {

@@ -23,8 +23,9 @@ const ClearContainer = styled.View(({ theme }) => ({
 
 const ClearText = styled.Text(({ theme }) => ({
   fontSize: 16,
-  color: theme.color.black,
-  fontWeight: 'bold',
+  color: theme.text,
+  includeFontPadding: false,
+  fontFamily: theme.font.Cafe24Simplehae,
 }));
 
 interface IRecycleBin {
