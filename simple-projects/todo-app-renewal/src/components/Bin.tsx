@@ -29,7 +29,7 @@ const Container = styled.View(({ theme }) => ({
   }),
 }));
 
-const DayContainer = styled.View({
+const ContantsContainer = styled.View({
   flex: 1,
 });
 
@@ -53,13 +53,13 @@ const Bin: FC<IBin> = ({ todo, onPress }) => {
 
   return (
     <Container>
-      <DayContainer>
+      <ContantsContainer>
         <StyledText fontSize={16}>{todo.text}</StyledText>
 
         <StyledText fontSize={10} color={theme.color.gray}>
           {todo.updateOn}
         </StyledText>
-      </DayContainer>
+      </ContantsContainer>
 
       <PressableIcon onPress={onPress(todo.id)}>
         <Recovery source={theme.icon.recovery} />

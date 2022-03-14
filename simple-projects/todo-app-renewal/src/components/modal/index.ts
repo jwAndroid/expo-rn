@@ -1,1 +1,1 @@
-export { default as InputModal } from './InputModal';
+export { default as DeleteModal } from './DeleteModal';

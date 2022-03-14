@@ -35,7 +35,7 @@ const Container = styled.View<IContainer>(({ theme, isCompleted }) => ({
   }),
 }));
 
-const DayContainer = styled.View({
+const ContantsContainer = styled.View({
   flex: 1,
 });
 
@@ -116,7 +116,7 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
             onPress={onCheck(todo.id)}
           />
 
-          <DayContainer>
+          <ContantsContainer>
             <StyledText
               fontSize={16}
               isCompleted={todo.isCompleted}
@@ -128,7 +128,7 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
             <StyledText fontSize={10} color={theme.color.gray}>
               {todo.updateOn}
             </StyledText>
-          </DayContainer>
+          </ContantsContainer>
 
           <CheckButton
             icon={theme.icon.binActive}
