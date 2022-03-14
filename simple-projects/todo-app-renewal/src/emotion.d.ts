@@ -23,6 +23,8 @@ declare module '@emotion/react' {
       dynamic: {
         inActive: string;
         active: string;
+        focus: string;
+        blur: stringl;
       };
     };
     icon: typeof icon;

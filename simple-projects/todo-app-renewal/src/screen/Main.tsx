@@ -25,6 +25,7 @@ const TabBarContainer = styled.View({
 
 const Main = () => {
   const theme = useTheme();
+
   const [isActive, setIsActive] = useState(true);
   const [isTodo, setIsTodo] = useState(true);
   const [value, setValue] = useState('');
@@ -212,7 +213,7 @@ const Main = () => {
         >
           <StyledInput
             value={value}
-            placeholder="..."
+            placeholder="메모를 입력해 주세요."
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
           />

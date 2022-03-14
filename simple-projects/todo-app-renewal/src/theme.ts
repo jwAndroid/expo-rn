@@ -33,6 +33,8 @@ export const lightTheme: Theme = {
     dynamic: {
       inActive: '#f0f0f0',
       active: '#ffffff',
+      focus: '#0099ff',
+      blur: '#303030',
     },
   },
   icon,

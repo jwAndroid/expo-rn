@@ -1,9 +1,9 @@
-import { FC, memo } from 'react';
-import styled from '@emotion/native';
+import { FC, memo, useCallback, useState } from 'react';
 import {
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
 } from 'react-native';
+import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 const InputContainer = styled.View({
@@ -11,16 +11,22 @@ const InputContainer = styled.View({
   paddingHorizontal: 5,
 });
 
-const Input = styled.TextInput(({ theme }) => ({
+interface IInput {
+  isFocus: boolean;
+}
+
+const Input = styled.TextInput<IInput>(({ theme, isFocus }) => ({
   width: '100%',
-  height: 50,
+  paddingVertical: 8,
+  paddingHorizontal: 16,
   borderRadius: 10,
-  fontSize: 16,
-  fontWeight: 'bold',
+  borderColor: isFocus ? theme.color.dynamic.focus : theme.color.dynamic.blur,
+  borderWidth: 1,
+  fontSize: 14,
   color: theme.text,
-  paddingVertical: 10,
-  paddingHorizontal: 20,
-  backgroundColor: theme.color.gray,
+  includeFontPadding: false,
+  fontFamily: theme.font.Cafe24Simplehae,
+  backgroundColor: theme.color.white,
 }));
 
 interface IStyledInput {
@@ -40,15 +46,28 @@ const StyledInput: FC<IStyledInput> = ({
 }) => {
   const theme = useTheme();
 
+  const [isFocus, setIsFocus] = useState(false);
+
+  const onFocus = useCallback(() => {
+    setIsFocus(true);
+  }, []);
+
+  const onBlur = useCallback(() => {
+    setIsFocus(false);
+  }, []);
+
   return (
     <InputContainer>
       <Input
         value={value}
+        isFocus={isFocus}
+        onFocus={onFocus}
+        onBlur={onBlur}
         autoCapitalize="none"
         autoCorrect={false}
         returnKeyType="done"
         placeholder={placeholder}
-        placeholderTextColor={theme.text}
+        placeholderTextColor={theme.color.gray}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
       />
