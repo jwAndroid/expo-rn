@@ -6,21 +6,33 @@ const StyledPressable = styled.Pressable(() => ({
   margin: 10,
 }));
 
-const Icon = styled.Image(({ theme }) => ({
-  width: 30,
-  height: 30,
+interface IIcon {
+  width: number | undefined;
+  height: number | undefined;
+}
+
+const Icon = styled.Image<IIcon>(({ theme, width, height }) => ({
+  width,
+  height,
   tintColor: theme.text,
 }));
 
 interface ICheckButton {
   icon: ImageSourcePropType;
+  width?: number | undefined;
+  height?: number | undefined;
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
-const CheckButton: FC<ICheckButton> = ({ icon, onPress }) => {
+const CheckButton: FC<ICheckButton> = ({
+  icon,
+  onPress,
+  width = 26,
+  height = 26,
+}) => {
   return (
     <StyledPressable onPress={onPress}>
-      <Icon source={icon} />
+      <Icon source={icon} width={width} height={height} />
     </StyledPressable>
   );
 };

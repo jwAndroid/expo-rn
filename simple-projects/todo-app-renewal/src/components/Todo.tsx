@@ -102,7 +102,12 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
             {todo.text}
           </StyledText>
 
-          <CheckButton icon={theme.icon.delete} onPress={onDelete(todo.id)} />
+          <CheckButton
+            icon={theme.icon.binActive}
+            onPress={onDelete(todo.id)}
+            width={20}
+            height={20}
+          />
         </>
       )}
     </Container>

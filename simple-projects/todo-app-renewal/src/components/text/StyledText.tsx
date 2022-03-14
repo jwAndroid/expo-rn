@@ -8,13 +8,14 @@ interface IText {
   isCompleted?: boolean;
 }
 
-const Text = styled.Text<IText>(({ color, fontSize, isCompleted }) => ({
+const Text = styled.Text<IText>(({ theme, color, fontSize, isCompleted }) => ({
   flex: 1,
-  margin: 10,
   color,
   fontSize,
   textAlignVertical: 'center',
   textDecorationLine: isCompleted ? 'line-through' : 'none',
+  includeFontPadding: false,
+  fontFamily: theme.font.Cafe24Simplehae,
 }));
 
 interface IStyledText {

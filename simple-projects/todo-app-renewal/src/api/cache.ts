@@ -1,5 +1,10 @@
 import { Image } from 'react-native';
+import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
+
+export const cacheFonts = (font: { [fontFamily: string]: Font.FontSource }) => {
+  return Font.loadAsync(font);
+};
 
 export const cacheImages = (source: { [name: string]: string | number }) => {
   return Object.values(source).map((value) => {
@@ -8,6 +13,3 @@ export const cacheImages = (source: { [name: string]: string | number }) => {
       : Asset.fromModule(value).downloadAsync();
   });
 };
-
-// [ { key : value } , {} , {} ] ...
-// Object.values(source) => [val , val , val ...].map()

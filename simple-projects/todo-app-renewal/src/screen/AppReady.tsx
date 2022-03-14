@@ -1,8 +1,8 @@
 import { FC, memo, useCallback, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 
-import { icon } from '../theme';
-import { cacheImages } from '../api/cache';
+import { icon, font } from '../theme';
+import { cacheFonts, cacheImages } from '../api/cache';
 import SplashScreen from './SplashScreen';
 
 interface ISplash {
@@ -13,7 +13,7 @@ const AppReady: FC<ISplash> = ({ onComplete }) => {
   const [isPreloading, setIsPreloading] = useState(false);
 
   const startAsync = useCallback(async () => {
-    await Promise.all<any>([...cacheImages(icon)]);
+    await Promise.all<any>([cacheFonts(font), ...cacheImages(icon)]);
   }, []);
 
   const onFinish = useCallback(async () => {

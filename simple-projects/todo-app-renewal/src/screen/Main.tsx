@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ScrollView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
@@ -169,7 +170,11 @@ const Main = () => {
 
       <TabBarContainer>
         <TabButton
-          source={isActive ? theme.icon.listCheck : theme.icon.listChecked}
+          source={
+            isActive
+              ? theme.icon.listCheckActive
+              : theme.icon.listCheckedInActive
+          }
           onPress={onPressTodo}
           isActive={isActive}
         />
@@ -180,22 +185,24 @@ const Main = () => {
         />
       </TabBarContainer>
 
-      <ScreenContainer>
-        {isTodo ? (
-          <TodoScreen
-            todos={todos}
-            onCheck={onComplete}
-            onDelete={onDelete}
-            onEdit={onEdit}
-          />
-        ) : (
-          <RecycleBin
-            todos={binTodos}
-            onClear={onClear}
-            onRecovery={onRecovery}
-          />
-        )}
-      </ScreenContainer>
+      <ScrollView>
+        <ScreenContainer>
+          {isTodo ? (
+            <TodoScreen
+              todos={todos}
+              onCheck={onComplete}
+              onDelete={onDelete}
+              onEdit={onEdit}
+            />
+          ) : (
+            <RecycleBin
+              todos={binTodos}
+              onClear={onClear}
+              onRecovery={onRecovery}
+            />
+          )}
+        </ScreenContainer>
+      </ScrollView>
 
       {isTodo ? (
         <KeyboardAvoidingView
