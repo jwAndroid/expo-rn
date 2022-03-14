@@ -35,6 +35,10 @@ const Container = styled.View<IContainer>(({ theme, isCompleted }) => ({
   }),
 }));
 
+const DayContainer = styled.View({
+  flex: 1,
+});
+
 const EditInput = styled.TextInput(({ theme }) => ({
   flex: 1,
   fontSize: 20,
@@ -112,9 +116,19 @@ const Todo: FC<ITodo> = ({ todo, onEdit, onCheck, onDelete }) => {
             onPress={onCheck(todo.id)}
           />
 
-          <StyledText isCompleted={todo.isCompleted} onPress={onEditPress}>
-            {todo.text}
-          </StyledText>
+          <DayContainer>
+            <StyledText
+              fontSize={16}
+              isCompleted={todo.isCompleted}
+              onPress={onEditPress}
+            >
+              {todo.text}
+            </StyledText>
+
+            <StyledText fontSize={10} color={theme.color.gray}>
+              {todo.updateOn}
+            </StyledText>
+          </DayContainer>
 
           <CheckButton
             icon={theme.icon.binActive}

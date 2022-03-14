@@ -12,7 +12,7 @@ const Text = styled.Text<IText>(({ theme, color, fontSize, isCompleted }) => ({
   flex: 1,
   color,
   fontSize,
-  marginLeft: 5,
+  marginLeft: 3,
   textAlignVertical: 'center',
   textDecorationLine: isCompleted ? 'line-through' : 'none',
   includeFontPadding: false,

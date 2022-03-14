@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
+import moment from 'moment';
 
 import { RecycleBin, TodoScreen } from './components';
 import { TabButton } from '../components/button';
@@ -26,9 +27,9 @@ const TabBarContainer = styled.View({
 const Main = () => {
   const theme = useTheme();
 
+  const [value, setValue] = useState('');
   const [isActive, setIsActive] = useState(true);
   const [isTodo, setIsTodo] = useState(true);
-  const [value, setValue] = useState('');
 
   const [todos, setTodos] = useState<TodoObject[]>([]);
   const [binTodos, setbinTodos] = useState<TodoObject[]>([]);
@@ -45,8 +46,14 @@ const Main = () => {
     if (todos.length > 0) {
       setTodos(todos);
     } else {
+      const updateOn = moment().format('YY-MM-DD');
       const id = Date.now();
-      const todo = { id, text: '새롭게 작성해 주세요.', isCompleted: false };
+      const todo = {
+        id,
+        text: '새롭게 작성해 주세요.',
+        isCompleted: false,
+        updateOn,
+      };
 
       setTodoStorage([todo]);
     }
@@ -64,11 +71,13 @@ const Main = () => {
     if (todos.length > 0) {
       setbinTodos(todos);
     } else {
+      const updateOn = moment().format('YY-MM-DD');
       const id = Date.now();
       const todo = {
         id,
         text: '삭제된 게시글이 없습니다.',
         isCompleted: false,
+        updateOn,
       };
 
       setbinTodos([todo]);
@@ -156,8 +165,9 @@ const Main = () => {
 
   const onSubmitEditing = useCallback(() => {
     if (value.length > 0) {
+      const updateOn = moment().format('YY-MM-DD');
       const id = Date.now();
-      const todo = { id, text: value, isCompleted: false };
+      const todo = { id, text: value, isCompleted: false, updateOn };
 
       setTodoStorage([todo, ...todos]);
 
