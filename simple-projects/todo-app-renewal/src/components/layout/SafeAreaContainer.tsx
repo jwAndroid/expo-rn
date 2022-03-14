@@ -7,12 +7,13 @@ interface ISafeAreaContainer {
   children: ReactNode;
 }
 
-const StyledSafeAreaView = styled.SafeAreaView({
+const StyledSafeAreaView = styled.SafeAreaView(({ theme }) => ({
   flex: 1,
   ...(Platform.OS === 'android'
     ? { marginTop: getStatusBarHeight() }
     : undefined),
-});
+  backgroundColor: theme.color.white,
+}));
 
 const SafeAreaContainer: FC<ISafeAreaContainer> = ({ children }) => {
   return <StyledSafeAreaView>{children}</StyledSafeAreaView>;

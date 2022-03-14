@@ -1,5 +1,5 @@
 import { FC, memo, useCallback, useEffect, useRef, useState } from 'react';
-import { GestureResponderEvent, TextInput } from 'react-native';
+import { GestureResponderEvent, Platform, TextInput } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
@@ -19,6 +19,20 @@ const Container = styled.View<IContainer>(({ theme, isCompleted }) => ({
   padding: 5,
   marginVertical: 5,
   opacity: isCompleted ? 0.3 : 1,
+  ...Platform.select({
+    ios: {
+      shadowColor: 'black',
+      shadowOffset: {
+        width: 10,
+        height: 10,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 10,
+    },
+    android: {
+      elevation: 20,
+    },
+  }),
 }));
 
 const EditInput = styled.TextInput(({ theme }) => ({

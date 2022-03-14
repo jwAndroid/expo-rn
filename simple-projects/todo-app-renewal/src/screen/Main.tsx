@@ -211,7 +211,7 @@ const Main = () => {
 
       {isTodo ? (
         <KeyboardAvoidingView
-          style={{ marginBottom: 20 }}
+          style={{ marginVertical: 10 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           keyboardVerticalOffset={10}
         >

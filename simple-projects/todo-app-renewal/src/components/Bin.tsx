@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 import styled from '@emotion/native';
-import { GestureResponderEvent } from 'react-native';
+import { GestureResponderEvent, Platform } from 'react-native';
 import { useTheme } from '@emotion/react';
 
 import { StyledText } from './text';
@@ -13,6 +13,20 @@ const Container = styled.View(({ theme }) => ({
   borderRadius: 10,
   padding: 15,
   marginVertical: 5,
+  ...Platform.select({
+    ios: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 10,
+        height: 10,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 10,
+    },
+    android: {
+      elevation: 20,
+    },
+  }),
 }));
 
 const Recovery = styled.Image(({ theme }) => ({
