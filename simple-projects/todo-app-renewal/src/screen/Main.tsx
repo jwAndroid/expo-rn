@@ -165,6 +165,10 @@ const Main = () => {
     }
   }, [setTodoStorage, todos, value]);
 
+  const onCancel = useCallback(() => {
+    setValue('');
+  }, []);
+
   return (
     <SafeAreaContainer>
       <StatusBar style="dark" />
@@ -213,6 +217,7 @@ const Main = () => {
         >
           <StyledInput
             value={value}
+            onCancel={onCancel}
             placeholder="메모를 입력해 주세요."
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}

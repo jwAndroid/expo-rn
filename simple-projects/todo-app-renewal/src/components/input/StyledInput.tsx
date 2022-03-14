@@ -1,14 +1,17 @@
 import { FC, memo, useCallback, useState } from 'react';
 import {
+  GestureResponderEvent,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 
 const InputContainer = styled.View({
-  width: '100%',
-  paddingHorizontal: 5,
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingHorizontal: 10,
 });
 
 interface IInput {
@@ -16,7 +19,7 @@ interface IInput {
 }
 
 const Input = styled.TextInput<IInput>(({ theme, isFocus }) => ({
-  width: '100%',
+  flex: 1,
   paddingVertical: 8,
   paddingHorizontal: 16,
   borderRadius: 10,
@@ -29,6 +32,14 @@ const Input = styled.TextInput<IInput>(({ theme, isFocus }) => ({
   backgroundColor: theme.color.white,
 }));
 
+const CancelIcon = styled.Image(({ theme }) => ({
+  width: 24,
+  height: 24,
+  marginBottom: 2,
+  marginHorizontal: 5,
+  tintColor: theme.text,
+}));
+
 interface IStyledInput {
   value: string;
   placeholder: string;
@@ -36,11 +47,13 @@ interface IStyledInput {
   onSubmitEditing: (
     e: NativeSyntheticEvent<TextInputSubmitEditingEventData>
   ) => void;
+  onCancel: ((event: GestureResponderEvent) => void) | undefined;
 }
 
 const StyledInput: FC<IStyledInput> = ({
   value,
   placeholder,
+  onCancel,
   onChangeText,
   onSubmitEditing,
 }) => {
@@ -71,6 +84,10 @@ const StyledInput: FC<IStyledInput> = ({
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
       />
+
+      <TouchableWithoutFeedback onPress={onCancel}>
+        <CancelIcon source={theme.icon.cancel} />
+      </TouchableWithoutFeedback>
     </InputContainer>
   );
 };

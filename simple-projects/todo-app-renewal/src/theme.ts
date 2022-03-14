@@ -15,6 +15,7 @@ export const icon = {
   binInActive: require('../assets/icons/bin-inactive.png'),
   box: require('../assets/icons/box.png'),
   checked: require('../assets/icons/checked.png'),
+  cancel: require('../assets/icons/cancel.png'),
 };
 
 export const lightTheme: Theme = {
