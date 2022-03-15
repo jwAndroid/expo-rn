@@ -1,7 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ScrollView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
@@ -200,24 +199,22 @@ const Main = () => {
         />
       </TabBarContainer>
 
-      <ScrollView>
-        <ScreenContainer>
-          {isTodo ? (
-            <TodoScreen
-              todos={todos}
-              onCheck={onComplete}
-              onDelete={onDelete}
-              onEdit={onEdit}
-            />
-          ) : (
-            <RecycleBin
-              todos={binTodos}
-              onClear={onClear}
-              onRecovery={onRecovery}
-            />
-          )}
-        </ScreenContainer>
-      </ScrollView>
+      <ScreenContainer>
+        {isTodo ? (
+          <TodoScreen
+            todos={todos}
+            onCheck={onComplete}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ) : (
+          <RecycleBin
+            todos={binTodos}
+            onClear={onClear}
+            onRecovery={onRecovery}
+          />
+        )}
+      </ScreenContainer>
 
       {isTodo ? (
         <KeyboardAvoidingView
