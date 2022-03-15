@@ -1,8 +1,9 @@
-import { FC, memo, useEffect, useState } from 'react';
-import { GestureResponderEvent } from 'react-native';
+import { FC, memo, useCallback } from 'react';
+import { FlatList, GestureResponderEvent, ListRenderItem } from 'react-native';
 import styled from '@emotion/native';
 
 import { Bin } from '../../components';
+import { TodoObject } from '../../type';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -37,11 +38,14 @@ interface IRecycleBin {
 }
 
 const RecycleBin: FC<IRecycleBin> = ({ todos, onClear, onRecovery }) => {
-  const [data, setdata] = useState<TodoObject[]>([]);
+  const keyExtractor = useCallback((item: TodoObject) => `${item.id}`, []);
 
-  useEffect(() => {
-    setdata(todos);
-  }, [todos]);
+  const renderItem = useCallback<ListRenderItem<TodoObject>>(
+    ({ item }) => {
+      return <Bin todo={item} onPress={onRecovery} />;
+    },
+    [onRecovery]
+  );
 
   return (
     <Container>
@@ -49,12 +53,11 @@ const RecycleBin: FC<IRecycleBin> = ({ todos, onClear, onRecovery }) => {
         <ClearText onPress={onClear}>전체삭제</ClearText>
       </ClearContainer>
 
-      {data.map(
-        (todo) => (
-          <Bin key={todo.id} todo={todo} onPress={onRecovery} />
-        ),
-        []
-      )}
+      <FlatList
+        data={todos}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+      />
     </Container>
   );
 };

@@ -10,6 +10,7 @@ import { RecycleBin, TodoScreen } from './components';
 import { TabButton } from '../components/button';
 import { StyledInput } from '../components/input';
 import { SafeAreaContainer } from '../components/layout';
+import { TodoObject } from '../type';
 
 const ScreenContainer = styled.View(({ theme }) => ({
   flex: 1,

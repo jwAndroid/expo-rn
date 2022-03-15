@@ -4,6 +4,7 @@ import { GestureResponderEvent, Platform } from 'react-native';
 import { useTheme } from '@emotion/react';
 
 import { StyledText } from './text';
+import { TodoObject } from '../type';
 
 const Container = styled.View(({ theme }) => ({
   width: '100%',

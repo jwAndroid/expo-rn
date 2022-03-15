@@ -5,6 +5,7 @@ import { useTheme } from '@emotion/react';
 
 import { CheckButton } from './button';
 import { StyledText } from './text';
+import { TodoObject } from '../type';
 
 interface IContainer {
   isCompleted: boolean;

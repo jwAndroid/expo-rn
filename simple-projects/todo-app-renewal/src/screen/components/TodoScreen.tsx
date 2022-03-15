@@ -1,7 +1,9 @@
-import { FC, memo } from 'react';
+import { FC, memo, useCallback } from 'react';
 import styled from '@emotion/native';
-import { FlatList, GestureResponderEvent } from 'react-native';
+import { FlatList, GestureResponderEvent, ListRenderItem } from 'react-native';
+
 import { Todo } from '../../components';
+import { TodoObject } from '../../type';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -18,19 +20,28 @@ interface ITodoScreen {
 }
 
 const TodoScreen: FC<ITodoScreen> = ({ todos, onCheck, onEdit, onDelete }) => {
+  const keyExtractor = useCallback((item: TodoObject) => `${item.id}`, []);
+
+  const renderItem = useCallback<ListRenderItem<TodoObject>>(
+    ({ item }) => {
+      return (
+        <Todo
+          todo={item}
+          onCheck={onCheck}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
+      );
+    },
+    [onCheck, onDelete, onEdit]
+  );
+
   return (
     <Container>
       <FlatList
         data={todos}
-        renderItem={({ item }) => (
-          <Todo
-            todo={item}
-            onCheck={onCheck}
-            onDelete={onDelete}
-            onEdit={onEdit}
-            key={item.id}
-          />
-        )}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
       />
     </Container>
   );
