@@ -1,4 +1,4 @@
-export type Item = {
+export type IItem = {
   key: number;
   text: string;
 };

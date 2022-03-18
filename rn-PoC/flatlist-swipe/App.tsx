@@ -11,7 +11,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
 
 import { ITEM_LIST } from './src/itemList';
-import { Item } from './type';
+import { IItem } from './type';
 
 const StyledText = styled.Text({
   fontSize: 16,
@@ -28,7 +28,7 @@ const RowBack = styled.View({
 });
 
 const App = () => {
-  const [listData, setListData] = useState<Item[]>(ITEM_LIST);
+  const [listData, setListData] = useState<IItem[]>(ITEM_LIST);
 
   const safeAreaContainer = useMemo<StyleProp<ViewStyle>>(
     () => ({
@@ -49,14 +49,6 @@ const App = () => {
     []
   );
 
-  const closeButton = useMemo<StyleProp<ViewStyle>>(
-    () => ({
-      right: 75,
-      backgroundColor: 'blue',
-    }),
-    []
-  );
-
   const actionButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       bottom: 0,
@@ -65,6 +57,14 @@ const App = () => {
       width: 75,
       alignItems: 'center',
       justifyContent: 'center',
+    }),
+    []
+  );
+
+  const closeButton = useMemo<StyleProp<ViewStyle>>(
+    () => ({
+      right: 75,
+      backgroundColor: 'blue',
     }),
     []
   );
@@ -98,7 +98,7 @@ const App = () => {
   );
 
   const onItemOpen = useCallback((rowKey) => {
-    console.log(`Row opened : ${rowKey}`);
+    console.log(`Row open : ${rowKey}`);
   }, []);
 
   const onPressItem = useCallback(
@@ -130,7 +130,7 @@ const App = () => {
     [deleteItem, closeItem, actionButton, deleteButton, closeButton]
   );
 
-  const renderItem = useCallback<ListRenderItem<Item>>(
+  const renderItem = useCallback<ListRenderItem<IItem>>(
     ({ item }) => {
       return (
         <TouchableHighlight onPress={onPressItem(item)} style={rowFront}>
