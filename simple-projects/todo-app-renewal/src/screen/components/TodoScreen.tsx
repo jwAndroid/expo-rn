@@ -1,9 +1,10 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback, useMemo } from 'react';
 import styled from '@emotion/native';
 import { FlatList, GestureResponderEvent, ListRenderItem } from 'react-native';
 
 import { Todo } from '../../components';
 import { TodoObject } from '../../type';
+import { StyledText } from '../../components/text';
 
 const Container = styled.View(({ theme }) => ({
   flex: 1,
@@ -22,6 +23,8 @@ interface ITodoScreen {
 const TodoScreen: FC<ITodoScreen> = ({ todos, onCheck, onEdit, onDelete }) => {
   const keyExtractor = useCallback((item: TodoObject) => `${item.id}`, []);
 
+  const text = useMemo(() => '게시글을 작성해주세요', []);
+
   const renderItem = useCallback<ListRenderItem<TodoObject>>(
     ({ item }) => {
       return (
@@ -36,13 +39,17 @@ const TodoScreen: FC<ITodoScreen> = ({ todos, onCheck, onEdit, onDelete }) => {
     [onCheck, onDelete, onEdit]
   );
 
-  return (
+  return todos.length !== 0 ? (
     <Container>
       <FlatList
         data={todos}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
       />
+    </Container>
+  ) : (
+    <Container>
+      <StyledText>{text}</StyledText>
     </Container>
   );
 };
