@@ -5,8 +5,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { Users, ChatList, Settings } from '../screen/TabScreens';
-import Header from '../components/common/Header';
+import { Settings, Users, ChatList, Shopping, View } from '../screen';
 
 interface ITabIcon {
   name: any;
@@ -56,6 +55,22 @@ const Tab = () => {
     []
   );
 
+  const viewOptions = useMemo<BottomTabNavigationOptions>(
+    () => ({
+      tabBarIcon: ({ size, color }) =>
+        TabIcon({ name: 'settings', size, color }),
+    }),
+    []
+  );
+
+  const shoppingOptions = useMemo<BottomTabNavigationOptions>(
+    () => ({
+      tabBarIcon: ({ size, color }) =>
+        TabIcon({ name: 'settings', size, color }),
+    }),
+    []
+  );
+
   const settingsOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarIcon: ({ size, color }) =>
@@ -65,23 +80,13 @@ const Tab = () => {
   );
 
   return (
-    <>
-      <Header />
-
-      <Navigator screenOptions={bottomNavigationOption}>
-        <Screen name="Users" component={Users} options={usersOptions} />
-        <Screen
-          name="ChatList"
-          component={ChatList}
-          options={chatListOptions}
-        />
-        <Screen
-          name="Settings"
-          component={Settings}
-          options={settingsOptions}
-        />
-      </Navigator>
-    </>
+    <Navigator screenOptions={bottomNavigationOption}>
+      <Screen name="Users" component={Users} options={usersOptions} />
+      <Screen name="ChatList" component={ChatList} options={chatListOptions} />
+      <Screen name="View" component={View} options={viewOptions} />
+      <Screen name="Shopping" component={Shopping} options={shoppingOptions} />
+      <Screen name="Settings" component={Settings} options={settingsOptions} />
+    </Navigator>
   );
 };
 
