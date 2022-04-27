@@ -6,13 +6,7 @@ interface ISafeAreaContainer {
 }
 
 const SafeAreaContainer: FC<ISafeAreaContainer> = ({ children }) => {
-  return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-    >
-      {children}
-    </SafeAreaView>
-  );
+  return <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>;
 };
 
 export default memo(SafeAreaContainer);
