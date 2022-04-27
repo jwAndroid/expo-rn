@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import styled from '@emotion/native';
-import { Text } from 'react-native';
+import { StatusBar } from 'react-native';
+
+import { Navigation } from './src/navigation';
 
 const Container = styled.View({
   flex: 1,
@@ -9,7 +11,9 @@ const Container = styled.View({
 const App = () => {
   return (
     <Container>
-      <Text>kakao-clone</Text>
+      <StatusBar />
+
+      <Navigation />
     </Container>
   );
 };
