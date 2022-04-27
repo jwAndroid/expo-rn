@@ -6,6 +6,7 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { Users, ChatList, Settings } from '../screen/TabScreens';
+import Header from '../components/common/Header';
 
 interface ITabIcon {
   name: any;
@@ -64,11 +65,23 @@ const Tab = () => {
   );
 
   return (
-    <Navigator screenOptions={bottomNavigationOption}>
-      <Screen name="Users" component={Users} options={usersOptions} />
-      <Screen name="ChatList" component={ChatList} options={chatListOptions} />
-      <Screen name="Settings" component={Settings} options={settingsOptions} />
-    </Navigator>
+    <>
+      <Header />
+
+      <Navigator screenOptions={bottomNavigationOption}>
+        <Screen name="Users" component={Users} options={usersOptions} />
+        <Screen
+          name="ChatList"
+          component={ChatList}
+          options={chatListOptions}
+        />
+        <Screen
+          name="Settings"
+          component={Settings}
+          options={settingsOptions}
+        />
+      </Navigator>
+    </>
   );
 };
 
