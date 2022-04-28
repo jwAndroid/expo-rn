@@ -32,6 +32,7 @@ const Tab = () => {
   const usersOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarItemStyle: {
+        flex: 1,
         justifyContent: 'center',
       },
       tabBarIcon: ({ color, size, focused }) => {
@@ -39,6 +40,7 @@ const Tab = () => {
           <Image
             source={!focused ? theme.icon.users : theme.icon.usersfill}
             style={{ width: size, height: size, tintColor: color }}
+            resizeMode="contain"
           />
         );
       },
@@ -49,6 +51,7 @@ const Tab = () => {
   const chatListOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarItemStyle: {
+        flex: 1,
         justifyContent: 'center',
       },
       tabBarIcon: ({ color, size, focused }) => {
@@ -56,6 +59,7 @@ const Tab = () => {
           <Image
             source={!focused ? theme.icon.chat : theme.icon.chatfill}
             style={{ width: size, height: size, tintColor: color }}
+            resizeMode="contain"
           />
         );
       },
@@ -66,6 +70,7 @@ const Tab = () => {
   const viewOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarItemStyle: {
+        flex: 1,
         justifyContent: 'center',
       },
       tabBarIcon: ({ color, size, focused }) => {
@@ -73,6 +78,7 @@ const Tab = () => {
           <Image
             source={!focused ? theme.icon.view : theme.icon.viewfill}
             style={{ width: size, height: size, tintColor: color }}
+            resizeMode="contain"
           />
         );
       },
@@ -83,6 +89,7 @@ const Tab = () => {
   const shoppingOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarItemStyle: {
+        flex: 1,
         justifyContent: 'center',
       },
       tabBarIcon: ({ color, size, focused }) => {
@@ -90,6 +97,7 @@ const Tab = () => {
           <Image
             source={!focused ? theme.icon.shopping : theme.icon.shoppingfill}
             style={{ width: size, height: size, tintColor: color }}
+            resizeMode="contain"
           />
         );
       },
@@ -100,6 +108,7 @@ const Tab = () => {
   const settingsOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarItemStyle: {
+        flex: 1,
         justifyContent: 'center',
       },
       tabBarIcon: ({ color, size, focused }) => {
@@ -107,6 +116,7 @@ const Tab = () => {
           <Image
             source={!focused ? theme.icon.settings : theme.icon.settingsfill}
             style={{ width: size, height: size, tintColor: color }}
+            resizeMode="contain"
           />
         );
       },
