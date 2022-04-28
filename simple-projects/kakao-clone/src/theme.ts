@@ -31,6 +31,7 @@ export const lightTheme: Theme = {
   itemBackground: '#f0f0f0',
   color: {
     white: '#ffffff',
+    thickWhite: '#F9F9F9',
     black: '#000000',
     gray: '#808080',
     red: '#FF0000',
@@ -38,7 +39,7 @@ export const lightTheme: Theme = {
     yellow: '#ffe400',
     dynamic: {
       inActive: '#f0f0f0',
-      active: '#ffffff',
+      active: '#2F363C',
       focus: '#0099ff',
       blur: '#303030',
     },

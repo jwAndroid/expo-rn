@@ -1,8 +1,7 @@
 import { memo } from 'react';
 import { View } from 'react-native';
 
-import { StyledText } from '../components/common';
-import Header from '../components/common/Header';
+import { Header, StyledText } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 
 const ChatList = () => {

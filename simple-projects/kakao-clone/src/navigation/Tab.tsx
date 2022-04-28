@@ -1,82 +1,117 @@
-import { FC, memo, useMemo } from 'react';
+import { memo, useMemo } from 'react';
+import { Image, Dimensions } from 'react-native';
+import { useTheme } from '@emotion/react';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { MaterialIcons } from '@expo/vector-icons';
 
 import { Settings, Users, ChatList, Shopping, View } from '../screen';
 
-interface ITabIcon {
-  name: any;
-  size: number;
-  color: string;
-}
-
-const TabIcon: FC<ITabIcon> = ({ name, size, color }) => (
-  <MaterialIcons name={name} size={size} color={color} />
-);
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const Tab = () => {
+  const theme = useTheme();
+
   const bottomNavigationOption = useMemo<BottomTabNavigationOptions>(
     () => ({
       tabBarShowLabel: false,
-      tabBarLabelPosition: 'below-icon',
       tabBarStyle: {
-        height: 56,
-        backgroundColor: '#303030',
+        height: DEVICE_HEIGHT / 14,
+        backgroundColor: theme.color.thickWhite,
       },
-      tabBarActiveTintColor: '#000000',
-      tabBarInactiveTintColor: '#5096f1',
+      tabBarActiveTintColor: theme.color.dynamic.active,
+      tabBarInactiveTintColor: theme.color.black,
       headerShown: false,
     }),
-    []
+    [theme]
   );
 
   const usersOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
-      tabBarIcon: ({ size, color, focused }) =>
-        TabIcon({
-          name: focused ? 'mail' : 'mail-outline',
-          size,
-          color,
-        }),
-      tabBarLabel: 'Inbox',
+      tabBarItemStyle: {
+        justifyContent: 'center',
+      },
+      tabBarIcon: ({ color, size, focused }) => {
+        return (
+          <Image
+            source={!focused ? theme.icon.users : theme.icon.usersfill}
+            style={{ width: size, height: size, tintColor: color }}
+          />
+        );
+      },
     }),
-    []
+    [theme]
   );
 
   const chatListOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
-      tabBarIcon: ({ size, color }) => TabIcon({ name: 'person', size, color }),
+      tabBarItemStyle: {
+        justifyContent: 'center',
+      },
+      tabBarIcon: ({ color, size, focused }) => {
+        return (
+          <Image
+            source={!focused ? theme.icon.chat : theme.icon.chatfill}
+            style={{ width: size, height: size, tintColor: color }}
+          />
+        );
+      },
     }),
-    []
+    [theme]
   );
 
   const viewOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
-      tabBarIcon: ({ size, color }) =>
-        TabIcon({ name: 'settings', size, color }),
+      tabBarItemStyle: {
+        justifyContent: 'center',
+      },
+      tabBarIcon: ({ color, size, focused }) => {
+        return (
+          <Image
+            source={!focused ? theme.icon.view : theme.icon.viewfill}
+            style={{ width: size, height: size, tintColor: color }}
+          />
+        );
+      },
     }),
-    []
+    [theme]
   );
 
   const shoppingOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
-      tabBarIcon: ({ size, color }) =>
-        TabIcon({ name: 'settings', size, color }),
+      tabBarItemStyle: {
+        justifyContent: 'center',
+      },
+      tabBarIcon: ({ color, size, focused }) => {
+        return (
+          <Image
+            source={!focused ? theme.icon.shopping : theme.icon.shoppingfill}
+            style={{ width: size, height: size, tintColor: color }}
+          />
+        );
+      },
     }),
-    []
+    [theme]
   );
 
   const settingsOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
-      tabBarIcon: ({ size, color }) =>
-        TabIcon({ name: 'settings', size, color }),
+      tabBarItemStyle: {
+        justifyContent: 'center',
+      },
+      tabBarIcon: ({ color, size, focused }) => {
+        return (
+          <Image
+            source={!focused ? theme.icon.settings : theme.icon.settingsfill}
+            style={{ width: size, height: size, tintColor: color }}
+          />
+        );
+      },
     }),
-    []
+    [theme]
   );
 
   return (
