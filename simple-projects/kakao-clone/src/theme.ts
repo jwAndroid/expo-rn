@@ -44,5 +44,10 @@ export const lightTheme: Theme = {
       blur: '#303030',
     },
   },
+  constants: {
+    header: 56,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
   icon,
 };

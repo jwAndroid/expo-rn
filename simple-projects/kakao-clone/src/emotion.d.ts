@@ -29,6 +29,11 @@ declare module '@emotion/react' {
         blur: string;
       };
     };
+    constants: {
+      header: number;
+      paddingLeft: number;
+      paddingRight: number;
+    };
     icon: typeof icon;
   }
 }
