@@ -6,6 +6,20 @@ export const font = {
 
 export const icon = {
   kakao: require('../assets/icons/kakao.png'),
+  chat: require('../assets/icons/chat.png'),
+  chatfill: require('../assets/icons/chatfill.png'),
+  chatplus: require('../assets/icons/chatplus.png'),
+  headersetting: require('../assets/icons/headersetting.png'),
+  music: require('../assets/icons/music.png'),
+  search: require('../assets/icons/search.png'),
+  settings: require('../assets/icons/settings.png'),
+  settingsfill: require('../assets/icons/settingsfill.png'),
+  shopping: require('../assets/icons/shopping.png'),
+  shoppingfill: require('../assets/icons/shoppingfill.png'),
+  users: require('../assets/icons/users.png'),
+  usersfill: require('../assets/icons/usersfill.png'),
+  view: require('../assets/icons/view.png'),
+  viewfill: require('../assets/icons/viewfill.png'),
 };
 
 export const lightTheme: Theme = {
