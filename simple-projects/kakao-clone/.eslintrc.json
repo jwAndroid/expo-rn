@@ -35,6 +35,7 @@
     "react/jsx-no-useless-fragment": "off",
     "react/jsx-one-expression-per-line": "off",
     "import/prefer-default-export": "off",
-    "implicit-arrow-linebreak": "off"
+    "implicit-arrow-linebreak": "off",
+    "global-require": "off"
   }
 }

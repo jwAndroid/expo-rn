@@ -20,6 +20,7 @@ declare module '@emotion/react' {
       gray: string;
       red: string;
       blue: string;
+      yellow: string;
       dynamic: {
         inActive: string;
         active: string;

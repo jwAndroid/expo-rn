@@ -1,20 +1,23 @@
-import { memo } from 'react';
-import styled from '@emotion/native';
-import { StatusBar } from 'react-native';
+import { memo, useCallback, useMemo, useState } from 'react';
+import { ThemeProvider } from '@emotion/react';
 
 import { Navigation } from './src/navigation';
-
-const Container = styled.View({
-  flex: 1,
-});
+import { lightTheme } from './src/theme';
+import { AppReady } from './src/screen';
 
 const App = () => {
-  return (
-    <Container>
-      <StatusBar />
+  const [isCompleate, setIsCompleate] = useState(false);
 
-      <Navigation />
-    </Container>
+  const theme = useMemo(() => lightTheme, []);
+
+  const onComplete = useCallback(() => {
+    setIsCompleate(true);
+  }, []);
+
+  return (
+    <ThemeProvider theme={theme}>
+      {isCompleate ? <Navigation /> : <AppReady onComplete={onComplete} />}
+    </ThemeProvider>
   );
 };
 
