@@ -5,11 +5,11 @@ export const font = {
 };
 
 export const icon = {
-  kakao: require('../assets/icons/kakao.png'),
   chat: require('../assets/icons/chat.png'),
   chatfill: require('../assets/icons/chatfill.png'),
   chatplus: require('../assets/icons/chatplus.png'),
   headersetting: require('../assets/icons/headersetting.png'),
+  kakao: require('../assets/icons/kakao.png'),
   music: require('../assets/icons/music.png'),
   search: require('../assets/icons/search.png'),
   settings: require('../assets/icons/settings.png'),
