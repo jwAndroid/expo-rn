@@ -9,7 +9,8 @@ declare module '*.jpeg';
 declare module '@emotion/react' {
   export interface Theme {
     font: {
-      Cafe24Simplehae: string;
+      YoonGothicBold: string;
+      YoonGothicRegular: string;
     };
     text: string;
     background: string;

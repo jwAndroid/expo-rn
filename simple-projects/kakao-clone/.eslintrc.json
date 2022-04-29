@@ -37,6 +37,7 @@
     "import/prefer-default-export": "off",
     "implicit-arrow-linebreak": "off",
     "global-require": "off",
-    "react/no-unstable-nested-components": "off"
+    "react/no-unstable-nested-components": "off",
+    "react/require-default-props": "off"
   }
 }

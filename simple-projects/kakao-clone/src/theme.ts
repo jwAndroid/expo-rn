@@ -1,7 +1,8 @@
 import { Theme } from '@emotion/react';
 
 export const font = {
-  Cafe24Simplehae: require('../assets/font/Cafe24Simplehae.otf'),
+  YoonGothicBold: require('../assets/font/YoonGothicBold.otf'),
+  YoonGothicRegular: require('../assets/font/YoonGothicRegular.otf'),
 };
 
 export const icon = {
@@ -24,7 +25,8 @@ export const icon = {
 
 export const lightTheme: Theme = {
   font: {
-    Cafe24Simplehae: 'Cafe24Simplehae',
+    YoonGothicBold: 'YoonGothicBold',
+    YoonGothicRegular: 'YoonGothicRegular',
   },
   text: '#303030',
   background: '#ffffff',

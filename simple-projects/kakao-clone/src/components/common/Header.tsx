@@ -5,14 +5,27 @@ import { useTheme } from '@emotion/react';
 
 import StyledText from './StyledText';
 
-const StyledHeader = styled.View(({ theme }) => ({
+const Container = styled.View(({ theme }) => ({
   width: '100%',
   height: theme.constants.header,
   backgroundColor: theme.color.white,
-  justifyContent: 'space-between',
+  flexDirection: 'row',
+}));
+
+const TitleContainer = styled.View(({ theme }) => ({
+  flex: 1,
+  backgroundColor: 'yellow',
+  justifyContent: 'center',
+  paddingLeft: 10,
+}));
+
+const IconContainer = styled.View(({ theme }) => ({
+  flex: 1,
+  backgroundColor: 'red',
+  justifyContent: 'flex-end',
   alignItems: 'center',
   flexDirection: 'row',
-  paddingLeft: theme.constants.paddingLeft,
+  paddingRight: 10,
 }));
 
 interface IHeader {
@@ -24,9 +37,20 @@ const Header: FC<IHeader> = ({ title }) => {
   const theme = useTheme();
 
   return (
-    <StyledHeader>
-      <StyledText color={theme.color.black}>{title}</StyledText>
-    </StyledHeader>
+    <Container>
+      <TitleContainer>
+        <StyledText fontSize={20} isBold>
+          {title}
+        </StyledText>
+      </TitleContainer>
+
+      <IconContainer>
+        <StyledText>1</StyledText>
+        <StyledText>2</StyledText>
+        <StyledText>3</StyledText>
+        <StyledText>4</StyledText>
+      </IconContainer>
+    </Container>
   );
 };
 
