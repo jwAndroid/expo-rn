@@ -1,41 +1,61 @@
-import styled from '@emotion/native';
 import { FC, memo, ReactNode } from 'react';
-// import { ImageSourcePropType, View } from 'react-native';
-import { useTheme } from '@emotion/react';
+import {
+  GestureResponderEvent,
+  ImageSourcePropType,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import styled from '@emotion/native';
 
 import StyledText from './StyledText';
 
 const Container = styled.View(({ theme }) => ({
   width: '100%',
   height: theme.constants.header,
-  backgroundColor: theme.color.white,
   flexDirection: 'row',
 }));
 
-const TitleContainer = styled.View(({ theme }) => ({
+const TitleContainer = styled.View(() => ({
   flex: 1,
-  backgroundColor: 'yellow',
   justifyContent: 'center',
-  paddingLeft: 10,
+  paddingLeft: 15,
 }));
 
-const IconContainer = styled.View(({ theme }) => ({
+const IconContainer = styled.View(() => ({
   flex: 1,
-  backgroundColor: 'red',
   justifyContent: 'flex-end',
   alignItems: 'center',
   flexDirection: 'row',
-  paddingRight: 10,
 }));
+
+const Icon = styled.Image({
+  width: 22,
+  height: 22,
+  marginRight: 20,
+});
 
 interface IHeader {
   title: ReactNode;
-  // icon: ImageSourcePropType;
+  one?: ImageSourcePropType;
+  oneOnPress?: ((event: GestureResponderEvent) => void) | undefined;
+  two?: ImageSourcePropType;
+  twoOnPress?: ((event: GestureResponderEvent) => void) | undefined;
+  three?: ImageSourcePropType;
+  threeOnPress?: ((event: GestureResponderEvent) => void) | undefined;
+  four?: ImageSourcePropType;
+  fourOnPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
-const Header: FC<IHeader> = ({ title }) => {
-  const theme = useTheme();
-
+const Header: FC<IHeader> = ({
+  title,
+  one,
+  oneOnPress,
+  two,
+  twoOnPress,
+  three,
+  threeOnPress,
+  four,
+  fourOnPress,
+}) => {
   return (
     <Container>
       <TitleContainer>
@@ -45,10 +65,26 @@ const Header: FC<IHeader> = ({ title }) => {
       </TitleContainer>
 
       <IconContainer>
-        <StyledText>1</StyledText>
-        <StyledText>2</StyledText>
-        <StyledText>3</StyledText>
-        <StyledText>4</StyledText>
+        {one && (
+          <TouchableWithoutFeedback onPress={oneOnPress}>
+            <Icon source={one} resizeMode="contain" />
+          </TouchableWithoutFeedback>
+        )}
+        {two && (
+          <TouchableWithoutFeedback onPress={twoOnPress}>
+            <Icon source={two} resizeMode="contain" />
+          </TouchableWithoutFeedback>
+        )}
+        {three && (
+          <TouchableWithoutFeedback onPress={threeOnPress}>
+            <Icon source={three} resizeMode="contain" />
+          </TouchableWithoutFeedback>
+        )}
+        {four && (
+          <TouchableWithoutFeedback onPress={fourOnPress}>
+            <Icon source={four} resizeMode="contain" />
+          </TouchableWithoutFeedback>
+        )}
       </IconContainer>
     </Container>
   );
