@@ -38,3 +38,18 @@ export const SampleData = [
   { id: 37, name: 'jongduk', image_url: 'url5' },
   { id: 38, name: 'junghae', image_url: 'url6' },
 ];
+
+export const sectionData = Array(5)
+  .fill('')
+  .map((_, i) => ({
+    title: `title${i + 1}`,
+    data: [
+      ...Array(5)
+        .fill('')
+        .map((_, j) => ({
+          id: `${i}.${j}`,
+          name: `item #${j}`,
+          imageUrl: `imageUrl #${i}`,
+        })),
+    ],
+  }));

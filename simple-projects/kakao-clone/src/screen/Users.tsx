@@ -2,6 +2,7 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import {
   ListRenderItem,
   StyleProp,
+  Text,
   TouchableHighlight,
   TouchableOpacity,
   ViewStyle,
@@ -37,7 +38,7 @@ const RowBack = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
   paddingLeft: 5,
-  backgroundColor: '#000000',
+  backgroundColor: '#fff',
 });
 
 const Users = () => {
@@ -47,14 +48,14 @@ const Users = () => {
 
   const rowFront = useMemo<StyleProp<ViewStyle>>(
     () => ({
-      height: 50,
+      height: 60,
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottomWidth: 0.5,
-      borderBottomColor: 'black',
-      backgroundColor: 'lightcoral',
+      borderColor: theme.color.black,
+      borderWidth: 3,
+      backgroundColor: theme.color.gray,
     }),
-    []
+    [theme]
   );
 
   const actionButton = useMemo<StyleProp<ViewStyle>>(
@@ -116,10 +117,20 @@ const Users = () => {
     []
   );
 
+  const onPressLeft = useCallback(
+    (rowMap, rowKey) => () => {
+      rowMap[rowKey].closeRow();
+      // console.log(`로우맵 ${rowMap} 키 : ${rowKey}`);
+    },
+    []
+  );
+
   const renderHiddenItem = useCallback(
     ({ item }, rowMap) => {
       return (
         <RowBack>
+          <Text onPress={onPressLeft(rowMap, item.id)}>Left</Text>
+
           <TouchableOpacity
             style={[actionButton, closeButton]}
             onPress={closeItem(rowMap, item.id)}
@@ -136,7 +147,14 @@ const Users = () => {
         </RowBack>
       );
     },
-    [deleteItem, closeItem, actionButton, deleteButton, closeButton]
+    [
+      deleteItem,
+      closeItem,
+      actionButton,
+      deleteButton,
+      closeButton,
+      onPressLeft,
+    ]
   );
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
@@ -171,8 +189,8 @@ const Users = () => {
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
           onRowDidOpen={onItemOpen}
-          leftOpenValue={0}
-          disableRightSwipe
+          stopLeftSwipe={75}
+          leftOpenValue={75}
           stopRightSwipe={-150}
           rightOpenValue={-150}
           previewRowKey="0"
