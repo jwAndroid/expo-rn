@@ -97,8 +97,8 @@ const Users = () => {
 
   const test = useCallback(
     (rowMap, rowKey) => () => {
-      // 뽑은 객체하나 newData[section].data[foundIndex]
-      //  한 섹션의 데이터 리스트 : newData[section].data
+      // picked object : newData[section].data[foundIndex]
+      // section list : newData[section].data
 
       const [section] = rowKey.toString().split('.');
       const newData = [...listData];
