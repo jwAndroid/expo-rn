@@ -15,6 +15,11 @@ import { Header, StyledText, UserCard } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { SampleData, SampleSectionData, sectionData } from '../api/sample/data';
 import { IUser, UserEntity } from '../type';
+import {
+  FAVORITES_INDEX,
+  FAVORITES_SEC_INDEX,
+  RECOMEND_SEC_INDEX,
+} from '../constants';
 
 const MYPROFILE = {
   id: 178189,
@@ -95,10 +100,12 @@ const Users = () => {
     []
   );
 
-  const test = useCallback(
+  const go = useCallback(
     (rowMap, rowKey) => () => {
       // picked object : newData[section].data[foundIndex]
       // section list : newData[section].data
+
+      // add elements section list : const list = [dataObjects , ... newData[section].data]
 
       const [section] = rowKey.toString().split('.');
       const newData = [...listData];
@@ -106,13 +113,6 @@ const Users = () => {
       const foundIndex = listData[section].data.findIndex(
         (item) => item.id === rowKey
       );
-
-      newData[0].data.unshift(newData[section].data[foundIndex]);
-      newData[section].data.splice(foundIndex, 1);
-
-      setListData(newData);
-
-      console.log(newData);
     },
     [listData]
   );
@@ -120,13 +120,13 @@ const Users = () => {
   const deleteItem = useCallback(
     (rowMap, rowKey) => () => {
       // id : n.m (n : section , m : item id)
-      const str = rowKey.toString();
-      const [section] = str.split('.');
+      const id = rowKey.toString();
+      const [section] = id.split('.');
       const newData = [...listData];
-      const prevIndex = listData[section].data.findIndex(
+      const foundIndex = listData[section].data.findIndex(
         (item) => item.id === rowKey
       );
-      newData[section].data.splice(prevIndex, 1);
+      newData[section].data.splice(foundIndex, 1);
       setListData(newData);
     },
     [listData]
@@ -166,14 +166,14 @@ const Users = () => {
 
           <TouchableOpacity
             style={[actionButton, deleteButton]}
-            onPress={test(rowMap, item.id)}
+            onPress={go(rowMap, item.id)}
           >
             <StyledText>Delete</StyledText>
           </TouchableOpacity>
         </RowBack>
       );
     },
-    [test, closeItem, actionButton, deleteButton, closeButton, onPressLeft]
+    [go, closeItem, actionButton, deleteButton, closeButton, onPressLeft]
   );
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
