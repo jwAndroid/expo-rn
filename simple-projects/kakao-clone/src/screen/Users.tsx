@@ -13,13 +13,8 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Header, StyledText, UserCard } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
-import { SampleData, SampleSectionData, sectionData } from '../api/sample/data';
+import { SampleSectionData } from '../api/sample/data';
 import { IUser, UserEntity } from '../type';
-import {
-  FAVORITES_INDEX,
-  FAVORITES_SEC_INDEX,
-  RECOMEND_SEC_INDEX,
-} from '../constants';
 
 const MYPROFILE = {
   id: 178189,
@@ -101,19 +96,53 @@ const Users = () => {
   );
 
   const go = useCallback(
-    (rowMap, rowKey) => () => {
-      // picked object : newData[section].data[foundIndex]
-      // section list : newData[section].data
+    (rowMap, { id, section }) =>
+      () => {
+        if (section === 1) {
+          const newData = [...listData];
+          const foundIndex = listData[section].data.findIndex(
+            (item) => item.id === id
+          );
+          // n 섹션에 옮길때
+          // newData[section].data[foundIndex].section = 1
+          newData[section].data[foundIndex].section = 0;
 
-      // add elements section list : const list = [dataObjects , ... newData[section].data]
+          newData[0].data.unshift(newData[section].data[foundIndex]);
 
-      const [section] = rowKey.toString().split('.');
-      const newData = [...listData];
+          newData[section].data.splice(foundIndex, 1);
 
-      const foundIndex = listData[section].data.findIndex(
-        (item) => item.id === rowKey
-      );
-    },
+          setListData(newData);
+
+          console.log(newData);
+        } else {
+          console.log('다른 섹션입니다.');
+        }
+      },
+    [listData]
+  );
+
+  const back = useCallback(
+    (rowMap, { id, section }) =>
+      () => {
+        if (section === 0) {
+          const newData = [...listData];
+          const foundIndex = listData[section].data.findIndex(
+            (item) => item.id === id
+          );
+
+          newData[section].data[foundIndex].section = 1;
+
+          newData[1].data.unshift(newData[section].data[foundIndex]);
+
+          newData[section].data.splice(foundIndex, 1);
+
+          setListData(newData);
+
+          console.log(newData);
+        } else {
+          console.log('다른 섹션입니다.');
+        }
+      },
     [listData]
   );
 
@@ -159,16 +188,16 @@ const Users = () => {
 
           <TouchableOpacity
             style={[actionButton, closeButton]}
-            onPress={closeItem(rowMap, item.id)}
+            onPress={back(rowMap, item)}
           >
-            <StyledText>Close</StyledText>
+            <StyledText>back</StyledText>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[actionButton, deleteButton]}
-            onPress={go(rowMap, item.id)}
+            onPress={go(rowMap, item)}
           >
-            <StyledText>Delete</StyledText>
+            <StyledText>go</StyledText>
           </TouchableOpacity>
         </RowBack>
       );
