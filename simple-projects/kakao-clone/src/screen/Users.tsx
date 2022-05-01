@@ -115,16 +115,6 @@ const Users = () => {
 
           console.log(newData);
         } else {
-          console.log('다른 섹션입니다.');
-        }
-      },
-    [listData]
-  );
-
-  const back = useCallback(
-    (rowMap, { id, section }) =>
-      () => {
-        if (section === 0) {
           const newData = [...listData];
           const foundIndex = listData[section].data.findIndex(
             (item) => item.id === id
@@ -139,25 +129,36 @@ const Users = () => {
           setListData(newData);
 
           console.log(newData);
-        } else {
-          console.log('다른 섹션입니다.');
         }
       },
     [listData]
   );
 
+  const back = useCallback(
+    (rowMap, { id, section }) =>
+      () => {
+        if (section === 0) {
+          console.log('0 섹션');
+        } else {
+          console.log('다른 섹션입니다.');
+        }
+      },
+    []
+  );
+
   const deleteItem = useCallback(
-    (rowMap, rowKey) => () => {
-      // id : n.m (n : section , m : item id)
-      const id = rowKey.toString();
-      const [section] = id.split('.');
-      const newData = [...listData];
-      const foundIndex = listData[section].data.findIndex(
-        (item) => item.id === rowKey
-      );
-      newData[section].data.splice(foundIndex, 1);
-      setListData(newData);
-    },
+    (rowMap, { id, section }) =>
+      () => {
+        // id : n.m (n : section , m : item id)
+        // const id = rowKey.toString();
+        // const [section] = id.split('.');
+        const newData = [...listData];
+        const foundIndex = listData[section].data.findIndex(
+          (item) => item.id === id
+        );
+        newData[section].data.splice(foundIndex, 1);
+        setListData(newData);
+      },
     [listData]
   );
 
@@ -190,26 +191,26 @@ const Users = () => {
             style={[actionButton, closeButton]}
             onPress={back(rowMap, item)}
           >
-            <StyledText>back</StyledText>
+            <StyledText>대기</StyledText>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[actionButton, deleteButton]}
             onPress={go(rowMap, item)}
           >
-            <StyledText>go</StyledText>
+            <StyledText>즐겨찾기</StyledText>
           </TouchableOpacity>
         </RowBack>
       );
     },
-    [go, closeItem, actionButton, deleteButton, closeButton, onPressLeft]
+    [go, back, actionButton, deleteButton, closeButton, onPressLeft]
   );
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
     ({ item }) => {
       return (
         <TouchableHighlight onPress={onPressItem(item)} style={rowFront}>
-          <StyledText>텍스트:{item.name}</StyledText>
+          <StyledText>{item.name}</StyledText>
         </TouchableHighlight>
       );
     },

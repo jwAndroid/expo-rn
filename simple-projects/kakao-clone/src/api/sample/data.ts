@@ -57,17 +57,17 @@ export const SampleData = [
 export const SampleSectionData = [
   {
     data: [
-      { id: 0.0, name: 'hone1', image_url: 'url1', section: 0 },
-      { id: 0.1, name: 'hone2', image_url: 'url2', section: 0 },
+      { id: 0, name: '나리', image_url: 'url1', section: 0 },
+      { id: 1, name: '지웅', image_url: 'url2', section: 0 },
     ],
-    title: 'title1',
+    title: '즐겨찾기',
   },
   {
     data: [
-      { id: 1.0, name: 'hone3', image_url: 'url3', section: 1 },
-      { id: 1.1, name: 'hone4', image_url: 'url4', section: 1 },
-      { id: 1.2, name: 'hone5', image_url: 'url5', section: 1 },
+      { id: 2, name: '종덕', image_url: 'url3', section: 1 },
+      { id: 3, name: '정해', image_url: 'url4', section: 1 },
+      { id: 4, name: '영준', image_url: 'url5', section: 1 },
     ],
-    title: 'title2',
+    title: '친구',
   },
 ];
