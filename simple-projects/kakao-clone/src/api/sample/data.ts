@@ -39,17 +39,35 @@ export const SampleData = [
   { id: 38, name: 'junghae', image_url: 'url6' },
 ];
 
-export const sectionData = Array(5)
-  .fill('')
-  .map((_, i) => ({
-    title: `title${i + 1}`,
+// export const sectionData = Array(5)
+//   .fill('')
+//   .map((_, i) => ({
+//     title: `title${i + 1}`,
+//     data: [
+//       ...Array(5)
+//         .fill('')
+//         .map((_, j) => ({
+//           id: `${i}.${j}`,
+//           name: `item #${j}`,
+//           imageUrl: `imageUrl #${i}`,
+//         })),
+//     ],
+//   }));
+
+export const SampleSectionData = [
+  {
     data: [
-      ...Array(5)
-        .fill('')
-        .map((_, j) => ({
-          id: `${i}.${j}`,
-          name: `item #${j}`,
-          imageUrl: `imageUrl #${i}`,
-        })),
+      { id: 0.0, name: 'hone1', image_url: 'url1' },
+      { id: 0.1, name: 'hone2', image_url: 'url2' },
     ],
-  }));
+    title: 'title1',
+  },
+  {
+    data: [
+      { id: 1.0, name: 'hone3', image_url: 'url3' },
+      { id: 1.1, name: 'hone4', image_url: 'url4' },
+      { id: 1.2, name: 'hone5', image_url: 'url5' },
+    ],
+    title: 'title2',
+  },
+];

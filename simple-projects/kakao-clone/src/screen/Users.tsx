@@ -13,8 +13,8 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Header, StyledText, UserCard } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
-import { SampleData } from '../api/sample/data';
-import { UserEntity } from '../type';
+import { SampleData, SampleSectionData, sectionData } from '../api/sample/data';
+import { IUser, UserEntity } from '../type';
 
 const MYPROFILE = {
   id: 178189,
@@ -43,7 +43,7 @@ const RowBack = styled.View({
 
 const Users = () => {
   const theme = useTheme();
-  const [listData, setListData] = useState<UserEntity[]>(SampleData);
+  const [listData, setListData] = useState<IUser[]>(SampleSectionData);
   const keyExtractor = useCallback((item: UserEntity) => `${item.id}`, []);
 
   const rowFront = useMemo<StyleProp<ViewStyle>>(
@@ -95,24 +95,50 @@ const Users = () => {
     []
   );
 
+  const test = useCallback(
+    (rowMap, rowKey) => () => {
+      // 뽑은 객체하나 newData[section].data[foundIndex]
+      //  한 섹션의 데이터 리스트 : newData[section].data
+
+      const [section] = rowKey.toString().split('.');
+      const newData = [...listData];
+
+      const foundIndex = listData[section].data.findIndex(
+        (item) => item.id === rowKey
+      );
+
+      newData[0].data.unshift(newData[section].data[foundIndex]);
+      newData[section].data.splice(foundIndex, 1);
+
+      setListData(newData);
+
+      console.log(newData);
+    },
+    [listData]
+  );
+
   const deleteItem = useCallback(
     (rowMap, rowKey) => () => {
-      closeItem(rowMap, rowKey);
+      // id : n.m (n : section , m : item id)
+      const str = rowKey.toString();
+      const [section] = str.split('.');
       const newData = [...listData];
-      const prevIndex = listData.findIndex((item) => item.id === rowKey);
-      newData.splice(prevIndex, 1);
+      const prevIndex = listData[section].data.findIndex(
+        (item) => item.id === rowKey
+      );
+      newData[section].data.splice(prevIndex, 1);
       setListData(newData);
     },
-    [closeItem, listData]
+    [listData]
   );
 
   const onItemOpen = useCallback((rowKey) => {
-    console.log(`Row open : ${rowKey}`);
+    // console.log(`Row open : ${rowKey}`);
   }, []);
 
   const onPressItem = useCallback(
     (item) => () => {
-      console.log(item);
+      // console.log(item);
     },
     []
   );
@@ -140,21 +166,14 @@ const Users = () => {
 
           <TouchableOpacity
             style={[actionButton, deleteButton]}
-            onPress={deleteItem(rowMap, item.id)}
+            onPress={test(rowMap, item.id)}
           >
             <StyledText>Delete</StyledText>
           </TouchableOpacity>
         </RowBack>
       );
     },
-    [
-      deleteItem,
-      closeItem,
-      actionButton,
-      deleteButton,
-      closeButton,
-      onPressLeft,
-    ]
+    [test, closeItem, actionButton, deleteButton, closeButton, onPressLeft]
   );
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
@@ -167,6 +186,12 @@ const Users = () => {
     },
     [onPressItem, rowFront]
   );
+
+  const renderSectionHeader = useCallback(({ section }) => {
+    return <StyledText>{section.title}</StyledText>;
+  }, []);
+
+  // const renderSectionHeader = ({ section }) => <Text>{section.title}</Text>;
 
   return (
     <SafeAreaContainer>
@@ -184,7 +209,9 @@ const Users = () => {
 
       <Container>
         <SwipeListView
-          data={listData}
+          useSectionList
+          sections={listData}
+          renderSectionHeader={renderSectionHeader}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
