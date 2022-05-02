@@ -73,6 +73,8 @@ export const sampleSectionData = [
       { id: 2, name: '종덕', image_url: 'url3', section: 1 },
       { id: 3, name: '정해', image_url: 'url4', section: 1 },
       { id: 4, name: '영준', image_url: 'url5', section: 1 },
+      { id: 5, name: '민식', image_url: 'url5', section: 1 },
+      { id: 6, name: '민구', image_url: 'url5', section: 1 },
     ],
     title: '친구',
   },

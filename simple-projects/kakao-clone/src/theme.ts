@@ -36,6 +36,7 @@ export const lightTheme: Theme = {
   color: {
     white: '#ffffff',
     thickWhite: '#F9F9F9',
+    thickBlack: '#D7D7D7',
     black: '#000000',
     gray: '#808080',
     red: '#FF0000',

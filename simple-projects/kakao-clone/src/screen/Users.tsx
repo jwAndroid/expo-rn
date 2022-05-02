@@ -21,6 +21,13 @@ const Container = styled.View(() => ({
   flex: 1,
 }));
 
+const SectionHeaderContainer = styled.View({
+  width: '100%',
+  flexDirection: 'row',
+  paddingHorizontal: 15,
+  paddingVertical: 15,
+});
+
 const ProfileContainer = styled.View(() => ({
   width: '100%',
   paddingHorizontal: 15,
@@ -39,7 +46,6 @@ const RowBack = styled.View({
 const Users = () => {
   const theme = useTheme();
   const [listData, setListData] = useState<IUser[]>(sampleSectionData);
-  const keyExtractor = useCallback((item: UserEntity) => `${item.id}`, []);
 
   const rowFront = useMemo<StyleProp<ViewStyle>>(
     () => ({
@@ -80,6 +86,13 @@ const Users = () => {
     }),
     []
   );
+
+  const friendCount = useMemo(
+    () => listData[FRIEND_SEC_INDEX].data.length,
+    [listData]
+  );
+
+  const keyExtractor = useCallback((item: UserEntity) => `${item.id}`, []);
 
   const onFavorites = useCallback(
     ({ id, section }) =>
@@ -178,9 +191,23 @@ const Users = () => {
     [onPressItem, rowFront]
   );
 
-  const renderSectionHeader = useCallback(({ section }) => {
-    return <StyledText>{section.title}</StyledText>;
-  }, []);
+  const renderSectionHeader = useCallback(
+    ({ section }) => {
+      if (section.title === '친구') {
+        return (
+          <SectionHeaderContainer>
+            <StyledText>{section.title}</StyledText>
+            <StyledText paddingLeft={5}>{friendCount}</StyledText>
+          </SectionHeaderContainer>
+        );
+      }
+
+      if (section.title === '즐겨찾기') {
+        return <StyledText>{section.title}</StyledText>;
+      }
+    },
+    [friendCount]
+  );
 
   return (
     <SafeAreaContainer>
@@ -199,7 +226,7 @@ const Users = () => {
           imageUrl={myProfile.image_url}
           avatarWidth={60}
           avatarHeight={60}
-          avatarRadius={20}
+          avatarRadius={22}
         />
       </ProfileContainer>
 
