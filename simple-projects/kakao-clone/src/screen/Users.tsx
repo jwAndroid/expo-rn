@@ -13,23 +13,18 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Header, StyledText, UserCard } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
-import { SampleSectionData } from '../api/sample/data';
+import { sampleSectionData, myProfile } from '../api/sample/data';
 import { IUser, UserEntity } from '../type';
-
-const MYPROFILE = {
-  id: 178189,
-  name: '저입니다!!',
-  image_url: '내 이미지 프로필',
-};
+import { FAVORITES_SEC_INDEX, FRIEND_SEC_INDEX } from '../constants';
 
 const Container = styled.View(() => ({
   flex: 1,
 }));
 
-const ProfileContainer = styled.View(({ theme }) => ({
+const ProfileContainer = styled.View(() => ({
   width: '100%',
+  paddingHorizontal: 15,
   paddingVertical: 15,
-  backgroundColor: theme.color.gray,
 }));
 
 const RowBack = styled.View({
@@ -43,7 +38,7 @@ const RowBack = styled.View({
 
 const Users = () => {
   const theme = useTheme();
-  const [listData, setListData] = useState<IUser[]>(SampleSectionData);
+  const [listData, setListData] = useState<IUser[]>(sampleSectionData);
   const keyExtractor = useCallback((item: UserEntity) => `${item.id}`, []);
 
   const rowFront = useMemo<StyleProp<ViewStyle>>(
@@ -86,72 +81,39 @@ const Users = () => {
     []
   );
 
-  const closeItem = useCallback(
-    (rowMap, rowKey) => () => {
-      if (rowMap[rowKey]) {
-        rowMap[rowKey].closeRow();
-      }
-    },
-    []
-  );
-
-  const go = useCallback(
-    (rowMap, { id, section }) =>
+  const onFavorites = useCallback(
+    ({ id, section }) =>
       () => {
-        if (section === 1) {
-          const newData = [...listData];
-          const foundIndex = listData[section].data.findIndex(
-            (item) => item.id === id
-          );
-          // n 섹션에 옮길때
-          // newData[section].data[foundIndex].section = 1
-          newData[section].data[foundIndex].section = 0;
+        const newData = [...listData];
+        const foundIndex = listData[section].data.findIndex(
+          (item) => item.id === id
+        );
 
-          newData[0].data.unshift(newData[section].data[foundIndex]);
+        if (section === FRIEND_SEC_INDEX) {
+          newData[section].data[foundIndex].section = FAVORITES_SEC_INDEX;
+          newData[FAVORITES_SEC_INDEX].data.unshift(
+            newData[section].data[foundIndex]
+          );
 
           newData[section].data.splice(foundIndex, 1);
-
-          setListData(newData);
-
-          console.log(newData);
         } else {
-          const newData = [...listData];
-          const foundIndex = listData[section].data.findIndex(
-            (item) => item.id === id
+          newData[section].data[foundIndex].section = FRIEND_SEC_INDEX;
+          newData[FRIEND_SEC_INDEX].data.unshift(
+            newData[section].data[foundIndex]
           );
 
-          newData[section].data[foundIndex].section = 1;
-
-          newData[1].data.unshift(newData[section].data[foundIndex]);
-
           newData[section].data.splice(foundIndex, 1);
-
-          setListData(newData);
-
-          console.log(newData);
         }
+
+        setListData(newData);
       },
     [listData]
-  );
-
-  const back = useCallback(
-    (rowMap, { id, section }) =>
-      () => {
-        if (section === 0) {
-          console.log('0 섹션');
-        } else {
-          console.log('다른 섹션입니다.');
-        }
-      },
-    []
   );
 
   const deleteItem = useCallback(
     (rowMap, { id, section }) =>
       () => {
-        // id : n.m (n : section , m : item id)
-        // const id = rowKey.toString();
-        // const [section] = id.split('.');
+        rowMap[id].closeRow();
         const newData = [...listData];
         const foundIndex = listData[section].data.findIndex(
           (item) => item.id === id
@@ -162,21 +124,16 @@ const Users = () => {
     [listData]
   );
 
-  const onItemOpen = useCallback((rowKey) => {
-    // console.log(`Row open : ${rowKey}`);
-  }, []);
-
   const onPressItem = useCallback(
     (item) => () => {
-      // console.log(item);
+      console.log(item);
     },
     []
   );
 
-  const onPressLeft = useCallback(
+  const onPress = useCallback(
     (rowMap, rowKey) => () => {
       rowMap[rowKey].closeRow();
-      // console.log(`로우맵 ${rowMap} 키 : ${rowKey}`);
     },
     []
   );
@@ -185,25 +142,29 @@ const Users = () => {
     ({ item }, rowMap) => {
       return (
         <RowBack>
-          <Text onPress={onPressLeft(rowMap, item.id)}>Left</Text>
+          {item.section === 0 ? (
+            <Text onPress={onFavorites(item)}>즐찾</Text>
+          ) : (
+            <Text onPress={onFavorites(item)}>즐겨찾기</Text>
+          )}
 
           <TouchableOpacity
             style={[actionButton, closeButton]}
-            onPress={back(rowMap, item)}
+            onPress={onPress(rowMap, item.id)}
           >
-            <StyledText>대기</StyledText>
+            <StyledText>숨김</StyledText>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[actionButton, deleteButton]}
-            onPress={go(rowMap, item)}
+            onPress={deleteItem(rowMap, item)}
           >
-            <StyledText>즐겨찾기</StyledText>
+            <StyledText>차단</StyledText>
           </TouchableOpacity>
         </RowBack>
       );
     },
-    [go, back, actionButton, deleteButton, closeButton, onPressLeft]
+    [onFavorites, deleteItem, onPress, actionButton, deleteButton, closeButton]
   );
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
@@ -221,8 +182,6 @@ const Users = () => {
     return <StyledText>{section.title}</StyledText>;
   }, []);
 
-  // const renderSectionHeader = ({ section }) => <Text>{section.title}</Text>;
-
   return (
     <SafeAreaContainer>
       <Header
@@ -234,7 +193,14 @@ const Users = () => {
       />
 
       <ProfileContainer>
-        <UserCard name={MYPROFILE.name} imageUrl={MYPROFILE.image_url} />
+        <UserCard
+          name={myProfile.name}
+          isBold
+          imageUrl={myProfile.image_url}
+          avatarWidth={60}
+          avatarHeight={60}
+          avatarRadius={20}
+        />
       </ProfileContainer>
 
       <Container>
@@ -245,7 +211,6 @@ const Users = () => {
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
-          onRowDidOpen={onItemOpen}
           stopLeftSwipe={75}
           leftOpenValue={75}
           stopRightSwipe={-150}

@@ -4,34 +4,57 @@ import { FC, memo, useCallback } from 'react';
 import StyledText from './StyledText';
 
 const Container = styled.View({
-  width: '100%',
   flexDirection: 'row',
   alignItems: 'center',
-  paddingHorizontal: 15,
-  paddingVertical: 15,
 });
 
-const Avatar = styled.Image(() => ({
-  width: 50,
-  height: 50,
-  borderRadius: 17,
-  backgroundColor: 'blue',
-}));
+interface IAvatar {
+  avatarWidth: number;
+  avatarHeight: number;
+  avatarRadius: number;
+}
+
+const Avatar = styled.Image<IAvatar>(
+  ({ avatarWidth, avatarHeight, avatarRadius }) => ({
+    width: avatarWidth,
+    height: avatarHeight,
+    borderRadius: avatarRadius,
+    backgroundColor: 'blue',
+  })
+);
 
 interface IUserCard {
   name: string;
+  isBold: boolean;
   imageUrl: string;
+  avatarWidth: number;
+  avatarHeight: number;
+  avatarRadius: number;
 }
 
-const UserCard: FC<IUserCard> = ({ name, imageUrl }) => {
+const UserCard: FC<IUserCard> = ({
+  name,
+  isBold,
+  imageUrl,
+  avatarWidth,
+  avatarHeight,
+  avatarRadius,
+}) => {
   const source = useCallback((imageUri: string) => {
     return { uri: imageUri };
   }, []);
 
   return (
     <Container>
-      <Avatar source={source(imageUrl)} />
-      <StyledText paddingLeft={10}>{name}</StyledText>
+      <Avatar
+        source={source(imageUrl)}
+        avatarWidth={avatarWidth}
+        avatarHeight={avatarHeight}
+        avatarRadius={avatarRadius}
+      />
+      <StyledText paddingLeft={10} isBold={isBold}>
+        {name}
+      </StyledText>
     </Container>
   );
 };

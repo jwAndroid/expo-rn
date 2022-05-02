@@ -39,6 +39,7 @@
     "global-require": "off",
     "react/no-unstable-nested-components": "off",
     "react/require-default-props": "off",
-    "array-callback-return": "off"
+    "array-callback-return": "off",
+    "consistent-return": "off"
   }
 }

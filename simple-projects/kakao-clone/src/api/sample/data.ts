@@ -54,7 +54,13 @@ export const SampleData = [
 //     ],
 //   }));
 
-export const SampleSectionData = [
+export const myProfile = {
+  id: 950117,
+  name: '지웅',
+  image_url: 'https://avatars.githubusercontent.com/u/67754570?v=4',
+};
+
+export const sampleSectionData = [
   {
     data: [
       { id: 0, name: '나리', image_url: 'url1', section: 0 },

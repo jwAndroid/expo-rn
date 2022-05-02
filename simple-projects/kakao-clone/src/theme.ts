@@ -9,6 +9,8 @@ export const icon = {
   chat: require('../assets/icons/chat.png'),
   chatfill: require('../assets/icons/chatfill.png'),
   chatplus: require('../assets/icons/chatplus.png'),
+  favorites: require('../assets/icons/favorites.png'),
+  favoritesfill: require('../assets/icons/favoritesfill.png'),
   headersetting: require('../assets/icons/headersetting.png'),
   kakao: require('../assets/icons/kakao.png'),
   music: require('../assets/icons/music.png'),
