@@ -17,3 +17,15 @@ export interface BannerEntity {
   status: boolean;
   image_url: string;
 }
+
+export interface RoomEntity {
+  roomId: number;
+  lastMessage: string;
+  lastUpdateOn: string;
+  chatCount: number;
+  isRead: boolean;
+  isPin: boolean;
+  isAlram: boolean;
+  isChatLook: boolean;
+  user: UserEntity;
+}
