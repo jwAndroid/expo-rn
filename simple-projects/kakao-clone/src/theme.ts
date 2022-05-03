@@ -15,6 +15,7 @@ export const icon = {
   kakao: require('../assets/icons/kakao.png'),
   music: require('../assets/icons/music.png'),
   playbutton: require('../assets/icons/playbutton.png'),
+  samplebanner: require('../assets/icons/samplebanner.png'),
   search: require('../assets/icons/search.png'),
   settings: require('../assets/icons/settings.png'),
   settingsfill: require('../assets/icons/settingsfill.png'),

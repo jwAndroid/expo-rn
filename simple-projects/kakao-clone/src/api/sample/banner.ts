@@ -1,4 +1,4 @@
-export const banner = {
+export const bannerData = {
   id: 1,
   status: true,
   image_url:
