@@ -11,3 +11,9 @@ export interface IUser {
   title: string;
   data: UserEntity[];
 }
+
+export interface BannerEntity {
+  id: number;
+  status: boolean;
+  image_url: string;
+}

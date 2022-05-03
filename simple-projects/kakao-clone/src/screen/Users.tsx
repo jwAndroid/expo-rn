@@ -3,9 +3,7 @@ import {
   ListRenderItem,
   Pressable,
   StyleProp,
-  TouchableHighlight,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   ViewStyle,
 } from 'react-native';
 import styled from '@emotion/native';
