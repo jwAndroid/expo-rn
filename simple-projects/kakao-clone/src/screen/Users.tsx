@@ -1,9 +1,11 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import {
   ListRenderItem,
+  Pressable,
   StyleProp,
   TouchableHighlight,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   ViewStyle,
 } from 'react-native';
 import styled from '@emotion/native';
@@ -45,7 +47,6 @@ const RowBack = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
   paddingLeft: 5,
-  backgroundColor: '#fff',
 });
 
 const FavoritesIcon = styled.Image(({ theme }) => ({
@@ -188,7 +189,7 @@ const Users = () => {
 
           <TouchableOpacity
             style={[ActionButton, HidingButton]}
-            onPress={deleteItem(rowMap, item.id)}
+            onPress={deleteItem(rowMap, item)}
           >
             <StyledText color={theme.color.white} fontSize={14}>
               숨김
@@ -217,11 +218,18 @@ const Users = () => {
     ]
   );
 
+  const onPressChip = useCallback(
+    (item: UserEntity) => () => {
+      console.log(item);
+    },
+    []
+  );
+
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
     ({ item }) => {
       console.log(item.image_url);
       return (
-        <TouchableHighlight onPress={onPressItem(item)} style={Row}>
+        <Pressable onPress={onPressItem(item)} style={Row}>
           <UserCard
             name={item.name}
             introduction={item.introduction}
@@ -233,11 +241,12 @@ const Users = () => {
             avatarHeight={50}
             avatarRadius={18}
             music={item.music}
+            onPressChip={onPressChip(item)}
           />
-        </TouchableHighlight>
+        </Pressable>
       );
     },
-    [onPressItem, Row]
+    [onPressItem, onPressChip, Row]
   );
 
   const renderSectionHeader = useCallback(

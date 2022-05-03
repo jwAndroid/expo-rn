@@ -95,6 +95,7 @@ const UserCard: FC<IUserCard> = ({
         avatarWidth={avatarWidth}
         avatarHeight={avatarHeight}
         avatarRadius={avatarRadius}
+        resizeMode="cover"
       />
       <ContentsContainer>
         <StyledText
