@@ -21,15 +21,19 @@ declare module '@emotion/react' {
       thickBlack: string;
       black: string;
       gray: string;
+      thickGray: string;
       red: string;
       blue: string;
+      thickBlue: string;
       yellow: string;
+      orange: string;
       dynamic: {
         inActive: string;
         active: string;
         focus: string;
         blur: string;
       };
+      subtitle: string;
     };
     constants: {
       header: number;

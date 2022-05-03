@@ -19,12 +19,12 @@ const Avatar = styled.Image<IAvatar>(
     width: avatarWidth,
     height: avatarHeight,
     borderRadius: avatarRadius,
-    backgroundColor: 'blue',
   })
 );
 
 interface IUserCard {
   name: string;
+  fontSize?: number;
   isBold: boolean;
   imageUrl: string;
   avatarWidth: number;
@@ -34,6 +34,7 @@ interface IUserCard {
 
 const UserCard: FC<IUserCard> = ({
   name,
+  fontSize,
   isBold,
   imageUrl,
   avatarWidth,
@@ -52,7 +53,7 @@ const UserCard: FC<IUserCard> = ({
         avatarHeight={avatarHeight}
         avatarRadius={avatarRadius}
       />
-      <StyledText paddingLeft={10} isBold={isBold}>
+      <StyledText fontSize={fontSize} isBold={isBold} paddingLeft={10}>
         {name}
       </StyledText>
     </Container>

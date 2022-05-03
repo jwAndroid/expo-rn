@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { FC, memo, ReactNode } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -6,7 +7,13 @@ interface ISafeAreaContainer {
 }
 
 const SafeAreaContainer: FC<ISafeAreaContainer> = ({ children }) => {
-  return <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>;
+  const theme = useTheme();
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.color.white }}>
+      {children}
+    </SafeAreaView>
+  );
 };
 
 export default memo(SafeAreaContainer);

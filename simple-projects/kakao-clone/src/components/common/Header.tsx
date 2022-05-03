@@ -35,6 +35,7 @@ const Icon = styled.Image({
 
 interface IHeader {
   title: ReactNode;
+  fontSize?: number;
   one?: ImageSourcePropType;
   oneOnPress?: ((event: GestureResponderEvent) => void) | undefined;
   two?: ImageSourcePropType;
@@ -47,6 +48,7 @@ interface IHeader {
 
 const Header: FC<IHeader> = ({
   title,
+  fontSize,
   one,
   oneOnPress,
   two,
@@ -59,7 +61,7 @@ const Header: FC<IHeader> = ({
   return (
     <Container>
       <TitleContainer>
-        <StyledText fontSize={20} isBold>
+        <StyledText fontSize={fontSize} isBold>
           {title}
         </StyledText>
       </TitleContainer>

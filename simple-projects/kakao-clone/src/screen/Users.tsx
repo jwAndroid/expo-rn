@@ -2,7 +2,6 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import {
   ListRenderItem,
   StyleProp,
-  Text,
   TouchableHighlight,
   TouchableOpacity,
   ViewStyle,
@@ -21,12 +20,18 @@ const Container = styled.View(() => ({
   flex: 1,
 }));
 
-const SectionHeaderContainer = styled.View({
-  width: '100%',
-  flexDirection: 'row',
-  paddingHorizontal: 15,
-  paddingVertical: 15,
-});
+interface ISectionHeaderContainer {
+  isFlexDirection?: boolean;
+}
+
+const SectionHeaderContainer = styled.View<ISectionHeaderContainer>(
+  ({ isFlexDirection }) => ({
+    width: '100%',
+    flexDirection: isFlexDirection ? 'row' : undefined,
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+  })
+);
 
 const ProfileContainer = styled.View(() => ({
   width: '100%',
@@ -43,26 +48,43 @@ const RowBack = styled.View({
   backgroundColor: '#fff',
 });
 
+const FavoritesIcon = styled.Image(({ theme }) => ({
+  width: 20,
+  height: 20,
+  tintColor: theme.color.white,
+}));
+
 const Users = () => {
   const theme = useTheme();
   const [listData, setListData] = useState<IUser[]>(sampleSectionData);
 
-  const rowFront = useMemo<StyleProp<ViewStyle>>(
+  const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({
       height: 60,
-      alignItems: 'center',
+      paddingHorizontal: 15,
       justifyContent: 'center',
-      borderColor: theme.color.black,
-      borderWidth: 3,
-      backgroundColor: theme.color.gray,
+      backgroundColor: theme.color.white,
     }),
     [theme]
   );
 
-  const actionButton = useMemo<StyleProp<ViewStyle>>(
+  const FavoritesButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       bottom: 0,
       position: 'absolute',
+      top: 0,
+      width: 75,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: theme.color.thickBlue,
+    }),
+    [theme]
+  );
+
+  const ActionButton = useMemo<StyleProp<ViewStyle>>(
+    () => ({
+      position: 'absolute',
+      bottom: 0,
       top: 0,
       width: 75,
       alignItems: 'center',
@@ -71,20 +93,20 @@ const Users = () => {
     []
   );
 
-  const closeButton = useMemo<StyleProp<ViewStyle>>(
+  const HidingButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
       right: 75,
-      backgroundColor: 'blue',
+      backgroundColor: theme.color.thickGray,
     }),
-    []
+    [theme]
   );
 
-  const deleteButton = useMemo<StyleProp<ViewStyle>>(
+  const BlockButton = useMemo<StyleProp<ViewStyle>>(
     () => ({
-      backgroundColor: 'red',
       right: 0,
+      backgroundColor: theme.color.orange,
     }),
-    []
+    [theme]
   );
 
   const friendCount = useMemo(
@@ -144,84 +166,114 @@ const Users = () => {
     []
   );
 
-  const onPress = useCallback(
-    (rowMap, rowKey) => () => {
-      rowMap[rowKey].closeRow();
-    },
-    []
-  );
-
   const renderHiddenItem = useCallback(
     ({ item }, rowMap) => {
       return (
         <RowBack>
           {item.section === 0 ? (
-            <Text onPress={onFavorites(item)}>즐찾</Text>
+            <TouchableOpacity
+              style={FavoritesButton}
+              onPress={onFavorites(item)}
+            >
+              <FavoritesIcon source={theme.icon.favoritesfill} />
+            </TouchableOpacity>
           ) : (
-            <Text onPress={onFavorites(item)}>즐겨찾기</Text>
+            <TouchableOpacity
+              style={FavoritesButton}
+              onPress={onFavorites(item)}
+            >
+              <FavoritesIcon source={theme.icon.favorites} />
+            </TouchableOpacity>
           )}
 
           <TouchableOpacity
-            style={[actionButton, closeButton]}
-            onPress={onPress(rowMap, item.id)}
+            style={[ActionButton, HidingButton]}
+            onPress={deleteItem(rowMap, item.id)}
           >
-            <StyledText>숨김</StyledText>
+            <StyledText color={theme.color.white} fontSize={14}>
+              숨김
+            </StyledText>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[actionButton, deleteButton]}
+            style={[ActionButton, BlockButton]}
             onPress={deleteItem(rowMap, item)}
           >
-            <StyledText>차단</StyledText>
+            <StyledText color={theme.color.white} fontSize={14}>
+              차단
+            </StyledText>
           </TouchableOpacity>
         </RowBack>
       );
     },
-    [onFavorites, deleteItem, onPress, actionButton, deleteButton, closeButton]
+    [
+      onFavorites,
+      deleteItem,
+      FavoritesButton,
+      HidingButton,
+      ActionButton,
+      BlockButton,
+      theme,
+    ]
   );
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
     ({ item }) => {
+      console.log(item.image_url);
       return (
-        <TouchableHighlight onPress={onPressItem(item)} style={rowFront}>
-          <StyledText>{item.name}</StyledText>
+        <TouchableHighlight onPress={onPressItem(item)} style={Row}>
+          <UserCard
+            name={item.name}
+            isBold={false}
+            imageUrl={item.image_url}
+            avatarWidth={50}
+            avatarHeight={50}
+            avatarRadius={18}
+          />
         </TouchableHighlight>
       );
     },
-    [onPressItem, rowFront]
+    [onPressItem, Row]
   );
 
   const renderSectionHeader = useCallback(
     ({ section }) => {
-      if (section.title === '친구') {
+      if (section.title === '즐겨찾기') {
         return (
           <SectionHeaderContainer>
-            <StyledText>{section.title}</StyledText>
-            <StyledText paddingLeft={5}>{friendCount}</StyledText>
+            <StyledText fontSize={13} color={theme.color.subtitle}>
+              {section.title}
+            </StyledText>
           </SectionHeaderContainer>
         );
       }
 
-      if (section.title === '즐겨찾기') {
-        return <StyledText>{section.title}</StyledText>;
+      if (section.title === '친구') {
+        return (
+          <SectionHeaderContainer isFlexDirection>
+            <StyledText fontSize={13} color={theme.color.subtitle}>
+              {section.title}
+            </StyledText>
+            <StyledText
+              fontSize={13}
+              color={theme.color.subtitle}
+              paddingLeft={5}
+            >
+              {friendCount}
+            </StyledText>
+          </SectionHeaderContainer>
+        );
       }
     },
-    [friendCount]
+    [friendCount, theme]
   );
 
-  return (
-    <SafeAreaContainer>
-      <Header
-        title="친구"
-        one={theme.icon.search}
-        two={theme.icon.users}
-        three={theme.icon.music}
-        four={theme.icon.headersetting}
-      />
-
+  const listHeaderComponent = useCallback(() => {
+    return (
       <ProfileContainer>
         <UserCard
           name={myProfile.name}
+          fontSize={18}
           isBold
           imageUrl={myProfile.image_url}
           avatarWidth={60}
@@ -229,12 +281,27 @@ const Users = () => {
           avatarRadius={22}
         />
       </ProfileContainer>
+    );
+  }, []);
+
+  return (
+    <SafeAreaContainer>
+      <Header
+        title="친구"
+        fontSize={24}
+        one={theme.icon.search}
+        two={theme.icon.users}
+        three={theme.icon.music}
+        four={theme.icon.headersetting}
+      />
 
       <Container>
         <SwipeListView
           useSectionList
           sections={listData}
           renderSectionHeader={renderSectionHeader}
+          stickySectionHeadersEnabled={false}
+          ListHeaderComponent={listHeaderComponent}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
@@ -242,8 +309,6 @@ const Users = () => {
           leftOpenValue={75}
           stopRightSwipe={-150}
           rightOpenValue={-150}
-          previewRowKey="0"
-          previewOpenValue={-40}
           previewOpenDelay={3000}
         />
       </Container>
