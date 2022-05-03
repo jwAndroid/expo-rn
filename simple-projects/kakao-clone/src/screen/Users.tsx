@@ -47,6 +47,11 @@ const RowBack = styled.View({
   paddingLeft: 5,
 });
 
+const Footer = styled.View({
+  width: '100%',
+  height: 30,
+});
+
 const FavoritesIcon = styled.Image(({ theme }) => ({
   width: 20,
   height: 20,
@@ -295,6 +300,10 @@ const Users = () => {
     );
   }, []);
 
+  const listFooterComponent = useCallback(() => {
+    return <Footer />;
+  }, []);
+
   return (
     <SafeAreaContainer>
       <Header
@@ -313,6 +322,7 @@ const Users = () => {
           renderSectionHeader={renderSectionHeader}
           stickySectionHeadersEnabled={false}
           ListHeaderComponent={listHeaderComponent}
+          ListFooterComponent={listFooterComponent}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
