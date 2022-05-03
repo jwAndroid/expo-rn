@@ -14,6 +14,7 @@ export const icon = {
   headersetting: require('../assets/icons/headersetting.png'),
   kakao: require('../assets/icons/kakao.png'),
   music: require('../assets/icons/music.png'),
+  playbutton: require('../assets/icons/playbutton.png'),
   search: require('../assets/icons/search.png'),
   settings: require('../assets/icons/settings.png'),
   settingsfill: require('../assets/icons/settingsfill.png'),
@@ -30,7 +31,7 @@ export const lightTheme: Theme = {
     YoonGothicBold: 'YoonGothicBold',
     YoonGothicRegular: 'YoonGothicRegular',
   },
-  text: '#303030',
+  text: '#1B1B1B',
   background: '#ffffff',
   itemBackground: '#f0f0f0',
   color: {
@@ -39,6 +40,7 @@ export const lightTheme: Theme = {
     thickBlack: '#D7D7D7',
     black: '#000000',
     gray: '#808080',
+    green: '#7DB379',
     thickGray: '#71757E',
     red: '#FF0000',
     blue: '#0000FF',
@@ -52,6 +54,7 @@ export const lightTheme: Theme = {
       blur: '#303030',
     },
     subtitle: '#848484',
+    subText: '#C5C5C5',
   },
   constants: {
     header: 56,

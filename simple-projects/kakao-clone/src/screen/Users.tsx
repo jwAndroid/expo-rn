@@ -224,11 +224,15 @@ const Users = () => {
         <TouchableHighlight onPress={onPressItem(item)} style={Row}>
           <UserCard
             name={item.name}
+            introduction={item.introduction}
+            fontSize={17}
+            introductionSize={12}
             isBold={false}
             imageUrl={item.image_url}
             avatarWidth={50}
             avatarHeight={50}
             avatarRadius={18}
+            music={item.music}
           />
         </TouchableHighlight>
       );

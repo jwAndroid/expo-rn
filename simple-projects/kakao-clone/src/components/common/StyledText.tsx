@@ -6,11 +6,24 @@ interface IEmotionText {
   fontSize: number;
   paddingLeft: number;
   paddingRight: number;
+  paddingTop: number;
+  paddingBottom: number;
+  marginBottom: number;
   isBold: boolean;
 }
 
 const EmotionText = styled.Text<IEmotionText>(
-  ({ theme, color, fontSize, paddingLeft, paddingRight, isBold }) => ({
+  ({
+    theme,
+    color,
+    fontSize,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+    paddingBottom,
+    marginBottom,
+    isBold,
+  }) => ({
     fontFamily: isBold
       ? theme.font.YoonGothicBold
       : theme.font.YoonGothicRegular,
@@ -18,6 +31,9 @@ const EmotionText = styled.Text<IEmotionText>(
     color,
     paddingLeft,
     paddingRight,
+    paddingTop,
+    paddingBottom,
+    marginBottom,
     includeFontPadding: false,
   })
 );
@@ -28,6 +44,9 @@ interface IStyledText {
   fontSize?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
+  marginBottom?: number;
   isBold?: boolean;
 }
 
@@ -37,6 +56,9 @@ const StyledText: FC<IStyledText> = ({
   fontSize = 16,
   paddingLeft = 0,
   paddingRight = 0,
+  paddingTop = 0,
+  paddingBottom = 0,
+  marginBottom = 0,
   isBold = false,
 }) => {
   return (
@@ -45,7 +67,12 @@ const StyledText: FC<IStyledText> = ({
       color={color}
       paddingLeft={paddingLeft}
       paddingRight={paddingRight}
+      paddingTop={paddingTop}
+      paddingBottom={paddingBottom}
+      marginBottom={marginBottom}
       isBold={isBold}
+      ellipsizeMode="tail"
+      numberOfLines={1}
     >
       {children}
     </EmotionText>

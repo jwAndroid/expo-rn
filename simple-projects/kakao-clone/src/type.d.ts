@@ -1,15 +1,8 @@
-// export interface UserEntity {
-//   title: string;
-//   data: {
-//     id: number;
-//     name: string;
-//     image_url: string;
-//   };
-// }
-
 export interface UserEntity {
   id: number;
   name: string;
+  introduction: string;
+  music: string;
   image_url: string;
   section: number;
 }

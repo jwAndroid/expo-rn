@@ -21,6 +21,7 @@ declare module '@emotion/react' {
       thickBlack: string;
       black: string;
       gray: string;
+      green: string;
       thickGray: string;
       red: string;
       blue: string;
@@ -34,6 +35,7 @@ declare module '@emotion/react' {
         blur: string;
       };
       subtitle: string;
+      subText: string;
     };
     constants: {
       header: number;
