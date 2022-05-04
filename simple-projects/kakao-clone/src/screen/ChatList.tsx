@@ -14,14 +14,14 @@ import { useTheme } from '@emotion/react';
 import { Banner, Header } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { bannerData } from '../api/sample/banner';
-import { BannerEntity, RoomEntity } from '../type';
+import { RoomEntity } from '../type';
 
 import { roomSampleData } from '../api/sample/roomList';
 
 const BannerContainer = styled.View({
   paddingHorizontal: 15,
   marginTop: 15,
-  marginBottom: 20,
+  marginBottom: 25,
 });
 
 const Container = styled.View({
@@ -119,13 +119,6 @@ const ChatList = () => {
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
 
-  const onPressBanner = useCallback(
-    (item: BannerEntity) => () => {
-      console.log(item);
-    },
-    []
-  );
-
   const renderHiddenItem = useCallback(({ item }, rowMap) => {
     console.log(item, rowMap);
     return (
@@ -172,8 +165,8 @@ const ChatList = () => {
     ({ item }) => {
       console.log(item);
       return (
-        <Pressable onPress={() => console.log('')} style={Row}>
-          <Text>asdf</Text>
+        <Pressable onPress={() => console.log(item)} style={Row}>
+          <Text>{item.lastMessage}</Text>
         </Pressable>
       );
     },
@@ -183,14 +176,10 @@ const ChatList = () => {
   const listHeaderComponent = useCallback(() => {
     return (
       <BannerContainer>
-        <Banner
-          source={theme.icon.samplebanner}
-          onPress={onPressBanner(bannerData)}
-          status={bannerData.status}
-        />
+        <Banner source={theme.icon.samplebanner} status={bannerData.status} />
       </BannerContainer>
     );
-  }, [onPressBanner, theme]);
+  }, [theme]);
 
   const listFooterComponent = useCallback(() => {
     return <Footer />;

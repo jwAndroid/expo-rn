@@ -1,7 +1,7 @@
 export const roomSampleData = [
   {
     roomId: 1,
-    lastMessage: '',
+    lastMessage: 'ㅎㅇㅎㅇ',
     lastUpdateOn: '',
     chatCount: 10,
     isRead: true,
@@ -19,7 +19,7 @@ export const roomSampleData = [
   },
   {
     roomId: 2,
-    lastMessage: '',
+    lastMessage: '안녕',
     lastUpdateOn: '',
     chatCount: 10,
     isRead: true,
@@ -37,7 +37,7 @@ export const roomSampleData = [
   },
   {
     roomId: 3,
-    lastMessage: '',
+    lastMessage: '마지막메세지',
     lastUpdateOn: '',
     chatCount: 10,
     isRead: true,
