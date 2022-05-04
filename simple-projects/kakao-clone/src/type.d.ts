@@ -12,12 +12,6 @@ export interface IUser {
   data: UserEntity[];
 }
 
-export interface BannerEntity {
-  id: number;
-  status: boolean;
-  image_url: string;
-}
-
 export interface RoomEntity {
   roomId: number;
   lastMessage: string;
@@ -28,4 +22,10 @@ export interface RoomEntity {
   isAlram: boolean;
   isChatLook: boolean;
   user: UserEntity;
+}
+
+export interface BannerEntity {
+  id: number;
+  status: boolean;
+  image_url: string;
 }

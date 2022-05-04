@@ -1,4 +1,4 @@
-export const roomList = [
+export const roomSampleData = [
   {
     roomId: 1,
     lastMessage: '',
@@ -14,8 +14,43 @@ export const roomList = [
       introduction: '',
       music: '',
       image_url: 'https://avatars.githubusercontent.com/u/67754570?v=4',
+      section: 0,
     },
   },
-  {},
-  {},
+  {
+    roomId: 2,
+    lastMessage: '',
+    lastUpdateOn: '',
+    chatCount: 10,
+    isRead: true,
+    isPin: true,
+    isAlram: true,
+    isChatLook: true,
+    user: {
+      id: 17,
+      name: '나리',
+      introduction: '',
+      music: '',
+      image_url: 'https://avatars.githubusercontent.com/u/67754570?v=4',
+      section: 0,
+    },
+  },
+  {
+    roomId: 3,
+    lastMessage: '',
+    lastUpdateOn: '',
+    chatCount: 10,
+    isRead: true,
+    isPin: true,
+    isAlram: true,
+    isChatLook: true,
+    user: {
+      id: 99,
+      name: '지호',
+      introduction: '',
+      music: '',
+      image_url: 'https://avatars.githubusercontent.com/u/67754570?v=4',
+      section: 0,
+    },
+  },
 ];

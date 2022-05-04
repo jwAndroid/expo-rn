@@ -40,11 +40,9 @@ const ProfileContainer = styled.View(() => ({
 }));
 
 const RowBack = styled.View({
-  alignItems: 'center',
   flex: 1,
   flexDirection: 'row',
-  justifyContent: 'space-between',
-  paddingLeft: 5,
+  alignItems: 'center',
 });
 
 const Footer = styled.View({
@@ -230,7 +228,6 @@ const Users = () => {
 
   const renderItem = useCallback<ListRenderItem<UserEntity>>(
     ({ item }) => {
-      console.log(item.image_url);
       return (
         <Pressable onPress={onPressItem(item)} style={Row}>
           <UserCard
