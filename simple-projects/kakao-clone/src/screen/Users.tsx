@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
+import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Header, StyledText, UserCard } from '../components/common';
@@ -59,6 +60,10 @@ const FavoritesIcon = styled.Image(({ theme }) => ({
 const Users = () => {
   const theme = useTheme();
   const [listData, setListData] = useState<IUser[]>(sampleSectionData);
+
+  useFocusEffect(() => {
+    console.log('User screen');
+  });
 
   const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({

@@ -8,9 +8,10 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { SwipeListView } from 'react-native-swipe-list-view';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
+import { useFocusEffect } from '@react-navigation/native';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Banner, Header } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
@@ -44,6 +45,10 @@ const ChatList = () => {
   const theme = useTheme();
 
   const [roomData, setRoomData] = useState<RoomEntity[]>(roomSampleData);
+
+  useFocusEffect(() => {
+    console.log('ChatList screen');
+  });
 
   const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({
