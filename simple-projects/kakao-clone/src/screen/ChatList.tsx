@@ -5,7 +5,6 @@ import {
   StyleProp,
   Text,
   TouchableOpacity,
-  View,
   ViewStyle,
 } from 'react-native';
 import styled from '@emotion/native';
@@ -13,7 +12,7 @@ import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { Banner, Header } from '../components/common';
+import { Banner, Header, RoomItem } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { bannerData } from '../api/sample/banner';
 import { RoomEntity } from '../type';
@@ -22,13 +21,7 @@ import { roomSampleData } from '../api/sample/roomList';
 
 const BannerContainer = styled.View({
   paddingHorizontal: 15,
-  marginTop: 15,
-  marginBottom: 25,
-});
-
-const Container = styled.View({
-  flex: 1,
-  backgroundColor: 'orange',
+  marginBottom: 20,
 });
 
 const RowBack = styled.View({
@@ -55,6 +48,7 @@ const ChatList = () => {
       height: 60,
       justifyContent: 'center',
       backgroundColor: theme.color.white,
+      paddingVertical: 8,
     }),
     [theme]
   );
@@ -253,9 +247,15 @@ const ChatList = () => {
     ({ item }) => {
       return (
         <Pressable onPress={() => console.log('')} style={Row}>
-          <View style={{ padding: 10 }}>
-            <Text>{item.user.name}</Text>
-          </View>
+          <RoomItem
+            avatar={{ uri: item.user.image_url }}
+            isLock={item.isChatLook}
+            isPin={item.isPin}
+            isUnNotification={item.isAlram}
+            lastMessage={item.lastMessage}
+            lastUpdateOn={item.lastUpdateOn}
+            title={item.user.name}
+          />
         </Pressable>
       );
     },
@@ -285,21 +285,19 @@ const ChatList = () => {
         four={theme.icon.headersetting}
       />
 
-      <Container>
-        <SwipeListView
-          data={roomData}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          renderHiddenItem={renderHiddenItem}
-          ListHeaderComponent={listHeaderComponent}
-          ListFooterComponent={listFooterComponent}
-          leftOpenValue={225}
-          stopLeftSwipe={225}
-          stopRightSwipe={-150}
-          rightOpenValue={-150}
-          previewOpenDelay={3000}
-        />
-      </Container>
+      <SwipeListView
+        data={roomData}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        renderHiddenItem={renderHiddenItem}
+        ListHeaderComponent={listHeaderComponent}
+        ListFooterComponent={listFooterComponent}
+        leftOpenValue={225}
+        stopLeftSwipe={225}
+        stopRightSwipe={-150}
+        rightOpenValue={-150}
+        previewOpenDelay={3000}
+      />
     </SafeAreaContainer>
   );
 };
