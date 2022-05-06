@@ -15,7 +15,7 @@ export interface IUser {
 export interface RoomEntity {
   roomId: number;
   lastMessage: string;
-  lastUpdateOn: string;
+  lastUpdateOn: number;
   chatCount: number;
   isFavorites: boolean;
   isRead: boolean;

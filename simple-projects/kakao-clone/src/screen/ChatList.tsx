@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ListRenderItem,
   Pressable,
@@ -11,6 +11,7 @@ import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import moment from 'moment';
 
 import { Banner, Header, RoomItem } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
@@ -37,10 +38,21 @@ const Footer = styled.View({
 const ChatList = () => {
   const theme = useTheme();
 
-  const [roomData, setRoomData] = useState<RoomEntity[]>(roomSampleData);
+  const [roomData, setRoomData] = useState<RoomEntity[]>([]);
+
+  useEffect(() => {
+    const orderedList = roomSampleData.sort((a, b): number => {
+      return b.lastUpdateOn - a.lastUpdateOn;
+    });
+
+    setRoomData(orderedList);
+  }, []);
 
   useFocusEffect(() => {
-    console.log('ChatList screen');
+    const now = Date.now(); // 오늘 타임스탬프
+    const nowTime = moment(1651355793438).format('YYYY-MM-DD'); // 모맨트->변환
+
+    // console.log(nowTime);
   });
 
   const Row = useMemo<StyleProp<ViewStyle>>(

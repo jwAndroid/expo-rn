@@ -1,7 +1,8 @@
-import { FC, memo } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { ImageSourcePropType } from 'react-native';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
+import moment from 'moment';
 
 import StyledText from './StyledText';
 
@@ -48,7 +49,7 @@ interface IRoomItem {
   isPin: boolean;
   isUnNotification: boolean;
   isLock: boolean;
-  lastUpdateOn: string;
+  lastUpdateOn: number;
 }
 
 const RoomItem: FC<IRoomItem> = ({
@@ -61,6 +62,13 @@ const RoomItem: FC<IRoomItem> = ({
   lastUpdateOn,
 }) => {
   const theme = useTheme();
+
+  const now = Date.now();
+
+  const getNow = moment(Date.now()).format('YYYY-MM-DD');
+  const getDate = moment(lastUpdateOn).format('YYYY-MM-DD');
+
+  console.log();
 
   return (
     <Container>
@@ -84,7 +92,11 @@ const RoomItem: FC<IRoomItem> = ({
 
       <DateContainer>
         <StyledText fontSize={10} color={theme.color.thickGray}>
-          {lastUpdateOn}
+          {moment(moment(Date.now()).format('YYYY-MM-DD')).isSame(
+            moment(lastUpdateOn).format('YYYY-MM-DD')
+          )
+            ? moment(lastUpdateOn).locale('ko').format('A HH:mm')
+            : moment(lastUpdateOn).format('M월 DD일')}
         </StyledText>
       </DateContainer>
     </Container>

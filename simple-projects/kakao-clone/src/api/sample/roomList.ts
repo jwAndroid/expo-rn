@@ -1,8 +1,12 @@
+// 05월01일 타임스탬프 1651355793438
+// 05월03일 타임스탬프 1651528743382
+// 05월07일 타임스탬프 1651874164128
+
 export const roomSampleData = [
   {
     roomId: 1,
     lastMessage: 'ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ',
-    lastUpdateOn: '5월 7일',
+    lastUpdateOn: 1651355793438,
     chatCount: 10,
     isFavorites: false,
     isRead: false,
@@ -22,7 +26,7 @@ export const roomSampleData = [
   {
     roomId: 2,
     lastMessage: '리액트 네이티브 카카오톡 클론 만들기~~~~~',
-    lastUpdateOn: '어제',
+    lastUpdateOn: 1651874164128,
     chatCount: 10,
     isFavorites: false,
     isRead: true,
@@ -42,7 +46,7 @@ export const roomSampleData = [
   {
     roomId: 3,
     lastMessage: '오늘은 코딩하자',
-    lastUpdateOn: '4월 27일',
+    lastUpdateOn: 1651528743382,
     chatCount: 10,
     isFavorites: false,
     isRead: true,
