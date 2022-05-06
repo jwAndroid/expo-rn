@@ -1,5 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import {
+  Linking,
   ListRenderItem,
   Pressable,
   StyleProp,
@@ -47,9 +48,7 @@ const ChatList = () => {
     setRoomData(orderedList);
   }, []);
 
-  useFocusEffect(() => {
-    console.log('ChatList');
-  });
+  useFocusEffect(() => {});
 
   const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({
@@ -270,13 +269,21 @@ const ChatList = () => {
     [Row]
   );
 
+  const onPressBanner = useCallback(async () => {
+    Linking.openURL('https://tv.kakao.com/channel/3643851/info');
+  }, []);
+
   const listHeaderComponent = useCallback(() => {
     return (
       <BannerContainer>
-        <Banner source={theme.icon.samplebanner} status={bannerData.status} />
+        <Banner
+          source={theme.icon.samplebanner}
+          status={bannerData.status}
+          onPress={onPressBanner}
+        />
       </BannerContainer>
     );
-  }, [theme]);
+  }, [onPressBanner, theme]);
 
   const listFooterComponent = useCallback(() => {
     return <Footer />;

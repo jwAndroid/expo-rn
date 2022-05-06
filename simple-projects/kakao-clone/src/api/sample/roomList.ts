@@ -2,7 +2,7 @@ export const roomSampleData = [
   {
     roomId: 1,
     lastMessage: 'ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ',
-    lastUpdateOn: 1651355793438,
+    lastUpdateOn: 1651534168607,
     chatCount: 10,
     isFavorites: false,
     isRead: false,
@@ -22,7 +22,7 @@ export const roomSampleData = [
   {
     roomId: 2,
     lastMessage: '리액트 네이티브 카카오톡 클론 만들기~~~~~',
-    lastUpdateOn: 1651874164128,
+    lastUpdateOn: 1651620579449,
     chatCount: 10,
     isFavorites: false,
     isRead: true,
@@ -42,7 +42,7 @@ export const roomSampleData = [
   {
     roomId: 3,
     lastMessage: '오늘은 코딩하자',
-    lastUpdateOn: 1651528743382,
+    lastUpdateOn: 1651706990231,
     chatCount: 10,
     isFavorites: false,
     isRead: true,
@@ -52,6 +52,46 @@ export const roomSampleData = [
     user: {
       id: 99,
       name: '지호',
+      introduction: '',
+      music: '',
+      image_url:
+        'https://mblogthumb-phinf.pstatic.net/MjAyMTAzMDhfMjIy/MDAxNjE1MTg3MTQxMDIz.weRl0_E89fxb-Hr_htbmKmlJkAv3mhtUYSBlD7k5iPUg.YZ3jFh50iqZEjCTdpupUcecyLb6JnrSI1A4Euz1l2agg.JPEG.aksen244/Twitter.jpg?type=w800',
+      section: 0,
+    },
+  },
+  {
+    roomId: 4,
+    lastMessage: '어제어제어제~~~~~',
+    lastUpdateOn: 1651793402163,
+    chatCount: 10,
+    isFavorites: false,
+    isRead: true,
+    isPin: false,
+    isAlram: false,
+    isChatLook: true,
+    user: {
+      id: 107,
+      name: '웅쓰',
+      introduction: '',
+      music: '',
+      image_url:
+        'https://mblogthumb-phinf.pstatic.net/MjAyMTAzMDhfMjIy/MDAxNjE1MTg3MTQxMDIz.weRl0_E89fxb-Hr_htbmKmlJkAv3mhtUYSBlD7k5iPUg.YZ3jFh50iqZEjCTdpupUcecyLb6JnrSI1A4Euz1l2agg.JPEG.aksen244/Twitter.jpg?type=w800',
+      section: 0,
+    },
+  },
+  {
+    roomId: 5,
+    lastMessage: 'asdfasdfgasegsaegasegaseg',
+    lastUpdateOn: 1651879829380,
+    chatCount: 10,
+    isFavorites: false,
+    isRead: true,
+    isPin: false,
+    isAlram: false,
+    isChatLook: true,
+    user: {
+      id: 109,
+      name: '보라돌이',
       introduction: '',
       music: '',
       image_url:
