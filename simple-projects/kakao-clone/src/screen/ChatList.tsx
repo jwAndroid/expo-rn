@@ -11,7 +11,6 @@ import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import moment from 'moment';
 
 import { Banner, Header, RoomItem } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
@@ -49,10 +48,7 @@ const ChatList = () => {
   }, []);
 
   useFocusEffect(() => {
-    const now = Date.now(); // 오늘 타임스탬프
-    const nowTime = moment(1651355793438).format('YYYY-MM-DD'); // 모맨트->변환
-
-    // console.log(nowTime);
+    console.log('ChatList');
   });
 
   const Row = useMemo<StyleProp<ViewStyle>>(

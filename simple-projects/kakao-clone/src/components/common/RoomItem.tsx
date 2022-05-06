@@ -1,4 +1,4 @@
-import { FC, memo, useEffect } from 'react';
+import { FC, memo } from 'react';
 import { ImageSourcePropType } from 'react-native';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
@@ -62,13 +62,6 @@ const RoomItem: FC<IRoomItem> = ({
   lastUpdateOn,
 }) => {
   const theme = useTheme();
-
-  const now = Date.now();
-
-  const getNow = moment(Date.now()).format('YYYY-MM-DD');
-  const getDate = moment(lastUpdateOn).format('YYYY-MM-DD');
-
-  console.log();
 
   return (
     <Container>
