@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import {
   Linking,
   ListRenderItem,
@@ -38,15 +38,19 @@ const Footer = styled.View({
 const ChatList = () => {
   const theme = useTheme();
 
-  const [roomData, setRoomData] = useState<RoomEntity[]>([]);
+  const [roomData, setRoomData] = useState<RoomEntity[]>(roomSampleData);
 
-  useEffect(() => {
-    const orderedList = roomSampleData.sort((a, b): number => {
-      return b.lastUpdateOn - a.lastUpdateOn;
-    });
+  // useEffect(() => {
+  //   roomSampleData.map((item) => {
+  //     if (!item.isPin) {
+  //       const orderedList = roomSampleData.sort((a, b): number => {
+  //         return b.lastUpdateOn - a.lastUpdateOn;
+  //       });
 
-    setRoomData(orderedList);
-  }, []);
+  //       setRoomData(orderedList);
+  //     }
+  //   }, []);
+  // }, []);
 
   useFocusEffect(() => {});
 
@@ -144,16 +148,20 @@ const ChatList = () => {
   );
 
   const onPin = useCallback(
-    (rowMap, { roomId, isPin }) =>
-      () => {
-        rowMap[roomId].closeRow();
+    (rowMap, item) => () => {
+      rowMap[item.roomId].closeRow();
 
-        const updatedPinRooms = roomData.map((room) => {
-          return room.roomId === roomId ? { ...room, isPin: !isPin } : room;
-        }, []);
+      const updatedPinRooms = roomData.map((room) => {
+        return room.roomId === item.roomId
+          ? { ...room, isPin: !item.isPin }
+          : room;
+      }, []);
 
-        setRoomData(updatedPinRooms);
-      },
+      // const del = updatedPinRooms.filter((room) => room.roomId !== item.roomId);
+      // setRoomData([item, ...del]);
+
+      setRoomData(updatedPinRooms);
+    },
     [roomData]
   );
 

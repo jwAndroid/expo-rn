@@ -6,7 +6,7 @@ export const roomSampleData = [
     chatCount: 10,
     isFavorites: false,
     isRead: false,
-    isPin: true,
+    isPin: false,
     isAlram: true,
     isChatLook: false,
     user: {
@@ -46,7 +46,7 @@ export const roomSampleData = [
     chatCount: 10,
     isFavorites: false,
     isRead: true,
-    isPin: false,
+    isPin: true,
     isAlram: false,
     isChatLook: true,
     user: {
@@ -86,7 +86,7 @@ export const roomSampleData = [
     chatCount: 10,
     isFavorites: false,
     isRead: true,
-    isPin: false,
+    isPin: true,
     isAlram: false,
     isChatLook: true,
     user: {
