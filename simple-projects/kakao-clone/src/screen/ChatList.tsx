@@ -367,7 +367,7 @@ const ChatList = () => {
     return <></>;
   }, []);
 
-  return (
+  return !!roomSampleData[0].data.length || !!roomSampleData[1].data.length ? (
     <SafeAreaContainer>
       <Header
         title="채팅"
@@ -395,6 +395,8 @@ const ChatList = () => {
         previewOpenDelay={3000}
       />
     </SafeAreaContainer>
+  ) : (
+    <StyledText>개설된 채팅방이 없습니다</StyledText>
   );
 };
 
