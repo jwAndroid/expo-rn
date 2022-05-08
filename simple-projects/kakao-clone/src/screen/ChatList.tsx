@@ -13,7 +13,7 @@ import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { Banner, Header, RoomItem, StyledText } from '../components/common';
+import { Banner, Header, RoomItem } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { bannerData } from '../api/sample/banner';
 import { IRoom, RoomEntity } from '../type';
@@ -38,9 +38,25 @@ const Footer = styled.View({
 const ChatList = () => {
   const theme = useTheme();
 
-  const [roomData, setRoomData] = useState<IRoom[]>(roomSampleData);
+  const [roomData, setRoomData] = useState<IRoom[]>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const order = roomSampleData.map((item, findIndex) => {
+      if (findIndex === 1) {
+        item.data.sort((a, b): number => {
+          return a.user.name < b.user.name
+            ? -1
+            : a.user.name === b.user.name
+            ? 0
+            : 1;
+        });
+      }
+
+      return item;
+    }, []);
+
+    setRoomData(order);
+  }, []);
 
   useFocusEffect(() => {});
 
