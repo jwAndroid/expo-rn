@@ -51,6 +51,7 @@ export const lightTheme: Theme = {
     green: '#7DB379',
     thickGray: '#71757E',
     red: '#FF0000',
+    thickRed: '#D4684B',
     blue: '#0000FF',
     skyblue: {
       one: '#95BBEC',

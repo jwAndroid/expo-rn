@@ -24,6 +24,7 @@ declare module '@emotion/react' {
       green: string;
       thickGray: string;
       red: string;
+      thickRed: string;
       blue: string;
       skyblue: {
         one: string;

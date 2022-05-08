@@ -38,9 +38,19 @@ const Icon = styled.Image(() => ({
   marginLeft: 5,
 }));
 
-const DateContainer = styled.View({
-  marginTop: 8,
+const SystemContainer = styled.View({
+  alignItems: 'center',
 });
+
+const MessageCount = styled.View(({ theme }) => ({
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 20,
+  height: 20,
+  borderRadius: 10,
+  marginTop: 3,
+  backgroundColor: theme.color.thickRed,
+}));
 
 interface IRoomItem {
   avatar: ImageSourcePropType;
@@ -50,6 +60,7 @@ interface IRoomItem {
   isUnNotification: boolean;
   isLock: boolean;
   lastUpdateOn: number;
+  chatCount: number | null;
 }
 
 const RoomItem: FC<IRoomItem> = ({
@@ -60,6 +71,7 @@ const RoomItem: FC<IRoomItem> = ({
   isUnNotification,
   isLock,
   lastUpdateOn,
+  chatCount,
 }) => {
   const theme = useTheme();
 
@@ -99,16 +111,26 @@ const RoomItem: FC<IRoomItem> = ({
           {isLock && <Icon source={theme.icon.lock} />}
         </TitleIconContainer>
 
-        <StyledText fontSize={12} color={theme.color.thickGray}>
-          {lastMessage}
-        </StyledText>
+        {lastMessage && (
+          <StyledText fontSize={12} color={theme.color.thickGray}>
+            {lastMessage}
+          </StyledText>
+        )}
       </ContentsContainer>
 
-      <DateContainer>
+      <SystemContainer>
         <StyledText fontSize={10} color={theme.color.thickGray}>
           {date()}
         </StyledText>
-      </DateContainer>
+
+        {chatCount && (
+          <MessageCount>
+            <StyledText fontSize={10} color={theme.color.white} isBold>
+              {chatCount}
+            </StyledText>
+          </MessageCount>
+        )}
+      </SystemContainer>
     </Container>
   );
 };

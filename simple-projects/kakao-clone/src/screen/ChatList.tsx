@@ -311,6 +311,7 @@ const ChatList = () => {
             lastMessage={item.lastMessage}
             lastUpdateOn={item.lastUpdateOn}
             title={item.user.name}
+            chatCount={item.chatCount}
           />
         </Pressable>
       );
