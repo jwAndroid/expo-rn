@@ -41,6 +41,8 @@
     "react/require-default-props": "off",
     "array-callback-return": "off",
     "consistent-return": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "no-nested-ternary": "off",
+    "indent": "off"
   }
 }

@@ -1,5 +1,9 @@
 export const roomSampleData = [
   {
+    data: [],
+    title: '즐겨찾기',
+  },
+  {
     data: [
       {
         roomId: 1,
@@ -9,16 +13,16 @@ export const roomSampleData = [
         isFavorites: false,
         isRead: false,
         isPin: false,
-        isAlram: true,
+        isAlram: false,
         isChatLook: false,
         user: {
           id: 950117,
-          name: '지웅',
+          name: '라',
           introduction: '',
           music: '',
           image_url:
             'https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDdfOTgg/MDAxNTgxMDg1NzM0MzM4.zAEKMOTJiC1kziihr5HgN7IXe-r0VH8lniiqyG-Ds-cg.fDeO2lfE7ndU2T95t3OmEyOuQBN3mBQ28yZ6RYWdAVMg.JPEG.7wayjeju/%EB%B0%B0%EC%9A%B0%ED%94%84%EB%A1%9C%ED%95%84%EC%82%AC%EC%A7%84_IMG7116.jpg?type=w800',
-          section: 0,
+          section: 1,
         },
       },
       {
@@ -27,38 +31,33 @@ export const roomSampleData = [
         lastUpdateOn: 1651620579449,
         chatCount: 10,
         isFavorites: false,
-        isRead: true,
+        isRead: false,
         isPin: false,
-        isAlram: true,
-        isChatLook: true,
+        isAlram: false,
+        isChatLook: false,
         user: {
           id: 1,
-          name: '갑수',
+          name: '가',
           introduction: '',
           music: '',
           image_url:
             'https://mblogthumb-phinf.pstatic.net/MjAyMDAyMDdfOTgg/MDAxNTgxMDg1NzM0MzM4.zAEKMOTJiC1kziihr5HgN7IXe-r0VH8lniiqyG-Ds-cg.fDeO2lfE7ndU2T95t3OmEyOuQBN3mBQ28yZ6RYWdAVMg.JPEG.7wayjeju/%EB%B0%B0%EC%9A%B0%ED%94%84%EB%A1%9C%ED%95%84%EC%82%AC%EC%A7%84_IMG7116.jpg?type=w800',
-          section: 0,
+          section: 1,
         },
       },
-    ],
-    title: '즐겨찾기',
-  },
-  {
-    data: [
       {
         roomId: 3,
         lastMessage: 'ㄷ고ㅛㅗㅓㅛㅅㄱ',
         lastUpdateOn: 1651620579449,
         chatCount: 10,
         isFavorites: false,
-        isRead: true,
+        isRead: false,
         isPin: false,
-        isAlram: true,
-        isChatLook: true,
+        isAlram: false,
+        isChatLook: false,
         user: {
           id: 2,
-          name: '구으',
+          name: '다',
           introduction: '',
           music: '',
           image_url:
@@ -72,13 +71,13 @@ export const roomSampleData = [
         lastUpdateOn: 1651620579449,
         chatCount: 10,
         isFavorites: false,
-        isRead: true,
+        isRead: false,
         isPin: false,
-        isAlram: true,
-        isChatLook: true,
+        isAlram: false,
+        isChatLook: false,
         user: {
           id: 3,
-          name: '리라',
+          name: '나',
           introduction: '',
           music: '',
           image_url:
@@ -92,13 +91,13 @@ export const roomSampleData = [
         lastUpdateOn: 1651620579449,
         chatCount: 123,
         isFavorites: false,
-        isRead: true,
+        isRead: false,
         isPin: false,
-        isAlram: true,
-        isChatLook: true,
+        isAlram: false,
+        isChatLook: false,
         user: {
           id: 4,
-          name: '래로',
+          name: '바',
           introduction: '',
           music: '',
           image_url:

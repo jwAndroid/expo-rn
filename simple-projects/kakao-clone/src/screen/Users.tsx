@@ -15,7 +15,6 @@ import { Header, StyledText, UserCard } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { sampleSectionData, myProfile } from '../api/sample/data';
 import { IUser, UserEntity } from '../type';
-import { FAVORITES_SEC_INDEX, FRIEND_SEC_INDEX } from '../constants';
 
 const Container = styled.View(() => ({
   flex: 1,
@@ -116,10 +115,7 @@ const Users = () => {
     [theme]
   );
 
-  const friendCount = useMemo(
-    () => listData[FRIEND_SEC_INDEX].data.length,
-    [listData]
-  );
+  const friendCount = useMemo(() => listData[1].data.length, [listData]);
 
   const keyExtractor = useCallback((item: UserEntity) => `${item.id}`, []);
 
@@ -131,21 +127,18 @@ const Users = () => {
           (item) => item.id === id
         );
 
-        if (section === FRIEND_SEC_INDEX) {
-          newData[section].data[foundIndex].section = FAVORITES_SEC_INDEX;
-          newData[FAVORITES_SEC_INDEX].data.unshift(
-            newData[section].data[foundIndex]
-          );
+        const room = newData[section].data[foundIndex];
+        const list = newData[section].data;
 
-          newData[section].data.splice(foundIndex, 1);
+        if (section === 1) {
+          room.section = 0;
+          newData[0].data.unshift(room);
         } else {
-          newData[section].data[foundIndex].section = FRIEND_SEC_INDEX;
-          newData[FRIEND_SEC_INDEX].data.unshift(
-            newData[section].data[foundIndex]
-          );
-
-          newData[section].data.splice(foundIndex, 1);
+          room.section = 1;
+          newData[1].data.unshift(room);
         }
+
+        list.splice(foundIndex, 1);
 
         setListData(newData);
       },

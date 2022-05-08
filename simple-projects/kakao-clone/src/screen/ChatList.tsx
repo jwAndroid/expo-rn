@@ -40,16 +40,7 @@ const ChatList = () => {
 
   const [roomData, setRoomData] = useState<IRoom[]>(roomSampleData);
 
-  useEffect(() => {
-    // roomSampleData.map((item) => {
-    //   if (!item.isPin) {
-    //     const orderedList = roomSampleData.sort((a, b): number => {
-    //       return b.lastUpdateOn - a.lastUpdateOn;
-    //     });
-    //     setRoomData(orderedList);
-    //   }
-    // }, []);
-  }, []);
+  useEffect(() => {}, []);
 
   useFocusEffect(() => {});
 
@@ -135,21 +126,6 @@ const ChatList = () => {
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
 
-  // const onLeaveRoom = useCallback(
-  //   (rowMap, { data }) =>
-  //     () => {
-  //       // rowMap[data[0].roomId].closeRow();
-  //       // if (data[0]) {
-  //       //   const updateLeaveRoom = roomData.filter(
-  //       //     (room) => room.data[0].roomId !== data[0].roomId,
-  //       //     []
-  //       //   );
-  //       //   setRoomData(updateLeaveRoom);
-  //       // }
-  //     },
-  //   []
-  // );
-
   const onLeaveRoom = useCallback(
     (rowMap, { roomId, user }) =>
       () => {
@@ -184,51 +160,78 @@ const ChatList = () => {
         } else {
           room.user.section = 1;
           newData[1].data.unshift(room);
+
+          newData[1].data.sort((a, b): number => {
+            return a.user.name < b.user.name
+              ? -1
+              : a.user.name === b.user.name
+              ? 0
+              : 1;
+          });
         }
 
         list.splice(foundIndex, 1);
-
         setRoomData(newData);
       },
     [roomData]
   );
 
   const onAlram = useCallback(
-    (rowMap, { roomId, isAlram }) =>
+    (rowMap, { roomId, isAlram, user }) =>
       () => {
-        // rowMap[roomId].closeRow();
-        // const updatedAlramRooms = roomData.map((room) => {
-        //   return room.roomId === roomId ? { ...room, isAlram: !isAlram } : room;
-        // }, []);
-        // setRoomData(updatedAlramRooms);
+        rowMap[roomId].closeRow();
+
+        const newData = [...roomData];
+
+        const foundIndex = roomData[user.section].data.findIndex(
+          (item) => item.roomId === roomId
+        );
+
+        newData[user.section].data[foundIndex].isAlram = !isAlram;
+
+        setRoomData(newData);
       },
-    []
+    [roomData]
   );
 
   const onFavorits = useCallback(
-    (rowMap, { roomId, isFavorites }) =>
+    (rowMap, { roomId, isFavorites, user }) =>
       () => {
-        // rowMap[roomId].closeRow();
-        // const updatedFavoritesRooms = roomData.map((room) => {
-        //   return room.roomId === roomId
-        //     ? { ...room, isFavorites: !isFavorites }
-        //     : room;
-        // }, []);
-        // setRoomData(updatedFavoritesRooms);
+        rowMap[roomId].closeRow();
+
+        const newData = [...roomData];
+
+        const foundIndex = roomData[user.section].data.findIndex(
+          (item) => item.roomId === roomId
+        );
+
+        newData[user.section].data[foundIndex].isFavorites = !isFavorites;
+
+        setRoomData(newData);
       },
-    []
+    [roomData]
   );
 
   const onReadMessage = useCallback(
-    (rowMap, roomId) => () => {
-      // rowMap[roomId].closeRow();
-      // const updatedReadRooms = roomData.map((room) => {
-      //   return room.roomId === roomId ? { ...room, isRead: true } : room;
-      // }, []);
-      // setRoomData(updatedReadRooms);
-    },
+    (rowMap, { roomId, user }) =>
+      () => {
+        rowMap[roomId].closeRow();
 
-    []
+        const newData = [...roomData];
+
+        const foundIndex = roomData[user.section].data.findIndex(
+          (item) => item.roomId === roomId
+        );
+
+        const room = newData[user.section].data[foundIndex];
+
+        room.isRead = true;
+        room.chatCount = 0;
+
+        setRoomData(newData);
+      },
+
+    [roomData]
   );
 
   const renderHiddenItem = useCallback(
