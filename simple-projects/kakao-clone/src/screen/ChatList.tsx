@@ -322,8 +322,8 @@ const ChatList = () => {
     return <Footer />;
   }, []);
 
-  const renderSectionHeader = useCallback(({ section }) => {
-    return <StyledText>{section.title}</StyledText>;
+  const renderSectionHeader = useCallback(() => {
+    return <></>;
   }, []);
 
   return (
