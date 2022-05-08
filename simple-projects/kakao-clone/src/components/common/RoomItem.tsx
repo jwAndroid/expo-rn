@@ -86,7 +86,11 @@ const RoomItem: FC<IRoomItem> = ({
 
   return (
     <Container>
-      <Avatar source={avatar} />
+      {avatar ? (
+        <Avatar source={avatar} />
+      ) : (
+        <Avatar source={theme.icon.placeholder} />
+      )}
 
       <ContentsContainer>
         <TitleIconContainer>

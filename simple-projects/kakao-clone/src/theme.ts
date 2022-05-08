@@ -20,6 +20,7 @@ export const icon = {
   pin: require('../assets/icons/pin.png'),
   pinfill: require('../assets/icons/pinfill.png'),
   playbutton: require('../assets/icons/playbutton.png'),
+  placeholder: require('../assets/icons/placeholder.png'),
   samplebanner: require('../assets/icons/samplebanner.png'),
   search: require('../assets/icons/search.png'),
   settings: require('../assets/icons/settings.png'),

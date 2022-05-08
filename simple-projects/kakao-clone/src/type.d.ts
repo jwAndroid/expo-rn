@@ -23,6 +23,7 @@ export interface RoomEntity {
   isAlram: boolean;
   isChatLook: boolean;
   user: UserEntity;
+  title: string;
 }
 
 export interface BannerEntity {
