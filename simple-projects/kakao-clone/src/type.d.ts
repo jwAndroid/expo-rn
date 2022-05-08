@@ -23,6 +23,10 @@ export interface RoomEntity {
   isAlram: boolean;
   isChatLook: boolean;
   user: UserEntity;
+}
+
+export interface IRoom {
+  data: RoomEntity[];
   title: string;
 }
 

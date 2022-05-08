@@ -321,11 +321,11 @@ const Users = () => {
         <SwipeListView
           useSectionList
           sections={listData}
+          keyExtractor={keyExtractor}
           renderSectionHeader={renderSectionHeader}
           stickySectionHeadersEnabled={false}
           ListHeaderComponent={listHeaderComponent}
           ListFooterComponent={listFooterComponent}
-          keyExtractor={keyExtractor}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
           stopLeftSwipe={75}

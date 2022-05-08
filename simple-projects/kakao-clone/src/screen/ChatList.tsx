@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Linking,
   ListRenderItem,
@@ -13,10 +13,10 @@ import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { Banner, Header, RoomItem } from '../components/common';
+import { Banner, Header, RoomItem, StyledText } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { bannerData } from '../api/sample/banner';
-import { RoomEntity } from '../type';
+import { IRoom, RoomEntity } from '../type';
 
 import { roomSampleData } from '../api/sample/roomList';
 
@@ -38,19 +38,18 @@ const Footer = styled.View({
 const ChatList = () => {
   const theme = useTheme();
 
-  const [roomData, setRoomData] = useState<RoomEntity[]>(roomSampleData);
+  const [roomData, setRoomData] = useState<IRoom[]>(roomSampleData);
 
-  // useEffect(() => {
-  //   roomSampleData.map((item) => {
-  //     if (!item.isPin) {
-  //       const orderedList = roomSampleData.sort((a, b): number => {
-  //         return b.lastUpdateOn - a.lastUpdateOn;
-  //       });
-
-  //       setRoomData(orderedList);
-  //     }
-  //   }, []);
-  // }, []);
+  useEffect(() => {
+    // roomSampleData.map((item) => {
+    //   if (!item.isPin) {
+    //     const orderedList = roomSampleData.sort((a, b): number => {
+    //       return b.lastUpdateOn - a.lastUpdateOn;
+    //     });
+    //     setRoomData(orderedList);
+    //   }
+    // }, []);
+  }, []);
 
   useFocusEffect(() => {});
 
@@ -136,77 +135,78 @@ const ChatList = () => {
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
 
+  // const onLeaveRoom = useCallback(
+  //   (rowMap, { data }) =>
+  //     () => {
+  //       // rowMap[data[0].roomId].closeRow();
+  //       // if (data[0]) {
+  //       //   const updateLeaveRoom = roomData.filter(
+  //       //     (room) => room.data[0].roomId !== data[0].roomId,
+  //       //     []
+  //       //   );
+  //       //   setRoomData(updateLeaveRoom);
+  //       // }
+  //     },
+  //   []
+  // );
+
   const onLeaveRoom = useCallback(
-    (rowMap, id) => () => {
-      rowMap[id].closeRow();
-
-      const updateLeaveRoom = roomData.filter((room) => room.roomId !== id, []);
-
-      setRoomData(updateLeaveRoom);
-    },
+    (rowMap, { roomId, user }) =>
+      () => {
+        rowMap[roomId].closeRow();
+        const newData = [...roomData];
+        const foundIndex = roomData[user.section].data.findIndex(
+          (item) => item.roomId === roomId
+        );
+        newData[user.section].data.splice(foundIndex, 1);
+        setRoomData(newData);
+      },
     [roomData]
   );
 
   const onPin = useCallback(
     (rowMap, item) => () => {
-      rowMap[item.roomId].closeRow();
-
-      const updatedPinRooms = roomData.map((room) => {
-        return room.roomId === item.roomId
-          ? { ...room, isPin: !item.isPin }
-          : room;
-      }, []);
-
-      // const del = updatedPinRooms.filter((room) => room.roomId !== item.roomId);
-      // setRoomData([item, ...del]);
-
-      setRoomData(updatedPinRooms);
+      // rowMap[item.roomId].closeRow();
     },
-    [roomData]
+    []
   );
 
   const onAlram = useCallback(
     (rowMap, { roomId, isAlram }) =>
       () => {
-        rowMap[roomId].closeRow();
-
-        const updatedAlramRooms = roomData.map((room) => {
-          return room.roomId === roomId ? { ...room, isAlram: !isAlram } : room;
-        }, []);
-
-        setRoomData(updatedAlramRooms);
+        // rowMap[roomId].closeRow();
+        // const updatedAlramRooms = roomData.map((room) => {
+        //   return room.roomId === roomId ? { ...room, isAlram: !isAlram } : room;
+        // }, []);
+        // setRoomData(updatedAlramRooms);
       },
-    [roomData]
+    []
   );
 
   const onFavorits = useCallback(
     (rowMap, { roomId, isFavorites }) =>
       () => {
-        rowMap[roomId].closeRow();
-
-        const updatedFavoritesRooms = roomData.map((room) => {
-          return room.roomId === roomId
-            ? { ...room, isFavorites: !isFavorites }
-            : room;
-        }, []);
-
-        setRoomData(updatedFavoritesRooms);
+        // rowMap[roomId].closeRow();
+        // const updatedFavoritesRooms = roomData.map((room) => {
+        //   return room.roomId === roomId
+        //     ? { ...room, isFavorites: !isFavorites }
+        //     : room;
+        // }, []);
+        // setRoomData(updatedFavoritesRooms);
       },
-    [roomData]
+    []
   );
 
   const onReadMessage = useCallback(
     (rowMap, roomId) => () => {
-      rowMap[roomId].closeRow();
-
-      const updatedReadRooms = roomData.map((room) => {
-        return room.roomId === roomId ? { ...room, isRead: true } : room;
-      }, []);
-
-      setRoomData(updatedReadRooms);
+      // rowMap[roomId].closeRow();
+      // const updatedReadRooms = roomData.map((room) => {
+      //   return room.roomId === roomId ? { ...room, isRead: true } : room;
+      // }, []);
+      // setRoomData(updatedReadRooms);
     },
 
-    [roomData]
+    []
   );
 
   const renderHiddenItem = useCallback(
@@ -230,14 +230,14 @@ const ChatList = () => {
 
           <TouchableOpacity
             style={LeaveButton}
-            onPress={onLeaveRoom(rowMap, item.roomId)}
+            onPress={onLeaveRoom(rowMap, item)}
           >
             <Text>나가기</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={ReadButton}
-            onPress={onReadMessage(rowMap, item.roomId)}
+            onPress={onReadMessage(rowMap, item)}
           >
             <Text>읽음</Text>
           </TouchableOpacity>
@@ -297,6 +297,10 @@ const ChatList = () => {
     return <Footer />;
   }, []);
 
+  const renderSectionHeader = useCallback(({ section }) => {
+    return <StyledText>{section.title}</StyledText>;
+  }, []);
+
   return (
     <SafeAreaContainer>
       <Header
@@ -309,8 +313,11 @@ const ChatList = () => {
       />
 
       <SwipeListView
-        data={roomData}
+        useSectionList
+        sections={roomData}
         keyExtractor={keyExtractor}
+        renderSectionHeader={renderSectionHeader}
+        stickySectionHeadersEnabled={false}
         renderItem={renderItem}
         renderHiddenItem={renderHiddenItem}
         ListHeaderComponent={listHeaderComponent}
