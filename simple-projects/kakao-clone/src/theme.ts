@@ -45,6 +45,7 @@ export const lightTheme: Theme = {
   color: {
     white: '#ffffff',
     thickWhite: '#F9F9F9',
+    grayWhite: '#EFEFEF',
     thickBlack: '#D7D7D7',
     black: '#000000',
     gray: '#808080',
@@ -53,6 +54,7 @@ export const lightTheme: Theme = {
     red: '#FF0000',
     thickRed: '#D4684B',
     blue: '#0000FF',
+    systemBlue: '#5279C8',
     skyblue: {
       one: '#95BBEC',
       two: '#8CB6E8',

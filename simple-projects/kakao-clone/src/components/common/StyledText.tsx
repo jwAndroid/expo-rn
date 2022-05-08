@@ -10,6 +10,7 @@ interface IEmotionText {
   paddingBottom: number;
   marginBottom: number;
   isBold: boolean;
+  isTextAlign: boolean;
 }
 
 const EmotionText = styled.Text<IEmotionText>(
@@ -23,6 +24,7 @@ const EmotionText = styled.Text<IEmotionText>(
     paddingBottom,
     marginBottom,
     isBold,
+    isTextAlign,
   }) => ({
     fontFamily: isBold
       ? theme.font.YoonGothicBold
@@ -35,6 +37,7 @@ const EmotionText = styled.Text<IEmotionText>(
     paddingBottom,
     marginBottom,
     includeFontPadding: false,
+    textAlign: isTextAlign ? 'center' : undefined,
   })
 );
 
@@ -48,6 +51,7 @@ interface IStyledText {
   paddingBottom?: number;
   marginBottom?: number;
   isBold?: boolean;
+  isTextAlign?: boolean;
 }
 
 const StyledText: FC<IStyledText> = ({
@@ -60,6 +64,7 @@ const StyledText: FC<IStyledText> = ({
   paddingBottom = 0,
   marginBottom = 0,
   isBold = false,
+  isTextAlign = false,
 }) => {
   return (
     <EmotionText
@@ -73,6 +78,7 @@ const StyledText: FC<IStyledText> = ({
       isBold={isBold}
       ellipsizeMode="tail"
       numberOfLines={1}
+      isTextAlign={isTextAlign}
     >
       {children}
     </EmotionText>

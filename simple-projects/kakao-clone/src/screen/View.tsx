@@ -1,11 +1,11 @@
 import { memo } from 'react';
-import { StyledText } from '../components/common';
+import { LeaveModal } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 
 const View = () => {
   return (
     <SafeAreaContainer>
-      <StyledText color="black">뷰</StyledText>
+      <LeaveModal />
     </SafeAreaContainer>
   );
 };

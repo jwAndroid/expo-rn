@@ -18,6 +18,7 @@ declare module '@emotion/react' {
     color: {
       white: string;
       thickWhite: string;
+      grayWhite: string;
       thickBlack: string;
       black: string;
       gray: string;
@@ -26,6 +27,7 @@ declare module '@emotion/react' {
       red: string;
       thickRed: string;
       blue: string;
+      systemBlue: string;
       skyblue: {
         one: string;
         two: string;
