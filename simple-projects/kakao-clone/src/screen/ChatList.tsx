@@ -4,7 +4,6 @@ import {
   ListRenderItem,
   Pressable,
   StyleProp,
-  Text,
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
@@ -13,7 +12,7 @@ import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { Banner, Header, RoomItem } from '../components/common';
+import { Banner, Header, RoomItem, StyledText } from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { bannerData } from '../api/sample/banner';
 import { IRoom, RoomEntity } from '../type';
@@ -34,6 +33,12 @@ const Footer = styled.View({
   width: '100%',
   height: 30,
 });
+
+const ButtonIcon = styled.Image(({ theme }) => ({
+  width: 17,
+  height: 17,
+  tintColor: theme.color.white,
+}));
 
 const ChatList = () => {
   const theme = useTheme();
@@ -79,9 +84,9 @@ const ChatList = () => {
       left: 0,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'red',
+      backgroundColor: theme.color.skyblue.one,
     }),
-    []
+    [theme]
   );
 
   const AlramButton = useMemo<StyleProp<ViewStyle>>(
@@ -93,9 +98,9 @@ const ChatList = () => {
       left: 75,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'gray',
+      backgroundColor: theme.color.skyblue.two,
     }),
-    []
+    [theme]
   );
 
   const PinButton = useMemo<StyleProp<ViewStyle>>(
@@ -107,9 +112,9 @@ const ChatList = () => {
       left: 150,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'blue',
+      backgroundColor: theme.color.skyblue.three,
     }),
-    []
+    [theme]
   );
 
   const ReadButton = useMemo<StyleProp<ViewStyle>>(
@@ -118,12 +123,12 @@ const ChatList = () => {
       bottom: 0,
       top: 0,
       width: 75,
-      right: 0,
+      right: 75,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'red',
+      backgroundColor: theme.color.thickGray,
     }),
-    []
+    [theme]
   );
 
   const LeaveButton = useMemo<StyleProp<ViewStyle>>(
@@ -132,12 +137,12 @@ const ChatList = () => {
       bottom: 0,
       top: 0,
       width: 75,
-      right: 75,
+      right: 0,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'blue',
+      backgroundColor: theme.color.orange,
     }),
-    []
+    [theme]
   );
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
@@ -258,29 +263,47 @@ const ChatList = () => {
             style={FavoritesButton}
             onPress={onFavorits(rowMap, item)}
           >
-            <Text>즐겨찾기</Text>
+            <ButtonIcon
+              source={
+                item.isFavorites
+                  ? theme.icon.favoritesfill
+                  : theme.icon.favorites
+              }
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={AlramButton} onPress={onAlram(rowMap, item)}>
-            <Text>알람</Text>
+            <ButtonIcon
+              source={
+                item.isAlram
+                  ? theme.icon.notificaitonfill
+                  : theme.icon.notificaiton
+              }
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={PinButton} onPress={onPin(rowMap, item)}>
-            <Text>핀</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={LeaveButton}
-            onPress={onLeaveRoom(rowMap, item)}
-          >
-            <Text>나가기</Text>
+            <ButtonIcon
+              source={item.isPin ? theme.icon.pinfill : theme.icon.pin}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
             style={ReadButton}
             onPress={onReadMessage(rowMap, item)}
           >
-            <Text>읽음</Text>
+            <StyledText fontSize={13} color={theme.color.white} isBold>
+              읽음
+            </StyledText>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={LeaveButton}
+            onPress={onLeaveRoom(rowMap, item)}
+          >
+            <StyledText fontSize={13} color={theme.color.white} isBold>
+              나가기
+            </StyledText>
           </TouchableOpacity>
         </RowBack>
       );
@@ -296,6 +319,7 @@ const ChatList = () => {
       onPin,
       onLeaveRoom,
       onReadMessage,
+      theme,
     ]
   );
 
