@@ -165,10 +165,32 @@ const ChatList = () => {
   );
 
   const onPin = useCallback(
-    (rowMap, item) => () => {
-      // rowMap[item.roomId].closeRow();
-    },
-    []
+    (rowMap, { roomId, user, isPin }) =>
+      () => {
+        rowMap[roomId].closeRow();
+
+        const newData = [...roomData];
+        const foundIndex = roomData[user.section].data.findIndex(
+          (item) => item.roomId === roomId
+        );
+
+        const room = newData[user.section].data[foundIndex];
+        const list = newData[user.section].data;
+        room.isPin = !isPin;
+
+        if (user.section === 1) {
+          room.user.section = 0;
+          newData[0].data.unshift(room);
+        } else {
+          room.user.section = 1;
+          newData[1].data.unshift(room);
+        }
+
+        list.splice(foundIndex, 1);
+
+        setRoomData(newData);
+      },
+    [roomData]
   );
 
   const onAlram = useCallback(
