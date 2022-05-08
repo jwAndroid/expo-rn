@@ -60,7 +60,7 @@ interface IRoomItem {
   isUnNotification: boolean;
   isLock: boolean;
   lastUpdateOn: number;
-  chatCount: number | null;
+  chatCount: number;
 }
 
 const RoomItem: FC<IRoomItem> = ({
@@ -123,7 +123,7 @@ const RoomItem: FC<IRoomItem> = ({
           {date()}
         </StyledText>
 
-        {chatCount && (
+        {chatCount !== 0 && (
           <MessageCount>
             <StyledText fontSize={10} color={theme.color.white} isBold>
               {chatCount}

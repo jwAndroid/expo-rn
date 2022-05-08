@@ -16,7 +16,7 @@ export interface RoomEntity {
   roomId: number;
   lastMessage: string;
   lastUpdateOn: number;
-  chatCount: number | null;
+  chatCount: number;
   isFavorites: boolean;
   isRead: boolean;
   isPin: boolean;

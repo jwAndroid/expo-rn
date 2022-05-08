@@ -29,7 +29,7 @@ export const roomSampleData = [
         roomId: 2,
         lastMessage: 'ㅂㅈㄷㅇㅂㅈㅌㅋㅊ',
         lastUpdateOn: 1651620579449,
-        chatCount: null,
+        chatCount: 0,
         isFavorites: false,
         isRead: false,
         isPin: false,
