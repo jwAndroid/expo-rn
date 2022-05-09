@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
-import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 import {
@@ -73,8 +72,6 @@ const ChatList = () => {
 
     setRoomData(order);
   }, []);
-
-  useFocusEffect(() => {});
 
   const Row = useMemo<StyleProp<ViewStyle>>(
     () => ({
