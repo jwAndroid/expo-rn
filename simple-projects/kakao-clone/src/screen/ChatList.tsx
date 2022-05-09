@@ -48,14 +48,13 @@ const ButtonIcon = styled.Image(({ theme }) => ({
 
 const EmptyRoomContainer = styled.View({
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
 });
 
 const ChatList = () => {
   const theme = useTheme();
   const [roomData, setRoomData] = useState<IRoom[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [storage, setStorage] = useState<RoomEntity>();
 
   useEffect(() => {
     const order = roomSampleData.map((item, findIndex) => {
@@ -160,22 +159,31 @@ const ChatList = () => {
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
 
   const onLeave = useCallback(
-    (rowMap, { roomId, user }) =>
-      () => {
-        rowMap[roomId].closeRow();
+    (rowMap, item) => () => {
+      rowMap[item.roomId].closeRow();
 
-        const newData = [...roomData];
-        const foundIndex = roomData[user.section].data.findIndex(
-          (item) => item.roomId === roomId
-        );
+      setIsOpen(true);
 
-        newData[user.section].data.splice(foundIndex, 1);
-        setRoomData(newData);
-      },
-    [roomData]
+      if (item.roomId) {
+        setStorage(item);
+      }
+    },
+    []
   );
 
-  const onPostive = useCallback(() => {}, []);
+  const onPostive = useCallback(() => {
+    if (storage) {
+      const newData = [...roomData];
+      const foundIndex = roomData[storage.user.section].data.findIndex(
+        (item) => item.roomId === storage.roomId
+      );
+
+      newData[storage.user.section].data.splice(foundIndex, 1);
+      setRoomData(newData);
+    }
+
+    setIsOpen(false);
+  }, [storage, roomData]);
 
   const onNegative = useCallback(() => {
     setIsOpen(false);
@@ -416,7 +424,16 @@ const ChatList = () => {
     </SafeAreaContainer>
   ) : (
     <EmptyRoomContainer>
-      <StyledText isBold fontSize={17}>
+      <Header
+        title="채팅"
+        fontSize={24}
+        one={theme.icon.search}
+        two={theme.icon.chatplus}
+        three={theme.icon.music}
+        four={theme.icon.headersetting}
+      />
+
+      <StyledText isBold fontSize={17} paddingLeft={100} paddingTop={50}>
         개설된 채팅방이 없습니다.
       </StyledText>
     </EmptyRoomContainer>
