@@ -1,4 +1,4 @@
-import { FC, memo, useMemo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { GestureResponderEvent, Modal } from 'react-native';
 import styled from '@emotion/native';
 import { useTheme } from '@emotion/react';
@@ -51,11 +51,11 @@ const ModalText = styled.Text(({ theme }) => ({
 
 interface ILeaveModal {
   isOpen: boolean;
-  onClose: () => void;
-  onExit: (event: GestureResponderEvent) => void;
+  onNegative: () => void;
+  onPostive: (event: GestureResponderEvent) => void;
 }
 
-const LeaveModal: FC<ILeaveModal> = ({ isOpen, onClose, onExit }) => {
+const LeaveModal: FC<ILeaveModal> = ({ isOpen, onNegative, onPostive }) => {
   const theme = useTheme();
 
   const notification = useMemo(() => {
@@ -66,10 +66,10 @@ const LeaveModal: FC<ILeaveModal> = ({ isOpen, onClose, onExit }) => {
     <Modal
       transparent
       visible={isOpen}
-      onDismiss={onClose}
+      onDismiss={onNegative}
       animationType="fade"
     >
-      <Container>
+      <Container onPress={onNegative}>
         <TextContainer>
           <ModalText>{notification}</ModalText>
         </TextContainer>
@@ -77,7 +77,7 @@ const LeaveModal: FC<ILeaveModal> = ({ isOpen, onClose, onExit }) => {
         <Divider />
 
         <ButtonContainer>
-          <StyledButton>
+          <StyledButton onPress={onNegative}>
             <StyledText fontSize={17} color={theme.color.systemBlue} isBold>
               아니요
             </StyledText>
@@ -85,7 +85,7 @@ const LeaveModal: FC<ILeaveModal> = ({ isOpen, onClose, onExit }) => {
 
           <Divider isVertical />
 
-          <StyledButton>
+          <StyledButton onPress={onPostive}>
             <StyledText fontSize={17} color={theme.color.systemBlue} isBold>
               예
             </StyledText>

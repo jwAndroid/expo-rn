@@ -12,7 +12,13 @@ import { useTheme } from '@emotion/react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { Banner, Header, RoomItem, StyledText } from '../components/common';
+import {
+  Banner,
+  Header,
+  LeaveModal,
+  RoomItem,
+  StyledText,
+} from '../components/common';
 import { SafeAreaContainer } from '../components/layout';
 import { bannerData } from '../api/sample/banner';
 import { IRoom, RoomEntity } from '../type';
@@ -40,10 +46,16 @@ const ButtonIcon = styled.Image(({ theme }) => ({
   tintColor: theme.color.white,
 }));
 
+const EmptyRoomContainer = styled.View({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
 const ChatList = () => {
   const theme = useTheme();
-
   const [roomData, setRoomData] = useState<IRoom[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const order = roomSampleData.map((item, findIndex) => {
@@ -147,19 +159,27 @@ const ChatList = () => {
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.roomId}`, []);
 
-  const onLeaveRoom = useCallback(
+  const onLeave = useCallback(
     (rowMap, { roomId, user }) =>
       () => {
         rowMap[roomId].closeRow();
+
         const newData = [...roomData];
         const foundIndex = roomData[user.section].data.findIndex(
           (item) => item.roomId === roomId
         );
+
         newData[user.section].data.splice(foundIndex, 1);
         setRoomData(newData);
       },
     [roomData]
   );
+
+  const onPostive = useCallback(() => {}, []);
+
+  const onNegative = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   const onPin = useCallback(
     (rowMap, { roomId, user, isPin }) =>
@@ -297,10 +317,7 @@ const ChatList = () => {
             </StyledText>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={LeaveButton}
-            onPress={onLeaveRoom(rowMap, item)}
-          >
+          <TouchableOpacity style={LeaveButton} onPress={onLeave(rowMap, item)}>
             <StyledText fontSize={13} color={theme.color.white} isBold>
               나가기
             </StyledText>
@@ -317,7 +334,7 @@ const ChatList = () => {
       onFavorits,
       onAlram,
       onPin,
-      onLeaveRoom,
+      onLeave,
       onReadMessage,
       theme,
     ]
@@ -363,10 +380,6 @@ const ChatList = () => {
     return <Footer />;
   }, []);
 
-  const renderSectionHeader = useCallback(() => {
-    return <></>;
-  }, []);
-
   return !!roomSampleData[0].data.length || !!roomSampleData[1].data.length ? (
     <SafeAreaContainer>
       <Header
@@ -382,7 +395,6 @@ const ChatList = () => {
         useSectionList
         sections={roomData}
         keyExtractor={keyExtractor}
-        renderSectionHeader={renderSectionHeader}
         stickySectionHeadersEnabled={false}
         renderItem={renderItem}
         renderHiddenItem={renderHiddenItem}
@@ -394,9 +406,20 @@ const ChatList = () => {
         rightOpenValue={-150}
         previewOpenDelay={3000}
       />
+      {isOpen && (
+        <LeaveModal
+          isOpen={isOpen}
+          onNegative={onNegative}
+          onPostive={onPostive}
+        />
+      )}
     </SafeAreaContainer>
   ) : (
-    <StyledText>개설된 채팅방이 없습니다</StyledText>
+    <EmptyRoomContainer>
+      <StyledText isBold fontSize={17}>
+        개설된 채팅방이 없습니다.
+      </StyledText>
+    </EmptyRoomContainer>
   );
 };
 
