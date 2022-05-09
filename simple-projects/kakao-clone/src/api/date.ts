@@ -1,15 +1,23 @@
-// 05월01일 타임스탬프 1651355793438
-// 05월03일 타임스탬프 1651528743382
-// 05월07일 타임스탬프 1651874164128
-
 import moment from 'moment';
-// 안써도 자동으로 한국 시간을 불러온다. 명확하게 하기 위해 import
 import 'moment/locale/ko';
 
-// const now = Date.now(); // 오늘 타임스탬프
-// const nowTime = moment(1651355793438).format('YYYY-MM-DD'); // 모맨트->변환
+export const setupDate = (lastUpdateOn: number) => {
+  const ago = moment(
+    moment(lastUpdateOn).format('YYYY.MM.DD'),
+    'YYYY.MM.DD'
+  ).fromNow();
 
-// console.log(nowTime);
+  if (
+    moment(moment(Date.now()).format('YYYY-MM-DD')).isSame(
+      moment(lastUpdateOn).format('YYYY-MM-DD')
+    )
+  ) {
+    return moment(lastUpdateOn).format('A HH:mm');
+  }
 
-const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-console.log(nowTime);
+  if (ago === 'a day ago' || ago === '1 day ago') {
+    return '어제';
+  }
+
+  return moment(lastUpdateOn).format('M월 DD일');
+};

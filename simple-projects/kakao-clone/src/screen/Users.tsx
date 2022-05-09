@@ -286,6 +286,7 @@ const Users = () => {
           name={myProfile.name}
           fontSize={18}
           isBold
+          introduction={myProfile.introduction}
           imageUrl={myProfile.image_url}
           avatarWidth={60}
           avatarHeight={60}

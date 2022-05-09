@@ -1,10 +1,10 @@
-import { FC, memo, useCallback } from 'react';
+import { FC, memo } from 'react';
 import { ImageSourcePropType } from 'react-native';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/native';
-import moment from 'moment';
 
 import StyledText from './StyledText';
+import { setupDate } from '../../api/date';
 
 const Container = styled.View(() => ({
   flex: 1,
@@ -75,27 +75,6 @@ const RoomItem: FC<IRoomItem> = ({
 }) => {
   const theme = useTheme();
 
-  const date = useCallback(() => {
-    const ago = moment(
-      moment(lastUpdateOn).format('YYYY.MM.DD'),
-      'YYYY.MM.DD'
-    ).fromNow();
-
-    if (
-      moment(moment(Date.now()).format('YYYY-MM-DD')).isSame(
-        moment(lastUpdateOn).format('YYYY-MM-DD')
-      )
-    ) {
-      return moment(lastUpdateOn).format('A HH:mm');
-    }
-
-    if (ago === 'a day ago' || ago === '1 day ago') {
-      return '어제';
-    }
-
-    return moment(lastUpdateOn).format('M월 DD일');
-  }, [lastUpdateOn]);
-
   return (
     <Container>
       <Avatar source={avatar} />
@@ -120,7 +99,7 @@ const RoomItem: FC<IRoomItem> = ({
 
       <SystemContainer>
         <StyledText fontSize={10} color={theme.color.thickGray}>
-          {date()}
+          {setupDate(lastUpdateOn)}
         </StyledText>
 
         {chatCount !== 0 && (

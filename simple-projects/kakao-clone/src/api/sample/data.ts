@@ -1,7 +1,7 @@
 export const myProfile = {
   id: 950117,
   name: '지웅',
-  introduction: '',
+  introduction: 'dfgfdsg',
   music: '',
   image_url: 'https://avatars.githubusercontent.com/u/67754570?v=4',
 };
