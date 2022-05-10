@@ -1,20 +1,20 @@
 import { useNavigation } from '@react-navigation/native';
 import { memo, useCallback } from 'react';
 import { Text, View } from 'react-native';
-import { MailScreenNavigationProp } from '../MailStack';
+import { SearchScreenNavigationProp } from '../MailStack';
 
-const Mail = () => {
-  const navigation = useNavigation<MailScreenNavigationProp>();
+const Search = () => {
+  const navigation = useNavigation<SearchScreenNavigationProp>();
 
   const onPress = useCallback(() => {
-    navigation.navigate('Search');
+    navigation.reset({ routes: [{ name: 'Mail' }] });
   }, [navigation]);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text onPress={onPress}>서치 스크린 이동</Text>
+      <Text onPress={onPress}>서치스크린 .. 클릭 : 초기화면</Text>
     </View>
   );
 };
 
-export default memo(Mail);
+export default memo(Search);

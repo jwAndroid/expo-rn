@@ -1,18 +1,15 @@
+import { memo, useMemo } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationOptions,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { memo, useMemo } from 'react';
-
-import Mail from './components/Mail';
-
-// 탭을 배치 했으니까
-// 이 화면에 들어갈 스택 네비게이션을 배치
+import { Mail, Search } from './components';
 
 type RootStackParamList = {
   Mail: undefined;
+  Search: undefined;
 };
 
 export type MailScreenRouteProp = RouteProp<RootStackParamList, 'Mail'>;
@@ -21,9 +18,15 @@ export type MailScreenNavigationProp = StackNavigationProp<
   'Mail'
 >;
 
+export type SearchScreenRouteProp = RouteProp<RootStackParamList, 'Search'>;
+export type SearchScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Search'
+>;
+
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
-const MailScreen = () => {
+const MailStack = () => {
   const screenOptions = useMemo<StackNavigationOptions>(
     () => ({
       headerStyle: {
@@ -44,8 +47,9 @@ const MailScreen = () => {
   return (
     <Navigator screenOptions={screenOptions}>
       <Screen name="Mail" component={Mail} />
+      <Screen name="Search" component={Search} />
     </Navigator>
   );
 };
 
-export default memo(MailScreen);
+export default memo(MailStack);

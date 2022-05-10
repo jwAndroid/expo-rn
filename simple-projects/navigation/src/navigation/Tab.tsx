@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
-import { MailScreen, Profile, Settings } from '../screen';
+import { MailStack, ProfileStack, SettingsStack } from '../screen';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -49,9 +49,19 @@ const Tab = () => {
 
   return (
     <Navigator screenOptions={bottomNavigationOption}>
-      <Screen name="MailScreen" component={MailScreen} options={mailOptions} />
-      <Screen name="Profile" component={Profile} options={prifleOptions} />
-      <Screen name="Settings" component={Settings} options={settingsOptions} />
+      <Screen name="MailStack" component={MailStack} options={mailOptions} />
+
+      <Screen
+        name="ProfileStack"
+        component={ProfileStack}
+        options={prifleOptions}
+      />
+
+      <Screen
+        name="SettingsStack"
+        component={SettingsStack}
+        options={settingsOptions}
+      />
     </Navigator>
   );
 };
