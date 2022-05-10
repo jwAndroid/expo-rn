@@ -1,6 +1,7 @@
 import { memo, useMemo } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import {
+  CardStyleInterpolators,
   createStackNavigator,
   StackNavigationOptions,
   StackNavigationProp,
@@ -43,6 +44,7 @@ const MailStack = () => {
         alignItems: 'center',
       },
       headerTintColor: '#fff',
+      cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
     }),
     []
   );
