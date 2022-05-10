@@ -5,11 +5,13 @@ import {
   StackNavigationOptions,
   StackNavigationProp,
 } from '@react-navigation/stack';
+
 import { Mail, Search } from './components';
+import { TestType } from '../type';
 
 type RootStackParamList = {
   Mail: undefined;
-  Search: undefined;
+  Search: TestType | undefined;
 };
 
 export type MailScreenRouteProp = RouteProp<RootStackParamList, 'Mail'>;
