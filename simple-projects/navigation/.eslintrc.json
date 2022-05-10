@@ -43,6 +43,8 @@
     "consistent-return": "off",
     "operator-linebreak": "off",
     "no-nested-ternary": "off",
-    "indent": "off"
+    "indent": "off",
+    "no-confusing-arrow": "off",
+    "react/jsx-curly-newline": "off"
   }
 }
