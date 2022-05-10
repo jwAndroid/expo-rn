@@ -7,11 +7,18 @@ const Search = () => {
   const navigation = useNavigation<SearchScreenNavigationProp>();
 
   const onPress = useCallback(() => {
-    navigation.reset({ routes: [{ name: 'Mail' }] });
+    navigation.goBack();
   }, [navigation]);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'blue',
+      }}
+    >
       <Text onPress={onPress}>서치스크린 .. 클릭 : 초기화면</Text>
     </View>
   );

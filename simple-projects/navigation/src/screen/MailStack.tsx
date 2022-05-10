@@ -29,6 +29,7 @@ const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 const MailStack = () => {
   const screenOptions = useMemo<StackNavigationOptions>(
     () => ({
+      headerShown: false,
       headerStyle: {
         height: 50,
         backgroundColor: '#303030',

@@ -23,6 +23,7 @@ const Tab = () => {
         height: 56,
         backgroundColor: '#303030',
       },
+      tabBarHideOnKeyboard: true,
     }),
     []
   );
