@@ -6,16 +6,23 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import { Profile } from './components';
+import { Profile, Room } from './components';
 
 type RootStackParamList = {
   Profile: undefined;
+  Room: undefined;
 };
 
 export type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 export type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Profile'
+>;
+
+export type RoomScreenRouteProp = RouteProp<RootStackParamList, 'Room'>;
+export type RoomScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Room'
 >;
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
@@ -41,6 +48,8 @@ const ProfileStack = () => {
   return (
     <Navigator screenOptions={screenOptions}>
       <Screen name="Profile" component={Profile} />
+
+      <Screen name="Room" component={Room} />
     </Navigator>
   );
 };

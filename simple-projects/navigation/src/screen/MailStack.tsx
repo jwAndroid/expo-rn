@@ -7,12 +7,15 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import { Mail, Search } from './components';
+import { Mail, Profile, Search, Search2 } from './components';
+
 import { TestType } from '../type';
 
 type RootStackParamList = {
   Mail: undefined;
   Search: TestType | undefined;
+  Search2: undefined;
+  Profile: undefined;
 };
 
 export type MailScreenRouteProp = RouteProp<RootStackParamList, 'Mail'>;
@@ -25,6 +28,18 @@ export type SearchScreenRouteProp = RouteProp<RootStackParamList, 'Search'>;
 export type SearchScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Search'
+>;
+
+export type Search2ScreenRouteProp = RouteProp<RootStackParamList, 'Search2'>;
+export type Search2ScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Search2'
+>;
+
+export type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
+export type ProfileScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Profile'
 >;
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
@@ -52,7 +67,10 @@ const MailStack = () => {
   return (
     <Navigator screenOptions={screenOptions}>
       <Screen name="Mail" component={Mail} />
+
       <Screen name="Search" component={Search} />
+      <Screen name="Search2" component={Search2} />
+      <Screen name="Profile" component={Profile} />
     </Navigator>
   );
 };

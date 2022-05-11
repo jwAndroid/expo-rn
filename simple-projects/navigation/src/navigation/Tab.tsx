@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -10,6 +10,8 @@ import { MailStack, ProfileStack, SettingsStack } from '../screen';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 const Tab = () => {
+  const [isTabPress, setIsTabPress] = useState(false);
+
   const screenOptions = useMemo<BottomTabNavigationOptions>(
     () => ({
       headerShown: false,
@@ -28,6 +30,18 @@ const Tab = () => {
     []
   );
 
+  useEffect(() => {
+    if (isTabPress) {
+      const timeout = setTimeout(() => {
+        setIsTabPress(false);
+      }, 500);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [isTabPress]);
+
   return (
     <Navigator screenOptions={screenOptions}>
       <Screen
@@ -45,8 +59,13 @@ const Tab = () => {
             tabBarIconStyle: {
               display: 'none',
             },
-            tabBarLabel: '홈',
+            tabBarLabel: '메일',
           };
+        }}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+          },
         }}
       />
 

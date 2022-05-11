@@ -1,6 +1,8 @@
 import { memo } from 'react';
-import { StatusBar } from 'react-native';
+import { LogBox, StatusBar } from 'react-native';
 import { Navigation } from './src/navigation';
+
+LogBox.ignoreLogs(['EventEmitter.removeListener']);
 
 const App = () => {
   return (

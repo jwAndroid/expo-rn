@@ -45,6 +45,7 @@
     "no-nested-ternary": "off",
     "indent": "off",
     "no-confusing-arrow": "off",
-    "react/jsx-curly-newline": "off"
+    "react/jsx-curly-newline": "off",
+    "function-paren-newline": "off"
   }
 }

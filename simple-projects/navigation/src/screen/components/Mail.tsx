@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { TestType } from '../../type';
@@ -25,6 +25,9 @@ const Mail = () => {
       }}
     >
       <Text onPress={onPress}>{text}</Text>
+
+      {/* 바텀 네비게이션이 있을떄 + 키보드를 사용해야할때 네비게이션이 어떻게 노출되는지 테스트 */}
+      <TextInput style={{ backgroundColor: 'black', width: '100%' }} />
     </View>
   );
 };
