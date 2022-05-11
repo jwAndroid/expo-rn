@@ -1,10 +1,36 @@
 import { memo } from 'react';
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Settings = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>세팅 스크린</Text>
+      <ScrollView>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+        <Text style={{ fontSize: 30 }}>세팅 스크린</Text>
+      </ScrollView>
     </View>
   );
 };
