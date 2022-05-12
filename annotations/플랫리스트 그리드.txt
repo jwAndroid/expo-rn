@@ -1,1 +1,0 @@
-https://velog.io/@st2702/React-Native-FlatList

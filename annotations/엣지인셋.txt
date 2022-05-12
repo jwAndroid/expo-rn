@@ -1,5 +1,0 @@
-EdgeInsets -> 
-
-특정하게 찝어서 안전한영역을 잡아줌과 동시에
-
-inset + paddingHorizontal 이 가능하다

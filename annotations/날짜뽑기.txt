@@ -1,1 +1,0 @@
-https://github.com/henninghall/react-native-date-picker

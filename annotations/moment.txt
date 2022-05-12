@@ -1,4 +1,0 @@
-import 'moment/locale/ko';
-moment(test).fromNow();
-& npm i moment
-https://flamingotiger.github.io/javascript/momentjs/
