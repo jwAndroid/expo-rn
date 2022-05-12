@@ -7,7 +7,6 @@ import {
   doc,
   DocumentData,
   getDoc,
-  onSnapshot,
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
@@ -16,6 +15,7 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { db } from './src/api/config';
+import { onCollectionSnapshot, onSnapshotListener } from './src/api/firebase';
 
 const Container = styled.View({
   flex: 1,
@@ -30,68 +30,58 @@ const StyledText = styled.Text({
 });
 
 const data = {
-  name: '새로운 path 넣기',
-  age: 777,
+  name: '새로운 path 넣기2',
+  age: 7772,
   message: 77722,
 };
 
 const App = () => {
-  const [test, setTest] = useState<DocumentData[]>([]);
+  const [document, setDocument] = useState<DocumentData[]>([]);
 
-  const myDoc = doc(db, 'User', 'girl');
-  const myDoc2 = doc(db, 'room', '77', 'message', '501');
-  const col = collection(db, 'rooms', '12', 'messages');
+  const manRef = doc(db, 'user', 'a');
 
-  useEffect(() => {
-    // console.log(test);
-  }, [test]);
+  const col = collection(db, 'user', 'man', '1');
+
+  const ranCol = collection(db, 'user', 'man', 'message');
+
+  // useEffect(() => {
+
+  // }, [col]);
 
   const onCreate = useCallback(async () => {
-    await setDoc(myDoc2, data);
-  }, [myDoc2]);
+    await setDoc(manRef, data);
+  }, [manRef]);
 
   const onRead = useCallback(async () => {
-    const testDoc = await getDoc(myDoc2);
+    const did = doc(db, 'user', 'man');
+
+    const testDoc = await getDoc(did);
 
     const data = testDoc.data();
 
     console.log(data);
-  }, [myDoc2]);
+  }, []);
 
   // await setDoc(myDoc, { age: 18 }, { merge: false });
   // merge : true => updateDoc 기능 동일
   // merge : false => 타겟만 업데이트
 
   const onUpdate = useCallback(() => {
-    updateDoc(myDoc, { name: '수정3', age: 133, job: 'Dev2' });
-  }, [myDoc]);
+    updateDoc(manRef, { name: '수정3', age: 133, job: 'Dev2' });
+  }, [manRef]);
 
   const onDelete = useCallback(() => {
-    if (myDoc) {
-      deleteDoc(myDoc);
-    }
-  }, [myDoc]);
+    deleteDoc(manRef);
+  }, [manRef]);
 
   const addDocument = useCallback(async () => {
-    await addDoc(col, {
+    // adddDoc 은 "dev" 콜렉션에 무작위 id를 가진 객체를 계속해서 넣어짐
+    // 무작위 id 를 모두 참조해서 할 수가 없으니까. col.스냅샷 이 있는것.
+    await addDoc(ranCol, {
       hi: '경로정해서 넣기23',
       a: 77723,
     });
-  }, []);
-
-  const getCollection = useCallback(async () => {
-    onSnapshot(col, (snapshots) => {
-      const documents: DocumentData[] = [];
-
-      if (!snapshots.metadata.hasPendingWrites) {
-        snapshots.forEach((snapshot) => {
-          documents.push(snapshot.data());
-        });
-      }
-      setTest(documents);
-      // console.log(documents);
-    });
-  }, [col]);
+  }, [ranCol]);
 
   return (
     <ScrollView style={{ marginTop: 100 }}>
@@ -114,8 +104,6 @@ const App = () => {
         />
 
         <StyledText onPress={addDocument}>addDoc</StyledText>
-
-        <StyledText onPress={getCollection}>getCollection</StyledText>
       </Container>
     </ScrollView>
   );
