@@ -1,23 +1,28 @@
 import {
-  CollectionReference,
   DocumentData,
   DocumentReference,
   onSnapshot,
+  Query,
 } from 'firebase/firestore';
 
+import { TodoType } from '../../type';
+
 export const onCollectionSnapshot = (
-  path: CollectionReference<DocumentData>,
-  callback: (documents: DocumentData[]) => void
+  path: Query<DocumentData>,
+  callback: (documents: TodoType[]) => void
 ) => {
   onSnapshot(path, (snapshots) => {
-    const documents: DocumentData[] = [];
+    // const documents: DocumentData[] = [];
+    const test: TodoType[] = [];
 
     if (snapshots.size > 0) {
       snapshots.forEach((snapshot) => {
-        documents.push(snapshot.data());
+        test.push(snapshot.data() as TodoType);
+        // documents.push(snapshot.data() as TodoType);
       });
     }
-    callback(documents);
+    // console.log(test);
+    callback(test);
   });
 };
 /* useage
