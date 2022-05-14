@@ -5,14 +5,14 @@ import {
   addDoc,
   collection,
   doc,
-  limit,
+  onSnapshot,
   orderBy,
   query,
   setDoc,
 } from 'firebase/firestore';
 
 import { db } from './src/api/config';
-import { onCollectionSnapshot } from './src/api/firebase';
+
 import { TodoType } from './type';
 
 const Container = styled.View({
@@ -32,26 +32,28 @@ const user = {
 };
 
 const App = () => {
-  // const [documents, setDocuments] = useState<DocumentData[]>([]);
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [textValue, setTextValue] = useState('');
 
-  const docRef = doc(db, 'user', '1');
-
   const collectionRef = collection(db, 'user', '1', 'todo');
-  const queryRef = query(collectionRef, orderBy('id', 'asc'), limit(100));
 
   useEffect(() => {
-    onCollectionSnapshot(queryRef, (documents: TodoType[]) => {
-      if (documents.length > 0) {
-        setTodos(documents);
-      }
+    const queryRef = query(collectionRef, orderBy('id', 'asc'));
+    onSnapshot(queryRef, (snapshots) => {
+      const arr: TodoType[] = [];
+
+      snapshots.forEach((snapshot) => {
+        console.log(snapshot.id);
+        arr.push(snapshot.data() as TodoType);
+      });
+
+      setTodos(arr);
     });
-  }, [queryRef]);
+  }, []);
 
   const onCreate = useCallback(async () => {
-    await setDoc(docRef, user);
-  }, [docRef]);
+    await setDoc(doc(db, 'user', '1'), user);
+  }, []);
 
   const onChangeText = useCallback((text: string) => {
     setTextValue(text);
@@ -59,12 +61,12 @@ const App = () => {
 
   const onSubmitEditing = useCallback(async () => {
     await addDoc(collectionRef, {
-      id: 2,
+      id: todos.length + 1,
       text: textValue,
     });
 
     setTextValue('');
-  }, [collectionRef, textValue]);
+  }, [collectionRef, textValue, todos]);
 
   return (
     <Container>
