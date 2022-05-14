@@ -36,10 +36,12 @@ const App = () => {
   const [textValue, setTextValue] = useState('');
 
   useEffect(() => {
-    const collectionRef = collection(db, 'user', '1', 'todo');
-    const queryRef = query(collectionRef, orderBy('id', 'asc'));
+    const ref = query(
+      collection(db, 'user', '1', 'todo'),
+      orderBy('id', 'asc')
+    );
 
-    onSnapshot(queryRef, (snapshots) => {
+    onSnapshot(ref, (snapshots) => {
       const arr: TodoType[] = [];
 
       snapshots.forEach((snapshot) => {
