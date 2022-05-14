@@ -35,10 +35,10 @@ const App = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [textValue, setTextValue] = useState('');
 
-  const collectionRef = collection(db, 'user', '1', 'todo');
-
   useEffect(() => {
+    const collectionRef = collection(db, 'user', '1', 'todo');
     const queryRef = query(collectionRef, orderBy('id', 'asc'));
+
     onSnapshot(queryRef, (snapshots) => {
       const arr: TodoType[] = [];
 
@@ -60,13 +60,15 @@ const App = () => {
   }, []);
 
   const onSubmitEditing = useCallback(async () => {
+    const collectionRef = collection(db, 'user', '1', 'todo');
+
     await addDoc(collectionRef, {
       id: todos.length + 1,
       text: textValue,
     });
 
     setTextValue('');
-  }, [collectionRef, textValue, todos]);
+  }, [textValue, todos.length]);
 
   return (
     <Container>

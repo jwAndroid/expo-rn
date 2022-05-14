@@ -30,23 +30,14 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "no-shadow": "off",
-    "quotes": "off",
     "comma-dangle": "off",
     "react/jsx-no-useless-fragment": "off",
     "react/jsx-one-expression-per-line": "off",
     "import/prefer-default-export": "off",
-    "implicit-arrow-linebreak": "off",
-    "global-require": "off",
-    "react/no-unstable-nested-components": "off",
     "react/require-default-props": "off",
-    "array-callback-return": "off",
     "consistent-return": "off",
     "operator-linebreak": "off",
-    "no-nested-ternary": "off",
     "indent": "off",
-    "no-confusing-arrow": "off",
-    "react/jsx-curly-newline": "off",
-    "function-paren-newline": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react/jsx-curly-newline": "off"
   }
 }
