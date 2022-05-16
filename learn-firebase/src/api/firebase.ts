@@ -21,6 +21,25 @@ export const onDataSnapshot = (
     callback(arr);
   });
 };
+
+export const onDeleteSnapshot = (
+  path: Query<DocumentData>,
+  targetIndex: number
+) => {
+  onSnapshot(path, (snapshots) => {
+    const ids: String[] = [];
+
+    snapshots.forEach((snapshot) => {
+      ids.push(snapshot.id);
+    });
+
+    return ids[targetIndex] as string;
+  });
+
+  // const manRef = doc(db, 'user', '1', 'todo', delPath);
+  // deleteDoc(manRef);
+};
+
 /* useage
 
   useEffect(() => {

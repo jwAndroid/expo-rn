@@ -5,14 +5,14 @@ import {
   collection,
   deleteDoc,
   doc,
+  onSnapshot,
   setDoc,
-  SnapshotMetadata,
 } from 'firebase/firestore';
 import styled from '@emotion/native';
 
 import { db } from './src/api/config';
 import { TodoType } from './type';
-import { onDataSnapshot } from './src/api/firebase';
+import { onDataSnapshot, onDeleteSnapshot } from './src/api/firebase';
 import { todoRef } from './src/api/ref';
 
 const Container = styled.View({
@@ -38,6 +38,7 @@ const user = {
 const App = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [textValue, setTextValue] = useState('');
+  const [sb, setSb] = useState('');
 
   const keyExtractor = useCallback((item: TodoType) => `${item.id}`, []);
 
@@ -60,27 +61,43 @@ const App = () => {
   const onSubmitEditing = useCallback(async () => {
     const collectionRef = collection(db, 'user', '1', 'todo');
 
-    // await addDoc(collectionRef, {
+    const manRef = doc(db, 'user', '1', 'todo', '1'); // << 정답
+    // 파이어베이스는 컬렉션과 doc 의 관계임 그걸 항상 인지하고 있어야한다
+
+    // const collectionRef = collection(db, 'user', '1', 'todo');
+
+    await setDoc(manRef, user);
+
+    // await addDoc(manRef, {
     //   id: todos.length + 1,
     //   text: textValue,
     // });
 
-    // setTextValue('');
-  }, []);
+    setTextValue('');
+  }, [textValue, todos]);
 
   const onPress = useCallback(
-    (item: TodoType) => () => {
-      onDataSnapshot(todoRef, (documents: TodoType[]) => {});
+    (item: TodoType, targetIndex: number) => async () => {
+      onSnapshot(todoRef, (snapshots) => {
+        const ids: String[] = [];
 
-      const manRef = doc(db, 'user', '1', 'todo');
-      // console.log(item);
+        snapshots.forEach((snapshot) => {
+          ids.push(snapshot.id);
+        });
 
-      // const del = todos.filter((todo) => todo.id !== item.id);
-      // setTodos(del);
+        if (ids.length > targetIndex) {
+          setSb(ids[targetIndex] as string);
 
-      // deleteDoc(manRef);
+          console.log(sb);
+        }
+      });
+
+      // const manRef = doc(db, 'user', '1', 'todo', sb);
+      // await deleteDoc(manRef);
+
+      // console.log(sb);
     },
-    [todos]
+    [sb]
   );
 
   const onLongPress = useCallback(() => {
@@ -88,9 +105,9 @@ const App = () => {
   }, []);
 
   const renderItem = useCallback<ListRenderItem<TodoType>>(
-    ({ item }) => {
+    ({ item, index }) => {
       return (
-        <ItemContainer onLongPress={onLongPress} onPress={onPress(item)}>
+        <ItemContainer onLongPress={onLongPress} onPress={onPress(item, index)}>
           <StyledText>{item.text}</StyledText>
         </ItemContainer>
       );
