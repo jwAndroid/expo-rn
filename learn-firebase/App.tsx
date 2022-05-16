@@ -1,19 +1,19 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
-import styled from '@emotion/native';
+import { FlatList, ListRenderItem, TextInput, View } from 'react-native';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
-  onSnapshot,
-  orderBy,
-  query,
   setDoc,
+  SnapshotMetadata,
 } from 'firebase/firestore';
+import styled from '@emotion/native';
 
 import { db } from './src/api/config';
-
 import { TodoType } from './type';
+import { onDataSnapshot } from './src/api/firebase';
+import { todoRef } from './src/api/ref';
 
 const Container = styled.View({
   flex: 1,
@@ -26,6 +26,10 @@ const StyledText = styled.Text({
   color: 'blue',
 });
 
+const ItemContainer = styled.Pressable({
+  width: '100%',
+});
+
 const user = {
   name: '최지웅',
   age: 28,
@@ -35,21 +39,13 @@ const App = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [textValue, setTextValue] = useState('');
 
+  const keyExtractor = useCallback((item: TodoType) => `${item.id}`, []);
+
   useEffect(() => {
-    const ref = query(
-      collection(db, 'user', '1', 'todo'),
-      orderBy('id', 'asc')
-    );
-
-    onSnapshot(ref, (snapshots) => {
-      const arr: TodoType[] = [];
-
-      snapshots.forEach((snapshot) => {
-        console.log(snapshot.id);
-        arr.push(snapshot.data() as TodoType);
-      });
-
-      setTodos(arr);
+    onDataSnapshot(todoRef, (documents: TodoType[]) => {
+      if (documents.length > 0) {
+        setTodos(documents);
+      }
     });
   }, []);
 
@@ -64,13 +60,43 @@ const App = () => {
   const onSubmitEditing = useCallback(async () => {
     const collectionRef = collection(db, 'user', '1', 'todo');
 
-    await addDoc(collectionRef, {
-      id: todos.length + 1,
-      text: textValue,
-    });
+    // await addDoc(collectionRef, {
+    //   id: todos.length + 1,
+    //   text: textValue,
+    // });
 
-    setTextValue('');
-  }, [textValue, todos.length]);
+    // setTextValue('');
+  }, []);
+
+  const onPress = useCallback(
+    (item: TodoType) => () => {
+      onDataSnapshot(todoRef, (documents: TodoType[]) => {});
+
+      const manRef = doc(db, 'user', '1', 'todo');
+      // console.log(item);
+
+      // const del = todos.filter((todo) => todo.id !== item.id);
+      // setTodos(del);
+
+      // deleteDoc(manRef);
+    },
+    [todos]
+  );
+
+  const onLongPress = useCallback(() => {
+    console.log('onLongPress');
+  }, []);
+
+  const renderItem = useCallback<ListRenderItem<TodoType>>(
+    ({ item }) => {
+      return (
+        <ItemContainer onLongPress={onLongPress} onPress={onPress(item)}>
+          <StyledText>{item.text}</StyledText>
+        </ItemContainer>
+      );
+    },
+    [onLongPress, onPress]
+  );
 
   return (
     <Container>
@@ -91,9 +117,11 @@ const App = () => {
         onSubmitEditing={onSubmitEditing}
       />
 
-      {todos.map((item) => {
-        return <Text key={item.id}>{item.text}</Text>;
-      }, [])}
+      <FlatList
+        data={todos}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+      />
     </Container>
   );
 };

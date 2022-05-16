@@ -2,16 +2,18 @@ import { DocumentData, onSnapshot, Query } from 'firebase/firestore';
 
 import { TodoType } from '../../type';
 
-export const onCollectionSnapshot = (
+export const onDataSnapshot = (
   path: Query<DocumentData>,
   callback: (documents: TodoType[]) => void
 ) => {
   onSnapshot(path, (snapshots) => {
     const arr: TodoType[] = [];
+    // console.log('onSnapshot() start');
 
     if (snapshots) {
       snapshots.forEach((snapshot) => {
-        console.log(snapshot.id);
+        // console.log(snapshot.id);
+
         arr.push(snapshot.data() as TodoType);
       });
     }
