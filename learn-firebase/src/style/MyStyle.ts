@@ -21,6 +21,6 @@ export const ItemContainer = styled.Pressable({
   flex: 1,
   flexDirection: 'row',
   justifyContent: 'space-around',
-  backgroundColor: 'gray',
-  margin: 3,
+  marginVertical: 10,
+  backgroundColor: '#909090',
 });

@@ -1,4 +1,5 @@
 export interface TodoType {
-  id: number;
+  postId: number;
   text: string;
+  status: number;
 }
