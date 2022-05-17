@@ -39,6 +39,7 @@
     "operator-linebreak": "off",
     "indent": "off",
     "react/jsx-curly-newline": "off",
-    "array-callback-return": "off"
+    "array-callback-return": "off",
+    "quotes": "off"
   }
 }

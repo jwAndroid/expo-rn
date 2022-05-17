@@ -8,12 +8,11 @@ export const onDataSnapshot = (
 ) => {
   onSnapshot(path, (snapshots) => {
     const arr: TodoType[] = [];
-    // console.log('onSnapshot() start');
+
+    console.log('onSnapshot() start');
 
     if (snapshots) {
       snapshots.forEach((snapshot) => {
-        // console.log(snapshot.id);
-
         arr.push(snapshot.data() as TodoType);
       });
     }
@@ -22,26 +21,7 @@ export const onDataSnapshot = (
   });
 };
 
-export const onDeleteSnapshot = (
-  path: Query<DocumentData>,
-  targetIndex: number
-) => {
-  onSnapshot(path, (snapshots) => {
-    const ids: String[] = [];
-
-    snapshots.forEach((snapshot) => {
-      ids.push(snapshot.id);
-    });
-
-    return ids[targetIndex] as string;
-  });
-
-  // const manRef = doc(db, 'user', '1', 'todo', delPath);
-  // deleteDoc(manRef);
-};
-
 /* useage
-
   useEffect(() => {
     onCollectionSnapshot(path, (documents: DocumentData[]) => {
       if (documents.length > 0) {
