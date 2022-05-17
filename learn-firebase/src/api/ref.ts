@@ -3,5 +3,5 @@ import { db } from './config';
 
 export const todoRef = query(
   collection(db, 'user', '1', 'todo'),
-  orderBy('postId', 'asc')
+  orderBy('createdAt', 'asc')
 );
