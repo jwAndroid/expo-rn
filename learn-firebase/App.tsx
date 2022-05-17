@@ -1,6 +1,9 @@
-import { memo, useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { memo, useCallback, useLayoutEffect, useState } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import moment from 'moment';
+import uuid from 'react-native-uuid';
+import 'moment/locale/ko';
 
 import { db } from './src/api/config';
 import { TodoType } from './type';
@@ -20,7 +23,6 @@ const App = () => {
   const [value, setValue] = useState('');
 
   useLayoutEffect(() => {
-    console.log('ue');
     onDataSnapshot(todoRef, (documents: TodoType[]) => {
       if (documents.length > 0) {
         const process = documents.filter(
@@ -41,25 +43,48 @@ const App = () => {
 
   const onSubmitEditing = useCallback(async () => {
     if (value.length > 0) {
-      const ref = doc(db, 'user', userId, 'todo', String(todos.length + 1));
+      const id = String(uuid.v4());
 
-      const post = { postId: todos.length + 1, text: value, status: 1 };
+      const ref = doc(db, 'user', userId, 'todo', id);
+
+      const post = {
+        postId: id,
+        text: value,
+        status: 1,
+        createdAt: Date.now(),
+        updatedAt: -1,
+      };
 
       await setDoc(ref, post);
 
       setValue('');
     }
-  }, [value, todos]);
+  }, [value]);
 
   const onDelete = useCallback(
     (item: TodoType) => async () => {
       const ref = doc(db, 'user', userId, 'todo', String(item.postId));
 
-      await setDoc(ref, {
-        postId: item.postId,
-        text: 'delete data',
+      await updateDoc(ref, {
+        text: '',
         status: -1,
+        updatedAt: -1,
       });
+    },
+    []
+  );
+
+  const onUpdate = useCallback(
+    (item: TodoType) => async () => {
+      const ref = doc(db, 'user', userId, 'todo', String(item.postId));
+
+      const updatedPost = {
+        text: '수정완료',
+        status: 1,
+        updatedAt: Date.now(),
+      };
+
+      await updateDoc(ref, updatedPost);
     },
     []
   );
@@ -68,16 +93,15 @@ const App = () => {
     ({ item }) => {
       return (
         <ItemContainer>
-          <StyledText>id:{item.postId}</StyledText>
           <StyledText>content:{item.text}</StyledText>
 
-          <StyledText>수정</StyledText>
+          <StyledText onPress={onUpdate(item)}>수정</StyledText>
 
           <StyledText onPress={onDelete(item)}>삭제</StyledText>
         </ItemContainer>
       );
     },
-    [onDelete]
+    [onUpdate, onDelete]
   );
 
   return (
