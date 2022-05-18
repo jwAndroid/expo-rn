@@ -22,6 +22,7 @@ const Pagination = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
     const original = query(
       collection(db, 'user', '1', 'todo'),
       orderBy('createdAt', 'asc'),
@@ -29,33 +30,21 @@ const Pagination = () => {
     );
 
     onSnapshot(original, (snapshot) => {
-      const snapshots: TodoType[] = [];
-
       if (snapshot) {
-        snapshot.forEach((snapshot) => {
-          snapshots.push(snapshot.data() as TodoType);
-        });
+        const chunk = snapshot.docs.map((doc) => doc.data(), []);
+
         setIsLoading(false);
 
         setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
 
-        setData(snapshots);
+        setData(chunk as TodoType[]);
       }
     });
-  }, []);
-
-  const renderItem = useCallback<ListRenderItem<TodoType>>(({ item }) => {
-    return <Text style={{ fontSize: 30 }}>{item.text}</Text>;
-  }, []);
-
-  const keyExtractor = useCallback((item) => {
-    return item.postId;
   }, []);
 
   const onLoadMore = useCallback(() => {
     if (!!lastDoc) {
       setIsLoading(true);
-      console.log(`isPage: ${!!lastDoc}`);
 
       const next = query(
         collection(db, 'user', '1', 'todo'),
@@ -65,24 +54,26 @@ const Pagination = () => {
       );
 
       onSnapshot(next, (snapshot) => {
-        const nextSnapshots: TodoType[] = [];
-
         if (snapshot) {
-          snapshot.forEach((snapshot) => {
-            nextSnapshots.push(snapshot.data() as TodoType);
-          });
+          const chunk = snapshot.docs.map((doc) => doc.data(), []);
 
           setIsLoading(false);
 
           setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
 
-          setData([...data, ...nextSnapshots]);
+          setData([...data, ...(chunk as TodoType[])]);
         }
       });
-    } else {
-      console.log(`isPage: ${!!lastDoc}`);
     }
   }, [data, lastDoc]);
+
+  const renderItem = useCallback<ListRenderItem<TodoType>>(({ item }) => {
+    return <Text style={{ fontSize: 30 }}>{item.text}</Text>;
+  }, []);
+
+  const keyExtractor = useCallback((item) => {
+    return item.postId;
+  }, []);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
