@@ -6,13 +6,14 @@ export const onDataSnapshot = (
   path: Query<DocumentData>,
   callback: (documents: TodoType[]) => void
 ) => {
-  onSnapshot(path, (snapshots) => {
+  onSnapshot(path, (snapshot) => {
     const arr: TodoType[] = [];
 
+    console.log('=================================');
     console.log('onSnapshot() start');
 
-    if (snapshots) {
-      snapshots.forEach((snapshot) => {
+    if (snapshot) {
+      snapshot.forEach((snapshot) => {
         arr.push(snapshot.data() as TodoType);
       });
     }

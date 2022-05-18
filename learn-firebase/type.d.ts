@@ -4,4 +4,6 @@ export interface TodoType {
   status: number;
   createdAt: number;
   updatedAt: number;
+  isPin: boolean;
+  cursor: number;
 }

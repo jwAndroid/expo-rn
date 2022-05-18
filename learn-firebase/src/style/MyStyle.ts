@@ -13,7 +13,7 @@ export const StyledInput = styled.TextInput({
 });
 
 export const StyledText = styled.Text({
-  fontSize: 30,
+  fontSize: 40,
   color: 'blue',
 });
 
