@@ -23,6 +23,7 @@ import {
   StyledInput,
   StyledText,
 } from './src/style/MyStyle';
+import Pagination from './src/components/Pagination';
 
 const userId = '1';
 
@@ -199,7 +200,9 @@ const App = () => {
 
   return (
     <Container>
-      <StyledInput
+      <Pagination />
+
+      {/* <StyledInput
         value={value}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmitEditing}
@@ -215,7 +218,7 @@ const App = () => {
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
-      />
+      /> */}
     </Container>
   );
 };

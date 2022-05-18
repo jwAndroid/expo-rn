@@ -40,6 +40,7 @@
     "indent": "off",
     "react/jsx-curly-newline": "off",
     "array-callback-return": "off",
-    "quotes": "off"
+    "quotes": "off",
+    "no-extra-boolean-cast": "off"
   }
 }
