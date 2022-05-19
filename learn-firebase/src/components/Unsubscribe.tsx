@@ -16,7 +16,7 @@ const Unsubscribe = () => {
   const [data, setData] = useState<TodoType[]>([]);
 
   useEffect(() => {
-    const original = query(collection(db, 'user', '2', 'todo'), limit(10));
+    const original = query(collection(db, 'user', '2', 'todo'));
 
     onSnapshot(original, (snapshot) => {
       if (snapshot) {
@@ -51,11 +51,10 @@ const Unsubscribe = () => {
     await setDoc(ref, post);
   }, []);
 
-  const unsubscribe = useCallback(() => {
-    console.log('리스너 분리');
-
-    onSnapshot(doc(db, 'user', '2', 'todo', '1'), () => {});
-  }, []);
+  const unsubscribe = onSnapshot(collection(db, 'user', '2', 'todo'), () => {
+    // Respond to data
+    // ...
+  });
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

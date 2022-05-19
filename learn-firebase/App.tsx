@@ -202,8 +202,8 @@ const App = () => {
 
   return (
     <Container>
-      <Doc />
-      {/* <Unsubscribe /> */}
+      {/* <Doc /> */}
+      <Unsubscribe />
       {/* <Pagination /> */}
       {/* <StyledInput
         value={value}
