@@ -25,6 +25,7 @@ import {
 } from './src/style/MyStyle';
 import Pagination from './src/components/Pagination';
 import Unsubscribe from './src/components/Unsubscribe';
+import Doc from './src/components/Doc';
 
 const userId = '1';
 
@@ -201,7 +202,8 @@ const App = () => {
 
   return (
     <Container>
-      <Unsubscribe />
+      <Doc />
+      {/* <Unsubscribe /> */}
       {/* <Pagination /> */}
       {/* <StyledInput
         value={value}
