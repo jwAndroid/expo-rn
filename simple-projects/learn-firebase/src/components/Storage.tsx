@@ -2,15 +2,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadString,
-  putFile,
-} from 'firebase/storage';
-
-// https://www.makeuseof.com/upload-files-to-firebase-using-reactjs/
+import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
 
 import { storage } from '../api/config';
 
@@ -49,8 +41,6 @@ const styles = StyleSheet.create({
 
 const Storage = () => {
   const [selectedImage, setSelectedImage] = useState({ uri: '' });
-  const [base64url, setBase64url] = useState('');
-  const [downloadFile, setDownloadFile] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -76,36 +66,32 @@ const Storage = () => {
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
-        base64: true,
       });
-
-      console.log(pickerResult);
 
       if (!pickerResult.cancelled) {
         setSelectedImage({ uri: pickerResult.uri });
 
-        setBase64url(`data:image/jpeg;base64${pickerResult.base64}`);
+        const reference = ref(storage, 'image.jpg');
+
+        const img = await fetch(pickerResult.uri);
+
+        const bytes = await img.blob();
+
+        await uploadBytes(reference, bytes).then(
+          () => {},
+          (compleated) => {
+            if (compleated) {
+              console.log(`compleated : ${compleated}`);
+            }
+          }
+        );
       }
     }
   };
 
-  const upload = useCallback(
-    (base64) => () => {
-      if (base64) {
-        const reference = ref(storage, 'mountains.jpg');
-
-        const message3 = '5b6p5Y-344GX44G-44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-        uploadString(reference, message3, base64).then((snapshot) => {
-          console.log('Uploaded a base64url string!');
-        });
-      }
-    },
-    []
-  );
-
   const download = useCallback(() => {
-    getDownloadURL(ref(storage, 'mountains.jpg')).then((url) => {
-      setDownloadFile(url);
+    getDownloadURL(ref(storage, 'image.jpg')).then((url) => {
+      console.log(url);
     });
   }, []);
 
@@ -123,20 +109,9 @@ const Storage = () => {
         <Text style={styles.buttonText}>앨범가기</Text>
       </Pressable>
 
-      <Pressable style={styles.button} onPress={upload(selectedImage)}>
-        <Text style={styles.buttonText}>업로드</Text>
-      </Pressable>
-
       <Pressable style={styles.button} onPress={download}>
         <Text style={styles.buttonText}>다운로드</Text>
       </Pressable>
-
-      {!!downloadFile && (
-        <>
-          <Text style={{ marginTop: 50 }}>다운로드 파일</Text>
-          <Image style={styles.thumbnail} source={{ uri: downloadFile }} />
-        </>
-      )}
     </View>
   );
 };
