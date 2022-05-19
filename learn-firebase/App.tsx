@@ -24,6 +24,7 @@ import {
   StyledText,
 } from './src/style/MyStyle';
 import Pagination from './src/components/Pagination';
+import Unsubscribe from './src/components/Unsubscribe';
 
 const userId = '1';
 
@@ -200,8 +201,8 @@ const App = () => {
 
   return (
     <Container>
-      <Pagination />
-
+      <Unsubscribe />
+      {/* <Pagination /> */}
       {/* <StyledInput
         value={value}
         onChangeText={onChangeText}
