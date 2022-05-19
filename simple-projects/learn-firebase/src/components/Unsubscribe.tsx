@@ -1,6 +1,6 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { FlatList, ListRenderItem, Text, View } from 'react-native';
-import { collection, doc, onSnapshot, query, setDoc } from 'firebase/firestore';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 
 import { db } from '../api/config';
 import { TodoType } from '../../type';

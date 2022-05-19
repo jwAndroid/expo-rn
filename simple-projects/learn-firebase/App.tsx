@@ -1,5 +1,5 @@
 import { memo, useCallback, useLayoutEffect, useState } from 'react';
-import { FlatList, ListRenderItem, RefreshControl } from 'react-native';
+import { ListRenderItem } from 'react-native';
 import {
   collection,
   doc,
@@ -17,15 +17,8 @@ import { db } from './src/api/config';
 import { TodoType } from './type';
 import { onDataSnapshot } from './src/api/firebase';
 import { original, todoRef } from './src/api/ref';
-import {
-  Container,
-  ItemContainer,
-  StyledInput,
-  StyledText,
-} from './src/style/MyStyle';
-import Pagination from './src/components/Pagination';
+import { Container, ItemContainer, StyledText } from './src/style/MyStyle';
 import Unsubscribe from './src/components/Unsubscribe';
-import Doc from './src/components/Doc';
 
 const userId = '1';
 
@@ -202,8 +195,8 @@ const App = () => {
 
   return (
     <Container>
-      {/* <Doc /> */}
       <Unsubscribe />
+      {/* <Doc /> */}
       {/* <Pagination /> */}
       {/* <StyledInput
         value={value}
