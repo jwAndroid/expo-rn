@@ -18,7 +18,7 @@ import { TodoType } from './type';
 import { onDataSnapshot } from './src/api/firebase';
 import { original, todoRef } from './src/api/ref';
 import { Container, ItemContainer, StyledText } from './src/style/MyStyle';
-import Unsubscribe from './src/components/Unsubscribe';
+import Storage from './src/components/Storage';
 
 const userId = '1';
 
@@ -195,7 +195,8 @@ const App = () => {
 
   return (
     <Container>
-      <Unsubscribe />
+      <Storage />
+      {/* <Unsubscribe /> */}
       {/* <Doc /> */}
       {/* <Pagination /> */}
       {/* <StyledInput
