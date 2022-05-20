@@ -13,7 +13,11 @@ const AppReady: FC<IAppReady> = ({ onComplete }) => {
   const [isPreloading, setIsPreloading] = useState(false);
 
   const startAsync = useCallback(async () => {
-    await Promise.all<any>([cacheFonts(font), ...cacheImages(icon)]);
+    await Promise.all<any>([cacheFonts(font), ...cacheImages(icon)]).then(
+      (result) => {
+        console.log(result);
+      }
+    );
   }, []);
 
   const onFinish = useCallback(async () => {

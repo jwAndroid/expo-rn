@@ -32,6 +32,8 @@
     "object-curly-newline": "off",
     "comma-dangle": "off",
     "no-console": "off",
-    "quotes": "off"
+    "quotes": "off",
+    "indent": "off",
+    "no-extra-boolean-cast": "off"
   }
 }
