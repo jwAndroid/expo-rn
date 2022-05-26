@@ -38,6 +38,7 @@
     "operator-linebreak": "off",
     "no-nested-ternary": "off",
     "indent": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-alert": "off"
   }
 }
