@@ -31,6 +31,7 @@ const StyledText = styled.Text({
   fontSize: 20,
   color: '#fff',
   fontWeight: 'bold',
+  marginTop: 10,
 });
 
 Notifications.setNotificationHandler({
@@ -43,6 +44,16 @@ Notifications.setNotificationHandler({
 
 const App = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
+
+  useEffect(() => {
+    const subscription = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log(notification);
+      }
+    );
+
+    // return () => subscription.remove();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -113,10 +124,16 @@ const App = () => {
     });
   }, []);
 
+  const unsubscribe = useCallback(() => {
+    const subscription = Notifications.removeNotificationSubscription;
+  }, []);
+
   return (
     <Container>
       <Header>
         <StyledText onPress={sendNotification}>send notification</StyledText>
+
+        <StyledText onPress={unsubscribe}>unsubscribe</StyledText>
       </Header>
 
       <GiftedChat
