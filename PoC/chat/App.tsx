@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import styled from '@emotion/native';
@@ -128,6 +128,22 @@ const App = () => {
     const subscription = Notifications.removeNotificationSubscription;
   }, []);
 
+  const renderAccessory = useCallback(() => {
+    return (
+      <View style={{ flexDirection: 'column-reverse' }}>
+        <Text>악세사리뷰</Text>
+      </View>
+    );
+  }, []);
+
+  const renderInputToolbar = useCallback(() => {
+    return (
+      <View>
+        <Text>채팅 치는곳</Text>
+      </View>
+    );
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -142,6 +158,8 @@ const App = () => {
         alwaysShowSend
         keyboardShouldPersistTaps="handled"
         onSend={(messages) => onSend(messages)}
+        renderAccessory={renderAccessory}
+        renderInputToolbar={renderInputToolbar}
         user={{ _id: 1 }}
       />
     </Container>
