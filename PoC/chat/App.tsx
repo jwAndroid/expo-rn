@@ -130,7 +130,7 @@ const App = () => {
 
   const renderAccessory = useCallback(() => {
     return (
-      <View style={{ flexDirection: 'column-reverse' }}>
+      <View>
         <Text>악세사리뷰</Text>
       </View>
     );
