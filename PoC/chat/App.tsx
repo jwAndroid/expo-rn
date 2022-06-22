@@ -1,80 +1,26 @@
-import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  FlatList,
-  ListRenderItem,
-  StyleProp,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { memo, useCallback } from 'react';
+import { SectionList, Text } from 'react-native';
 
-import { sampleData } from './src/sampledata';
-import { ChatEntity } from './src/type';
+import { DATA } from './src/sample/sectionData';
 
 const App = () => {
-  const [data, setData] = useState<ChatEntity[]>(sampleData);
-
-  useEffect(() => {
-    const list1 = [...data];
-    const list2 = [...data];
-
-    const deduplication = list1.filter(
-      (arr, index, callback) =>
-        index === callback.findIndex((t) => t.date === arr.date)
-    );
-
-    const dateDeleteList = list2.map((data) => {
-      return { ...data, date: '' };
-    });
-
-    const result = [...deduplication, ...dateDeleteList].filter(
-      (arr, index, callback) =>
-        index === callback.findIndex((t) => t.id === arr.id)
-    );
-
-    const sorted = result.sort((a, b) => a.id - b.id);
-
-    setData(sorted);
-  }, [data]);
-
-  const ListHeaderComponentStyle = useMemo<StyleProp<ViewStyle>>(() => {
-    return {
-      backgroundColor: 'blue',
-    };
-  }, []);
-
   const keyExtractor = useCallback((item) => `${item.id}`, []);
 
-  const ListHeaderComponent = useCallback((item) => {
-    return (
-      <View>
-        <Text>{item.date}</Text>
-      </View>
-    );
+  const renderItem = useCallback(({ item }) => {
+    return <Text>{item.title}</Text>;
   }, []);
 
-  const renderItem = useCallback<ListRenderItem<ChatEntity>>(({ item }) => {
-    return (
-      <View style={{ alignItems: 'flex-end' }}>
-        {item.date === '' ? undefined : (
-          <Text style={{ marginTop: 10 }}>{item.date}</Text>
-        )}
-
-        <Text style={{ fontSize: 13, color: 'blue' }}>{item.message}</Text>
-      </View>
-    );
+  const renderSectionHeader = useCallback(({ title }) => {
+    return <Text>{title}</Text>;
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'gray' }}>
-      <FlatList
-        data={data}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        ListHeaderComponent={ListHeaderComponent}
-        ListHeaderComponentStyle={ListHeaderComponentStyle}
-      />
-    </View>
+    <SectionList
+      sections={DATA}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
+      renderSectionHeader={renderSectionHeader}
+    />
   );
 };
 

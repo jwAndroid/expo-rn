@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 
-import { giftedSampleData } from './sampledata';
+import { giftedSampleData } from './sample/sampledata';
 
 const ChatBasic = () => {
   const [messages, setMessages] = useState<IMessage[]>([]);
