@@ -35,7 +35,9 @@ const chats = [
 const App = () => {
   useEffect(() => {
     const results = groupBy(chats, (i) => i.date);
+    // 먼저 원본 리스트를 groupBy 로 분할한다.
 
+    // * 설명
     // console.log(results); // 원본
     // console.log(Object.keys(results)); // 날짜 자른 배열
     // console.log(Object.values(results)); //자른 날짜
@@ -47,6 +49,7 @@ const App = () => {
     // const key = Object.keys(results).map((key) => {
     //   return { title: key };
     // });
+    //  * 설명
 
     const values = Object.values(results).map((values) => {
       return { data: values };
