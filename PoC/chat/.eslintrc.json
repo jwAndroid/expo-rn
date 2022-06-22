@@ -39,6 +39,7 @@
     "no-nested-ternary": "off",
     "indent": "off",
     "import/no-extraneous-dependencies": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }
