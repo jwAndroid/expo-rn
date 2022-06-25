@@ -45,9 +45,20 @@ $ npm install @emotion/react @emotion/native
 ```bash
 $ npm install moti
 
-- and then install Reanimated 2
-
+- install Reanimated-2 :
 $ expo install react-native-reanimated
+
+- add the Babel-plugin to babel.config.js :
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ['react-native-reanimated/plugin'],
+  };
+};
+
+- import Components Moti :
+import { MotiView, MotiText, MotiScrollView, MotiSafeAreaView, MotiImage } from 'moti'
 ```
 
 - [Moti](https://moti.fyi/installation) install
