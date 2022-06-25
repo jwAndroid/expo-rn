@@ -1,6 +1,8 @@
 ### Setup
 
 ```bash
+$ npm install -g expo-cli
+
 $ expo init "project name"
 ```
 
@@ -38,9 +40,21 @@ add rules
 $ npm install @emotion/react @emotion/native
 ```
 
+### Moti
+
+```bash
+$ npm install moti
+
+- and then install Reanimated 2
+
+$ expo install react-native-reanimated
+```
+
+- [Moti](https://moti.fyi/installation) install
+
 ---
 
-### Reference link
+### Reference-link
 
 - [Node.js](https://nodejs.org/ko) install , update
 - [React Native](https://reactnative.dev)
@@ -57,7 +71,7 @@ $ npm install @emotion/react @emotion/native
 - [openbase](https://openbase.com)
 - [Public-API](https://github.com/public-apis/public-apis)
 
-## Design
+### Design
 
 - [MUI](https://mui.com/getting-started/usage)
 - [Ant](https://ant.design/components/overview)
@@ -67,6 +81,6 @@ $ npm install @emotion/react @emotion/native
 - [Vector-Icons](https://icons.expo.fyi)
 - [Google Fonts Icons](https://fonts.google.com/icons)
 
-## Flexbox Froggy
+### Flexbox Froggy
 
 - https://flexboxfroggy.com/#ko
