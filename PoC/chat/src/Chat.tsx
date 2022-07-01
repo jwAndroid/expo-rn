@@ -158,7 +158,7 @@ const Chat = () => {
         keyboardShouldPersistTaps="handled"
         onSend={(messages) => onSend(messages)}
         renderAccessory={renderAccessory}
-        renderInputToolbar={renderInputToolbar}
+        // renderInputToolbar={renderInputToolbar}
         user={{ _id: 1 }}
       />
     </Container>

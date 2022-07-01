@@ -1,5 +1,6 @@
 import { memo, useCallback } from 'react';
 import { SectionList, Text } from 'react-native';
+import Chat from './src/Chat';
 
 import { DATA } from './src/sample/sectionData';
 
@@ -15,12 +16,13 @@ const App = () => {
   }, []);
 
   return (
-    <SectionList
-      sections={DATA}
-      keyExtractor={keyExtractor}
-      renderItem={renderItem}
-      renderSectionHeader={renderSectionHeader}
-    />
+    <Chat />
+    // <SectionList
+    //   sections={DATA}
+    //   keyExtractor={keyExtractor}
+    //   renderItem={renderItem}
+    //   renderSectionHeader={renderSectionHeader}
+    // />
   );
 };
 
