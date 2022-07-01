@@ -135,13 +135,13 @@ const Chat = () => {
     );
   }, []);
 
-  const renderInputToolbar = useCallback(() => {
-    return (
-      <View>
-        <Text>채팅 치는곳</Text>
-      </View>
-    );
-  }, []);
+  // const renderInputToolbar = useCallback(() => {
+  //   return (
+  //     <View>
+  //       <Text>채팅 치는곳</Text>
+  //     </View>
+  //   );
+  // }, []);
 
   return (
     <Container>
