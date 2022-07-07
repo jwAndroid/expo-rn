@@ -27,7 +27,7 @@ const SquareBox = styled.Image(() => ({
   height: width / 3,
 }));
 
-const Left = styled.Image({
+const LeftBrick = styled.Image({
   width: (width / 3) * 2,
   height: (width / 3) * 2,
 });
@@ -66,7 +66,7 @@ const App = () => {
           if (item.type === 2) {
             return (
               <BrickBoxContainer key={item.id}>
-                <Left
+                <LeftBrick
                   key={item.image[0].id}
                   source={{ uri: item.image[0].uri }}
                 />
