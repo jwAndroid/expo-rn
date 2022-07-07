@@ -1,10 +1,10 @@
 import styled from '@emotion/native';
 import { memo, useEffect, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, ScrollView, View } from 'react-native';
 
 import { TYPE_DATA } from './src/typeData';
 
-const { width, height } = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 const Container = styled.View({
   flex: 1,
@@ -13,40 +13,24 @@ const Container = styled.View({
   marginTop: 30,
 });
 
-interface BoxColor {
-  backgroundColor: string;
-}
-
-const OneTypeContainer = styled.View({
-  width: '100%',
-  height: width / 3,
-  backgroundColor: 'gray',
+const RowContainer = styled.View({
+  flexDirection: 'row',
 });
 
-const TowTypeContainer = styled.View({
-  width: '100%',
+const BrickBoxContainer = styled.View({
   height: (width / 3) * 2,
   flexDirection: 'row',
-  backgroundColor: 'orange',
 });
 
-const TypeLeftContainer = styled.View({
-  width: (width / 3) * 2,
-  height: (width / 3) * 2,
-  backgroundColor: 'blue',
-});
-
-const TypeRightContainer = styled.View({
-  width: width / 3,
-  height: (width / 3) * 2,
-  backgroundColor: 'green',
-});
-
-const SquareBox = styled.View<BoxColor>(({ backgroundColor }) => ({
+const SquareBox = styled.Image(() => ({
   width: width / 3,
   height: width / 3,
-  backgroundColor,
 }));
+
+const Left = styled.Image({
+  width: (width / 3) * 2,
+  height: (width / 3) * 2,
+});
 
 interface IImage {
   id: number;
@@ -66,17 +50,44 @@ const App = () => {
   useEffect(() => {}, []);
 
   return (
-    <Container>
-      <OneTypeContainer>
-        <SquareBox backgroundColor={randomColor()} />
-      </OneTypeContainer>
+    <ScrollView>
+      <Container>
+        {data.map((item) => {
+          if (item.type === 1) {
+            return (
+              <RowContainer key={item.id}>
+                {item.image.map((one) => {
+                  return <SquareBox key={one.id} source={{ uri: one.uri }} />;
+                })}
+              </RowContainer>
+            );
+          }
 
-      <TowTypeContainer>
-        <TypeLeftContainer />
+          if (item.type === 2) {
+            return (
+              <BrickBoxContainer key={item.id}>
+                <Left
+                  key={item.image[0].id}
+                  source={{ uri: item.image[0].uri }}
+                />
 
-        <TypeRightContainer />
-      </TowTypeContainer>
-    </Container>
+                <View>
+                  <SquareBox
+                    key={item.image[1].id}
+                    source={{ uri: item.image[1].uri }}
+                  />
+
+                  <SquareBox
+                    key={item.image[2].id}
+                    source={{ uri: item.image[2].uri }}
+                  />
+                </View>
+              </BrickBoxContainer>
+            );
+          }
+        })}
+      </Container>
+    </ScrollView>
   );
 };
 
