@@ -1,33 +1,82 @@
-import { memo, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import styled from '@emotion/native';
+import { memo, useEffect, useState } from 'react';
+import { Dimensions } from 'react-native';
 
-import { SAMPLE_DATA } from './src/data';
-import { appStayle } from './src/style';
+import { TYPE_DATA } from './src/typeData';
 
-type Item = {
+const { width, height } = Dimensions.get('screen');
+
+const Container = styled.View({
+  flex: 1,
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginTop: 30,
+});
+
+interface BoxColor {
+  backgroundColor: string;
+}
+
+const OneTypeContainer = styled.View({
+  width: '100%',
+  height: width / 3,
+  backgroundColor: 'gray',
+});
+
+const TowTypeContainer = styled.View({
+  width: '100%',
+  height: (width / 3) * 2,
+  flexDirection: 'row',
+  backgroundColor: 'orange',
+});
+
+const TypeLeftContainer = styled.View({
+  width: (width / 3) * 2,
+  height: (width / 3) * 2,
+  backgroundColor: 'blue',
+});
+
+const TypeRightContainer = styled.View({
+  width: width / 3,
+  height: (width / 3) * 2,
+  backgroundColor: 'green',
+});
+
+const SquareBox = styled.View<BoxColor>(({ backgroundColor }) => ({
+  width: width / 3,
+  height: width / 3,
+  backgroundColor,
+}));
+
+interface IImage {
   id: number;
   uri: string;
-};
+}
+interface Item {
+  id: number;
+  type: number;
+  image: IImage[];
+}
 
 const App = () => {
-  const [data, setData] = useState<Item[]>(SAMPLE_DATA);
+  const randomColor = require('randomcolor');
+
+  const [data, setData] = useState<Item[]>(TYPE_DATA);
+
+  useEffect(() => {}, []);
 
   return (
-    <SafeAreaView style={appStayle.container}>
-      <ScrollView horizontal>
-        <View style={{ flexDirection: 'row' }}>
-          {data.map((item) => {
-            return (
-              <Image
-                style={appStayle.image}
-                key={item.id}
-                source={{ uri: item.uri }}
-              />
-            );
-          })}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Container>
+      <OneTypeContainer>
+        <SquareBox backgroundColor={randomColor()} />
+      </OneTypeContainer>
+
+      <TowTypeContainer>
+        <TypeLeftContainer />
+
+        <TypeRightContainer />
+      </TowTypeContainer>
+    </Container>
   );
 };
 
