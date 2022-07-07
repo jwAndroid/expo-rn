@@ -9,7 +9,7 @@ export const TYPE_DATA = [
       },
       {
         id: 1.2,
-        uri: 'https://mblogthumb-phinf.pstatic.net/MjAxODA2MjNfMjEy/MDAxNTI5NzMxMTU3MzY4.EPm3FL3YsFaLIn5xkcUH0EIA67u-QVEomKGaful9S9Eg.ND41Dh7dV5lv0BwNGYNy_BYMBaGUgZMGBo2xFA5cJpEg.PNG.guswh2678/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C1.PNG?type=w800',
+        uri: 'https://mblogthumb-phinf.pstatic.net/20150901_263/sun147500_14410977896583mta4_JPEG/%BA%F1%BF%C0%B4%C2_%C0%CC%B9%CC%C1%F62.jpg?type=w2',
       },
       {
         id: 1.3,
@@ -86,6 +86,42 @@ export const TYPE_DATA = [
       {
         id: 5.3,
         uri: 'https://blog.kakaocdn.net/dn/brkiVD/btrmKY0ZOCN/etrIIBhkoPAzS6rcVDAw9k/img.jpg',
+      },
+    ],
+  },
+  {
+    id: 6,
+    type: 1,
+    image: [
+      {
+        id: 6.1,
+        uri: 'https://blog.kakaocdn.net/dn/zdVIY/btqOuIEaVTd/YlvFFjKLJdcjXbJJb2ikKK/img.jpg',
+      },
+      {
+        id: 6.2,
+        uri: 'https://p4.wallpaperbetter.com/wallpaper/842/759/788/superb-sea-cove-at-sunrise-hdr-hd-wallpaper-340139-wallpaper-preview.jpg',
+      },
+      {
+        id: 6.3,
+        uri: 'https://t1.daumcdn.net/cfile/tistory/262E9D3A5387B4FF16',
+      },
+    ],
+  },
+  {
+    id: 7,
+    type: 3,
+    image: [
+      {
+        id: 7.1,
+        uri: 'https://mblogthumb-phinf.pstatic.net/20160304_2/qkrxorua89_1457077700105qCeNb_JPEG/%B9%E8%B0%E61.jpg?type=w800',
+      },
+      {
+        id: 7.2,
+        uri: 'https://t1.daumcdn.net/cfile/tistory/254F3E3A583C998C2F',
+      },
+      {
+        id: 7.3,
+        uri: 'https://s2.best-wallpaper.net/wallpaper/1920x1080/1802/Dubai-UAE-urban-skyscraper-lights-roads_1920x1080.jpg',
       },
     ],
   },
