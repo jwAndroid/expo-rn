@@ -65,8 +65,8 @@ interface IBrickBox {
 }
 
 const BrickBox = styled.Image<IBrickBox>(({ isMarginRight, isMarginLeft }) => ({
-  width: (width / 3) * 2,
-  height: (width / 3) * 2,
+  width: (width / 3) * 2 + 1,
+  height: (width / 3) * 2 + 1,
   marginRight: isMarginRight ? 1 : undefined,
   marginLeft: isMarginLeft ? 1 : undefined,
 }));

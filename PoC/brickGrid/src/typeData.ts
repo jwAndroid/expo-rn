@@ -125,4 +125,22 @@ export const TYPE_DATA = [
       },
     ],
   },
+  {
+    id: 8,
+    type: 1,
+    image: [
+      {
+        id: 8.1,
+        uri: 'https://cdn.pixabay.com/photo/2017/07/11/18/52/landscape-2494652_960_720.jpg',
+      },
+      {
+        id: 8.2,
+        uri: 'https://t1.daumcdn.net/cfile/tistory/99DB2F4B5E23AE9626',
+      },
+      {
+        id: 8.3,
+        uri: 'https://blog.kakaocdn.net/dn/brkiVD/btrmKY0ZOCN/etrIIBhkoPAzS6rcVDAw9k/img.jpg',
+      },
+    ],
+  },
 ];
