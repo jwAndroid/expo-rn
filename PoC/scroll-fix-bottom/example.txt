@@ -1,0 +1,95 @@
+import React, { useCallback } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  block: { flex: 1 },
+});
+
+const sample = [
+  {
+    id: 1,
+    message: 'hi',
+  },
+  {
+    id: 2,
+    message: 'hi1235dwfa2',
+  },
+  {
+    id: 3,
+    message: 'hi12342',
+  },
+  {
+    id: 4,
+    message: 'hi12342',
+  },
+  {
+    id: 5,
+    message: 'hi12342',
+  },
+  {
+    id: 6,
+    message: 'h1234i',
+  },
+  {
+    id: 7,
+    message: 'hi12342',
+  },
+  {
+    id: 8,
+    message: 'hi10',
+  },
+  {
+    id: 9,
+    message: 'hi11',
+  },
+  {
+    id: 10,
+    message: 'hi1agaseg0',
+  },
+  {
+    id: 11,
+    message: 'hi11',
+  },
+  {
+    id: 12,
+    message: 'hi1agaseg0',
+  },
+  {
+    id: 13,
+    message: 'hi11',
+  },
+  {
+    id: 14,
+    message: 'hi1agaseg0',
+  },
+  {
+    id: 15,
+    message: '151515151515151515',
+  },
+];
+
+const SearchScreen = () => {
+  const renderItem = useCallback(({ item }) => {
+    return <Text style={{ fontSize: 40 }}>{item.message}</Text>;
+  }, []);
+
+  return (
+    <View style={styles.block}>
+      <FlatList
+        data={sample}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'flex-end',
+        }}
+        inverted
+      />
+    </View>
+  );
+};
+
+export default SearchScreen;
+
+참고:
+https://stackoverflow.com/questions/57161189/can-i-render-from-top-when-using-flatlist-inverted

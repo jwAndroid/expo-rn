@@ -60,10 +60,23 @@ const App = () => {
         data={messages}
         inverted
         keyExtractor={keyExtractor}
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'flex-end',
+        }}
         renderItem={renderItem}
       />
     </View>
   );
 };
+
+/**
+ * contentContainerStyle={{
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+  }}
+  inverted를 하게되면 데이터가 적을때 아래서부터 랜더링되는데
+  위 코드를 사용하게되면 위에서부터 랜더링하게된다. 카카오톡처럼
+ */
 
 export default memo(App);
