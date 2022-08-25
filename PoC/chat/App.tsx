@@ -1,9 +1,9 @@
 import { memo } from 'react';
 
-import DaySectionList from './src/DaySectionList';
+import Test from './src/Test';
 
 const App = () => {
-  return <DaySectionList />;
+  return <Test />;
 };
 
 export default memo(App);

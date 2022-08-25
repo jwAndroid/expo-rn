@@ -15,10 +15,16 @@ import { chats } from './src/sampleData/chats';
 import { RoomEntity, SectionEntity } from './type';
 
 const App = () => {
+  const [original, setOriginal] = useState<RoomEntity[]>([]);
   const [data, setData] = useState<SectionEntity[]>([]);
+  const [value, setValue] = useState('');
 
   useEffect(() => {
-    const results = groupBy(chats, (i) => i.date);
+    setOriginal(chats);
+  }, []);
+
+  useEffect(() => {
+    const results = groupBy(original, (i) => i.date);
 
     const values = Object.values(results).map((values) => {
       return { data: values };
@@ -29,7 +35,7 @@ const App = () => {
     });
 
     setData(assign);
-  }, []);
+  }, [original]);
 
   const keyExtractor = useCallback((item: RoomEntity) => `${item.id}`, []);
 
@@ -41,6 +47,16 @@ const App = () => {
     return <Text>{section.title}</Text>;
   }, []);
 
+  const onChangeText = useCallback((text: string) => {
+    setValue(text);
+  }, []);
+
+  const onSubmitEditing = useCallback(() => {
+    const obj = { id: 99, date: '2022-06-22', message: value, name: 'jw' };
+
+    setOriginal([obj, ...original]);
+  }, []);
+
   return (
     <View style={{ flex: 1, marginTop: 30 }}>
       <SectionList
@@ -48,6 +64,13 @@ const App = () => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
+      />
+
+      <TextInput
+        value={value}
+        onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
+        style={{ width: '100%', height: 50, backgroundColor: 'skyblue' }}
       />
     </View>
   );
