@@ -28,13 +28,18 @@ const data = [
 ];
 
 const App = () => {
-  const [value, setValue] = useState('');
-  const [listData, setListData] = useState<Data[]>(data);
+  const [search, setSearch] = useState('');
+  const [filteredData, setFilteredData] = useState<Data[]>([]);
+  const [masterData, setMasterData] = useState<Data[]>([]);
+
+  useEffect(() => {
+    setFilteredData(data);
+    setMasterData(data);
+  }, []);
 
   const onPressItem = useCallback(
     (item: Data) => () => {
-      console.log(item.text);
-      console.log(item.id);
+      console.log(item);
     },
     []
   );
@@ -43,31 +48,41 @@ const App = () => {
     return <Text onPress={onPressItem(item)}>{item.text}</Text>;
   }, []);
 
-  const onChangeText = useCallback((text: string) => {
-    const prepared = listData.filter(
-      (data) => data.text.includes(text) || data.text2.includes(text)
-    );
+  const serchFilterText = useCallback(
+    (text: string) => {
+      if (text) {
+        const newData = masterData.filter((item) => {
+          const itemData = item.text
+            ? item.text.toUpperCase()
+            : ''.toUpperCase();
 
-    console.log(prepared);
+          const textData = text.toUpperCase();
+          return itemData.indexOf(textData) > -1;
+        });
 
-    setValue(text);
-
-    setListData(prepared);
-  }, []);
+        setFilteredData(newData);
+        setSearch(text);
+      } else {
+        setFilteredData(masterData);
+        setSearch(text);
+      }
+    },
+    [masterData]
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         style={{ margin: 10 }}
-        data={listData}
+        data={filteredData}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
       />
 
       <KeyboardAvoidingView behavior="padding">
         <TextInput
-          value={value}
-          onChangeText={onChangeText}
+          value={search}
+          onChangeText={(text) => serchFilterText(text)}
           style={{ width: '100%', height: 50, backgroundColor: 'gray' }}
         />
       </KeyboardAvoidingView>
