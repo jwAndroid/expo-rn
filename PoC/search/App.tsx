@@ -25,6 +25,8 @@ const data = [
   { id: '7', text: '방탈출123', text2: 'ass' },
   { id: '8', text: '123', text2: 'tyr' },
   { id: '9', text: '대탈출', text2: 'a123' },
+  { id: '10', text: 'ABC', text2: 'a123' },
+  { id: '11', text: 'abc', text2: 'a123' },
 ];
 
 const App = () => {
@@ -50,26 +52,19 @@ const App = () => {
   }, []);
 
   const serchFilterText = useCallback(
-    (text: string) => {
-      if (text) {
-        const newData = masterData.filter((item) => {
-          const itemData = item.text
-            ? item.text.toUpperCase()
-            : ''.toUpperCase();
+    (value: string) => {
+      if (value) {
+        const prepared = masterData.filter(
+          (item) =>
+            item.text.toUpperCase().includes(value.toUpperCase()) ||
+            item.text2.toUpperCase().includes(value.toUpperCase())
+        );
 
-          const textData = text.toUpperCase();
-
-          return itemData.indexOf(textData) > -1;
-        });
-
-        setFilteredData(newData);
-
-        setSearch(text);
+        setFilteredData(prepared);
       } else {
         setFilteredData(masterData);
-
-        setSearch(text);
       }
+      setSearch(value);
     },
     [masterData]
   );
