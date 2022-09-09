@@ -28,9 +28,10 @@ const data = [
 ];
 
 const App = () => {
-  const [search, setSearch] = useState('');
   const [filteredData, setFilteredData] = useState<Data[]>([]);
   const [masterData, setMasterData] = useState<Data[]>([]);
+
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     setFilteredData(data);
@@ -57,13 +58,16 @@ const App = () => {
             : ''.toUpperCase();
 
           const textData = text.toUpperCase();
+
           return itemData.indexOf(textData) > -1;
         });
 
         setFilteredData(newData);
+
         setSearch(text);
       } else {
         setFilteredData(masterData);
+
         setSearch(text);
       }
     },
