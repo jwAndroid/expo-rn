@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import { FlatList, ListRenderItem, Text, View } from 'react-native';
+import { FlatList, ListRenderItem, Text } from 'react-native';
 
 import {
   collection,
@@ -14,6 +14,7 @@ import {
 
 import { TodoType } from '../../type';
 import { db } from '../api/config';
+import { Container } from '../style/MyStyle';
 
 const Pagination = () => {
   const [data, setData] = useState<TodoType[]>([]);
@@ -53,6 +54,8 @@ const Pagination = () => {
         limit(20)
       );
 
+      // const querySnapshot = await getDocs(ref);
+
       onSnapshot(next, (snapshot) => {
         if (snapshot) {
           const chunk = snapshot.docs.map((doc) => doc.data(), []);
@@ -76,7 +79,7 @@ const Pagination = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Container>
       <FlatList
         data={data}
         keyExtractor={keyExtractor}
@@ -96,7 +99,7 @@ const Pagination = () => {
           No More Data...
         </Text>
       )}
-    </View>
+    </Container>
   );
 };
 
