@@ -1,7 +1,15 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
+import { Camera, CameraType } from 'expo-camera';
 import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
 
 import { storage } from '../api/config';
@@ -37,11 +45,24 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     borderRadius: 8,
   },
+  cameraButton: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'gray',
+  },
 });
 
 const Storage = () => {
   const [selectedImage, setSelectedImage] = useState({ uri: '' });
 
+  const [type, setType] = useState(CameraType.back); // CAMERA
+  const [permission, requestPermission] = Camera.useCameraPermissions(); // CAMERA
+  const cameraRef = useRef<Camera>(null);
+
+  // ............... MediaLibrary ............. //
   useEffect(() => {
     (async () => {
       await MediaLibrary.requestPermissionsAsync();
@@ -67,6 +88,8 @@ const Storage = () => {
         aspect: [4, 3],
         quality: 1,
       });
+
+      console.log(pickerResult);
 
       if (!pickerResult.cancelled) {
         setSelectedImage({ uri: pickerResult.uri });
@@ -95,6 +118,51 @@ const Storage = () => {
     });
   }, []);
 
+  // ............... MediaLibrary ............. //
+
+  // ............... Camera ............. //
+  const toggleCameraType = useCallback(() => {
+    setType((current) =>
+      current === CameraType.back ? CameraType.front : CameraType.back
+    );
+  }, []);
+
+  const takePhoto = useCallback(async () => {
+    const options = {
+      qulity: 1,
+      base64: true,
+      exif: false,
+    };
+
+    const photo = await cameraRef.current?.takePictureAsync(options);
+
+    if (photo && photo.uri) {
+      console.log('스타트');
+      const reference = ref(storage, 'image.jpg');
+
+      const img = await fetch(photo.uri);
+
+      const bytes = await img.blob();
+
+      await uploadBytes(reference, bytes)
+        .then(
+          () => {},
+          (compleated) => {
+            if (compleated) {
+              console.log(`compleated : ${compleated}`);
+            }
+          }
+        )
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      console.log('실패');
+    }
+  }, []);
+
+  // ............... Camera ............. //
+
   return (
     <View style={styles.container}>
       {!!selectedImage.uri && (
@@ -110,8 +178,29 @@ const Storage = () => {
       </Pressable>
 
       <Pressable style={styles.button} onPress={download}>
-        <Text style={styles.buttonText}>다운로드</Text>
+        <Text style={styles.buttonText}>다운로드 URL</Text>
       </Pressable>
+
+      <Camera
+        style={{ width: '100%', height: 300 }}
+        type={type}
+        ref={cameraRef}
+      >
+        <View>
+          <TouchableOpacity
+            style={styles.cameraButton}
+            onPress={toggleCameraType}
+          >
+            <Text style={styles.buttonText}>Flip Camera</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.cameraButton}>
+            <Text onPress={takePhoto} style={styles.buttonText}>
+              takePhoto
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Camera>
     </View>
   );
 };

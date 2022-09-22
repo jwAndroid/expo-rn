@@ -41,6 +41,9 @@
     "react/jsx-curly-newline": "off",
     "array-callback-return": "off",
     "quotes": "off",
-    "no-extra-boolean-cast": "off"
+    "no-extra-boolean-cast": "off",
+    "no-confusing-arrow": "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off"
   }
 }

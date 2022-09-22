@@ -1,12 +1,12 @@
 import { memo } from 'react';
 
-import Pagination2 from './src/components/Pagination2';
+import Storage from './src/components/Storage';
 import { Container } from './src/style/MyStyle';
 
 const App = () => {
   return (
     <Container>
-      <Pagination2 />
+      <Storage />
     </Container>
   );
 };
