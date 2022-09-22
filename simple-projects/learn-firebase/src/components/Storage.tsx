@@ -95,6 +95,7 @@ const Storage = () => {
         setSelectedImage({ uri: pickerResult.uri });
 
         const reference = ref(storage, 'image.jpg');
+        // ref : userId/images/data...
 
         const img = await fetch(pickerResult.uri);
 
@@ -139,6 +140,7 @@ const Storage = () => {
     if (photo && photo.uri) {
       console.log('스타트');
       const reference = ref(storage, 'image.jpg');
+      // ref : userId/images/data...
 
       const img = await fetch(photo.uri);
 
