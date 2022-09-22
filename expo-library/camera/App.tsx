@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   },
 });
 
+// hello pull
+
 const App = () => {
   return (
     <View style={styles.container}>
