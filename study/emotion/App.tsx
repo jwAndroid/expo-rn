@@ -7,6 +7,7 @@ import { ThemeProvider } from '@emotion/react';
 import { darkTheme, lightTheme } from './src/components/theme';
 import { Button } from './src/components';
 
+// emotion
 const Container = styled.View({
   flex: 1,
   backgroundColor: '#303030',
