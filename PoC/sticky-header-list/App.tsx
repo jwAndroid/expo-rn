@@ -48,10 +48,10 @@ const styles = StyleSheet.create({
   },
   headerTabView: {
     paddingVertical: 24,
-    backgroundColor: '#F4EEE0',
+    backgroundColor: 'orange',
   },
   tab: {
-    backgroundColor: '#6D5D6E',
+    backgroundColor: '#000',
     marginHorizontal: 10,
     paddingHorizontal: 15,
     borderRadius: 50,
